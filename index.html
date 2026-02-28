@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعلّم.ما - المنصة التعليمية المغربية</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* جميع الأنماط كما هي - لم أغيرها */
+        :root {
+            --primary: #1e3c72;
+            --primary-light: #2a5298;
+            --primary-dark: #0f2b4f;
+            --secondary: #ffd700;
+            --secondary-light: #ffed4a;
+            --secondary-dark: #e6b800;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --dark: #343a40;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --white: #ffffff;
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+            
+            --radius-sm: 5px;
+            --radius-md: 10px;
+            --radius-lg: 15px;
+            --radius-xl: 20px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* الشريط العلوي */
+        .navbar {
+            background: rgba(30, 60, 114, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--white), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.2);
+            color: var(--white);
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--white);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* ========== باقي الأنماط كما هي ========== */
+        .dashboard { max-width: 1400px; margin: 2rem auto; padding: 0 2rem; }
+        .welcome-card { background: linear-gradient(135deg, rgba(30,60,114,0.95), rgba(15,43,79,0.98)); backdrop-filter: blur(10px); color: var(--white); padding: 3rem; border-radius: var(--radius-xl); margin-bottom: 2rem; }
+        .welcome-title { font-size: 2.5rem; margin-bottom: 1rem; }
+        .welcome-stats { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .welcome-stat { display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: var(--radius-full); }
+        
+        /* نظام البحث */
+        .search-section { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 2rem; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); margin-bottom: 2rem; }
+        .search-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .search-input-group { position: relative; }
+        .search-input-group i { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--gray); }
+        .search-input { width: 100%; padding: 1rem 1rem 1rem 2.5rem; border: 2px solid #e9ecef; border-radius: var(--radius-full); font-size: 1rem; }
+        
+        /* شبكة الأساتذة والدروس */
+        .teachers-grid, .lessons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+        .teacher-card { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-xl); transition: all 0.3s ease; }
+        .teacher-card:hover { transform: translateY(-10px); }
+        .teacher-avatar { width: 100px; height: 100px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; margin: -50px auto 0; display: flex; align-items: center; justify-content: center; font-size: 3rem; border: 4px solid var(--white); }
+        .teacher-info { padding: 2rem; text-align: center; }
+        
+        /* النافذة المنبثقة */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: var(--white); width: 90%; max-width: 500px; padding: 2rem; border-radius: var(--radius-xl); position: relative; }
+        .modal-close { position: absolute; left: 1rem; top: 1rem; font-size: 1.5rem; cursor: pointer; }
+        
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 1rem; }
+            .search-grid { grid-template-columns: 1fr; }
+            .welcome-stats { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">تعلّم<span>.ما</span></div>
+            <div class="nav-menu" id="navMenu"></div>
+        </div>
+    </nav>
+
+    <div class="dashboard" id="dashboard"></div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // ========== البيانات الأساسية (بدون حسابات تجريبية) ==========
+        const State = {
+            user: JSON.parse(localStorage.getItem('user')) || null,
+            teachers: [], // فارغة تماماً
+            students: [], // فارغة تماماً
+            filters: {
+                search: '',
+                level: '',
+                subject: '',
+                teacherName: ''
+            },
+            searchResults: {
+                teachers: [],
+                lessons: []
+            },
+            selectedUserType: 'student',
+            ui: {
+                studentTab: 'all'
+            }
+        };
+
+        // ========== حفظ البيانات في localStorage ==========
+        function saveData() {
+            localStorage.setItem('user', JSON.stringify(State.user));
+            localStorage.setItem('teachers', JSON.stringify(State.teachers));
+            localStorage.setItem('students', JSON.stringify(State.students));
+        }
+
+        // ========== تحميل البيانات من localStorage ==========
+        function loadData() {
+            const savedUser = localStorage.getItem('user');
+            const savedTeachers = localStorage.getItem('teachers');
+            const savedStudents = localStorage.getItem('students');
+            
+            if (savedUser) State.user = JSON.parse(savedUser);
+            if (savedTeachers) State.teachers = JSON.parse(savedTeachers);
+            if (savedStudents) State.students = JSON.parse(savedStudents);
+        }
+
+        // ========== التهيئة ==========
+        function init() {
+            loadData();
+            renderUI();
+        }
+
+        // ========== تحديث واجهة المستخدم ==========
+        function renderUI() {
+            updateNavMenu();
+            
+            if (!State.user) {
+                showAuthModal();
+                return;
+            }
+
+            if (State.user.type === 'teacher') {
+                renderTeacherDashboard();
+            } else {
+                renderStudentDashboard();
+            }
+        }
+
+        // ========== تحديث قائمة التنقل ==========
+        function updateNavMenu() {
+            const navMenu = document.getElementById('navMenu');
+            
+            if (State.user) {
+                navMenu.innerHTML = `
+                    <span style="color: white;">👋 ${State.user.name}</span>
+                    <button class="nav-btn" onclick="logout()">خروج</button>
+                `;
+            } else {
+                navMenu.innerHTML = `
+                    <button class="nav-btn" onclick="showAuthModal()">دخول</button>
+                `;
+            }
+        }
+
+        // ========== عرض نافذة المصادقة (تسجيل/دخول) ==========
+        function showAuthModal() {
+            showModal(`
+                <h2 style="color: var(--primary); text-align: center; margin-bottom: 1.5rem;">
+                    <i class="fas fa-graduation-cap"></i> مرحباً بك في تعلّم.ما
+                </h2>
+                
+                <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                    <button class="nav-btn" style="flex:1; ${State.selectedUserType === 'student' ? 'background: var(--primary); color: white;' : ''}" 
+                        onclick="selectUserType('student')">
+                        <i class="fas fa-user-graduate"></i> تلميذ
+                    </button>
+                    <button class="nav-btn" style="flex:1; ${State.selectedUserType === 'teacher' ? 'background: var(--primary); color: white;' : ''}" 
+                        onclick="selectUserType('teacher')">
+                        <i class="fas fa-chalkboard-teacher"></i> أستاذ
+                    </button>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <button class="nav-btn" style="width:100%; background: var(--primary); color: white; margin-bottom: 0.5rem;" 
+                        onclick="showRegisterForm()">
+                        <i class="fas fa-user-plus"></i> تسجيل جديد
+                    </button>
+                    <button class="nav-btn" style="width:100%;" onclick="showLoginForm()">
+                        <i class="fas fa-sign-in-alt"></i> لدي حساب
+                    </button>
+                </div>
+            `);
+        }
+
+        // ========== نموذج تسجيل الدخول ==========
+        function showLoginForm() {
+            showModal(`
+                <h2 style="color: var(--primary); margin-bottom: 1.5rem;">تسجيل الدخول</h2>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">البريد الإلكتروني</label>
+                    <input type="email" id="loginEmail" class="search-input" placeholder="أدخل بريدك الإلكتروني">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">كلمة السر</label>
+                    <input type="password" id="loginPassword" class="search-input" placeholder="أدخل كلمة السر">
+                </div>
+                
+                <button class="nav-btn" style="width:100%; background: var(--primary); color: white;" onclick="handleLogin()">
+                    دخول
+                </button>
+                
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" onclick="showAuthModal()">رجوع</a>
+                </p>
+            `);
+        }
+
+        // ========== نموذج التسجيل الجديد ==========
+        function showRegisterForm() {
+            showModal(`
+                <h2 style="color: var(--primary); margin-bottom: 1.5rem;">${State.selectedUserType === 'teacher' ? 'تسجيل أستاذ جديد' : 'تسجيل تلميذ جديد'}</h2>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">الاسم الكامل</label>
+                    <input type="text" id="regName" class="search-input" placeholder="أدخل اسمك الكامل">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">البريد الإلكتروني</label>
+                    <input type="email" id="regEmail" class="search-input" placeholder="أدخل بريدك الإلكتروني">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">كلمة السر</label>
+                    <input type="password" id="regPassword" class="search-input" placeholder="أدخل كلمة السر">
+                </div>
+                
+                ${State.selectedUserType === 'student' ? `
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">المستوى الدراسي</label>
+                        <select id="regLevel" class="search-input">
+                            <option value="premiere">الأولى إعدادي</option>
+                            <option value="deuxieme">الثانية إعدادي</option>
+                            <option value="troisieme">الثالثة إعدادي</option>
+                            <option value="tronc">جذع مشترك</option>
+                            <option value="bac1">الأولى باكالوريا</option>
+                            <option value="bac2">الثانية باكالوريا</option>
+                        </select>
+                    </div>
+                ` : `
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">الاختصاص</label>
+                        <input type="text" id="regSpecialty" class="search-input" placeholder="مثال: الرياضيات">
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">نبذة عنك</label>
+                        <textarea id="regBio" class="search-input" rows="3" placeholder="اكتب نبذة مختصرة عنك..."></textarea>
+                    </div>
+                `}
+                
+                <button class="nav-btn" style="width:100%; background: var(--primary); color: white;" onclick="handleRegister()">
+                    تسجيل
+                </button>
+                
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" onclick="showAuthModal()">رجوع</a>
+                </p>
+            `);
+        }
+
+        // ========== معالجة تسجيل الدخول ==========
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                alert('الرجاء إدخال البريد الإلكتروني وكلمة السر');
+                return;
+            }
+
+            let user;
+            if (State.selectedUserType === 'teacher') {
+                user = State.teachers.find(t => t.email === email && t.password === password);
+            } else {
+                user = State.students.find(s => s.email === email && s.password === password);
+            }
+
+            if (user) {
+                State.user = {
+                    id: user.id,
+                    name: user.name,
+                    type: State.selectedUserType
+                };
+                saveData();
+                closeModal();
+                renderUI();
+                alert('مرحباً بك ' + user.name);
+            } else {
+                alert('البريد الإلكتروني أو كلمة السر غير صحيحة');
+            }
+        }
+
+        // ========== معالجة التسجيل الجديد ==========
+        function handleRegister() {
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            if (!name || !email || !password) {
+                alert('الرجاء ملء جميع الحقول المطلوبة');
+                return;
+            }
+
+            // التحقق من عدم وجود البريد الإلكتروني مسبقاً
+            if (State.selectedUserType === 'teacher') {
+                if (State.teachers.find(t => t.email === email)) {
+                    alert('البريد الإلكتروني موجود مسبقاً');
+                    return;
+                }
+            } else {
+                if (State.students.find(s => s.email === email)) {
+                    alert('البريد الإلكتروني موجود مسبقاً');
+                    return;
+                }
+            }
+
+            if (State.selectedUserType === 'teacher') {
+                const specialty = document.getElementById('regSpecialty').value;
+                const bio = document.getElementById('regBio').value;
+
+                const newTeacher = {
+                    id: State.teachers.length + 1,
+                    name: name,
+                    email: email,
+                    password: password,
+                    specialty: specialty || 'أستاذ',
+                    bio: bio || 'أستاذ جديد على المنصة',
+                    avatar: '👨‍🏫',
+                    levels: [],
+                    subjects: [],
+                    rating: 0,
+                    students: 0,
+                    followers: [],
+                    lessons: []
+                };
+
+                State.teachers.push(newTeacher);
+                State.user = { id: newTeacher.id, name: name, type: 'teacher' };
+                
+            } else {
+                const level = document.getElementById('regLevel').value;
+
+                const newStudent = {
+                    id: State.students.length + 1,
+                    name: name,
+                    email: email,
+                    password: password,
+                    level: level,
+                    following: [],
+                    savedLessons: [],
+                    points: 0,
+                    streak: 0
+                };
+
+                State.students.push(newStudent);
+                State.user = { id: newStudent.id, name: name, type: 'student' };
+            }
+
+            saveData();
+            closeModal();
+            renderUI();
+            alert('تم التسجيل بنجاح');
+        }
+
+        // ========== اختيار نوع المستخدم ==========
+        function selectUserType(type) {
+            State.selectedUserType = type;
+        }
+
+        // ========== تسجيل الخروج ==========
+        function logout() {
+            State.user = null;
+            localStorage.removeItem('user');
+            renderUI();
+        }
+
+        // ========== عرض لوحة تحكم التلميذ ==========
+        function renderStudentDashboard() {
+            const dashboard = document.getElementById('dashboard');
+            const student = State.students.find(s => s.id === State.user?.id);
+
+            if (!student) return;
+
+            const followingCount = student.following.length;
+            const savedCount = student.savedLessons.length;
+
+            dashboard.innerHTML = `
+                <div class="welcome-card">
+                    <h1 class="welcome-title">مرحباً بك ${student.name} 👋</h1>
+                    <div class="welcome-stats">
+                        <div class="welcome-stat">
+                            <i class="fas fa-fire" style="color: var(--secondary);"></i>
+                            <span>${student.streak} يوم متتالي</span>
+                        </div>
+                        <div class="welcome-stat">
+                            <i class="fas fa-star" style="color: var(--secondary);"></i>
+                            <span>${student.points} نقطة</span>
+                        </div>
+                        <div class="welcome-stat">
+                            <i class="fas fa-graduation-cap" style="color: var(--secondary);"></i>
+                            <span>${getLevelName(student.level)}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: var(--radius-xl); text-align: center;">
+                    <i class="fas fa-search" style="font-size: 3rem; color: var(--gray); margin-bottom: 1rem;"></i>
+                    <h3 style="color: var(--primary);">ابحث عن الدروس والأساتذة</h3>
+                    <p style="color: var(--gray); margin: 1rem 0;">استخدم البحث المتقدم للعثور على محتوى تعليمي</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 400px; margin: 2rem auto;">
+                        <div style="background: var(--light); padding: 1rem; border-radius: var(--radius-md);">
+                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">${State.teachers.length}</div>
+                            <div>أستاذ</div>
+                        </div>
+                        <div style="background: var(--light); padding: 1rem; border-radius: var(--radius-md);">
+                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">${State.teachers.reduce((sum, t) => sum + t.lessons.length, 0)}</div>
+                            <div>درس</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ========== عرض لوحة تحكم الأستاذ ==========
+        function renderTeacherDashboard() {
+            const dashboard = document.getElementById('dashboard');
+            const teacher = State.teachers.find(t => t.id === State.user.id);
+
+            dashboard.innerHTML = `
+                <div class="welcome-card">
+                    <h1 class="welcome-title">مرحباً بك أ. ${teacher.name} 👨‍🏫</h1>
+                    <p>${teacher.bio}</p>
+                </div>
+                
+                <div style="background: white; padding: 2rem; border-radius: var(--radius-xl); text-align: center;">
+                    <i class="fas fa-chalkboard-teacher" style="font-size: 3rem; color: var(--gray); margin-bottom: 1rem;"></i>
+                    <h3 style="color: var(--primary);">ابدأ بإضافة دروسك</h3>
+                    <p style="color: var(--gray); margin: 1rem 0;">شارك معرفتك مع التلاميذ</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 400px; margin: 2rem auto;">
+                        <div style="background: var(--light); padding: 1rem; border-radius: var(--radius-md);">
+                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">${teacher.lessons.length}</div>
+                            <div>دروسي</div>
+                        </div>
+                        <div style="background: var(--light); padding: 1rem; border-radius: var(--radius-md);">
+                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">${teacher.followers.length}</div>
+                            <div>متابعون</div>
+                        </div>
+                    </div>
+                    
+                    <button class="nav-btn" style="background: var(--primary); color: white;" onclick="showAddLessonForm()">
+                        <i class="fas fa-plus"></i> إضافة درس جديد
+                    </button>
+                </div>
+            `;
+        }
+
+        // ========== نموذج إضافة درس (للأستاذ) ==========
+        function showAddLessonForm() {
+            showModal(`
+                <h2 style="color: var(--primary); margin-bottom: 1.5rem;">إضافة درس جديد</h2>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">عنوان الدرس</label>
+                    <input type="text" id="lessonTitle" class="search-input" placeholder="أدخل عنوان الدرس">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">وصف الدرس</label>
+                    <textarea id="lessonDesc" class="search-input" rows="3" placeholder="وصف مختصر للدرس"></textarea>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">المستوى</label>
+                    <select id="lessonLevel" class="search-input">
+                        <option value="premiere">الأولى إعدادي</option>
+                        <option value="deuxieme">الثانية إعدادي</option>
+                        <option value="troisieme">الثالثة إعدادي</option>
+                        <option value="tronc">جذع مشترك</option>
+                        <option value="bac1">الأولى باكالوريا</option>
+                        <option value="bac2">الثانية باكالوريا</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">المادة</label>
+                    <select id="lessonSubject" class="search-input">
+                        <option value="math">الرياضيات</option>
+                        <option value="physique">الفيزياء</option>
+                        <option value="chimie">الكيمياء</option>
+                        <option value="svt">علوم الحياة</option>
+                        <option value="philosophy">الفلسفة</option>
+                        <option value="arabic">العربية</option>
+                        <option value="french">الفرنسية</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">نوع الدرس</label>
+                    <select id="lessonType" class="search-input">
+                        <option value="pdf">PDF</option>
+                        <option value="video">فيديو</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 1rem;" id="pdfField">
+                    <label style="display: block; margin-bottom: 0.5rem;">رابط PDF</label>
+                    <input type="url" id="lessonPdf" class="search-input" placeholder="https://example.com/lesson.pdf">
+                </div>
+                
+                <button class="nav-btn" style="width:100%; background: var(--primary); color: white;" onclick="addNewLesson()">
+                    نشر الدرس
+                </button>
+            `);
+        }
+
+        // ========== إضافة درس جديد ==========
+        function addNewLesson() {
+            const title = document.getElementById('lessonTitle').value;
+            const desc = document.getElementById('lessonDesc').value;
+            const level = document.getElementById('lessonLevel').value;
+            const subject = document.getElementById('lessonSubject').value;
+            const type = document.getElementById('lessonType').value;
+
+            if (!title || !desc) {
+                alert('الرجاء ملء جميع الحقول');
+                return;
+            }
+
+            const teacher = State.teachers.find(t => t.id === State.user.id);
+            
+            const newLesson = {
+                id: Date.now(),
+                title: title,
+                description: desc,
+                level: level,
+                subject: subject,
+                type: type,
+                date: new Date().toISOString().split('T')[0],
+                downloads: 0,
+                pages: type === 'pdf' ? 10 : undefined,
+                size: type === 'pdf' ? '1.5 MB' : undefined
+            };
+
+            teacher.lessons.push(newLesson);
+            saveData();
+            closeModal();
+            renderTeacherDashboard();
+            alert('✅ تم نشر الدرس بنجاح');
+        }
+
+        // ========== دوال مساعدة ==========
+        function getLevelName(level) {
+            const levels = {
+                'premiere': 'الأولى إعدادي',
+                'deuxieme': 'الثانية إعدادي',
+                'troisieme': 'الثالثة إعدادي',
+                'tronc': 'جذع مشترك',
+                'bac1': 'الأولى باكالوريا',
+                'bac2': 'الثانية باكالوريا'
+            };
+            return levels[level] || level;
+        }
+
+        function showModal(content) {
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // ========== التهيئة ==========
+        init();
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) closeModal();
+        };
+    </script>
+</body>
+</html>
