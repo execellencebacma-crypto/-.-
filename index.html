@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ========== جميع الأنماط السابقة ========== */
+        /* جميع الأنماط السابقة كما هي */
         :root {
             --primary: #1e3c72;
             --primary-light: #2a5298;
@@ -821,6 +821,62 @@
             color: var(--white);
         }
 
+        /* معاينة PDF داخل الصفحة */
+        .pdf-preview {
+            width: 100%;
+            height: 500px;
+            border: 2px solid #e9ecef;
+            border-radius: var(--radius-lg);
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .pdf-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* رسالة خطأ PDF */
+        .pdf-error {
+            text-align: center;
+            padding: 3rem;
+            background: var(--light);
+            border-radius: var(--radius-lg);
+            margin: 1rem 0;
+        }
+
+        .pdf-error i {
+            font-size: 4rem;
+            color: var(--danger);
+            margin-bottom: 1rem;
+        }
+
+        .pdf-error h3 {
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+        }
+
+        .pdf-error p {
+            color: var(--gray);
+        }
+
+        /* روابط PDF تجريبية */
+        .sample-pdf-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--info);
+            color: var(--white);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            margin: 0.5rem;
+            cursor: pointer;
+        }
+
+        .sample-pdf-link:hover {
+            background: var(--primary);
+        }
+
         /* التجاوب */
         @media (max-width: 768px) {
             .nav-container {
@@ -880,24 +936,27 @@
     </div>
 
     <script>
-        // ========== نظام البيانات المشتركة (قاعدة البيانات الموحدة) ==========
+        // ========== روابط PDF تجريبية حقيقية ==========
+        const SAMPLE_PDFS = {
+            math: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            physics: 'https://www.africau.edu/images/default/sample.pdf',
+            default: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+        };
+
+        // ========== نظام البيانات المشتركة ==========
         const Database = {
-            // البيانات الأساسية - مخزنة في localStorage
             teachers: JSON.parse(localStorage.getItem('teachers')) || [],
             students: JSON.parse(localStorage.getItem('students')) || [],
             lessons: JSON.parse(localStorage.getItem('lessons')) || [],
             
-            // حفظ جميع البيانات
             saveAll() {
                 localStorage.setItem('teachers', JSON.stringify(this.teachers));
                 localStorage.setItem('students', JSON.stringify(this.students));
                 localStorage.setItem('lessons', JSON.stringify(this.lessons));
             },
             
-            // تهيئة البيانات التجريبية
             initSampleData() {
                 if (this.teachers.length === 0) {
-                    // أساتذة تجريبيون
                     this.teachers.push(
                         {
                             id: 1,
@@ -931,7 +990,6 @@
                 }
 
                 if (this.students.length === 0) {
-                    // تلاميذ تجريبيون
                     this.students.push(
                         {
                             id: 1,
@@ -959,7 +1017,6 @@
                 }
 
                 if (this.lessons.length === 0) {
-                    // دروس تجريبية
                     this.lessons.push(
                         {
                             id: 101,
@@ -970,7 +1027,7 @@
                             level: 'bac1',
                             subject: 'math',
                             type: 'pdf',
-                            pdfUrl: '#',
+                            pdfUrl: SAMPLE_PDFS.math,
                             date: '2024-02-20',
                             downloads: 45,
                             views: 120
@@ -984,7 +1041,7 @@
                             level: 'bac2',
                             subject: 'physique',
                             type: 'pdf',
-                            pdfUrl: '#',
+                            pdfUrl: SAMPLE_PDFS.physics,
                             date: '2024-02-21',
                             downloads: 32,
                             views: 89
@@ -1020,7 +1077,7 @@
         // ========== تهيئة البيانات ==========
         Database.initSampleData();
 
-        // ========== دوال حفظ واسترجاع البيانات ==========
+        // ========== حفظ المستخدم الحالي ==========
         function saveCurrentUser() {
             localStorage.setItem('currentUser', JSON.stringify(AppState.currentUser));
         }
@@ -1082,7 +1139,7 @@
             }
         }
 
-        // ========== دوال البحث المتقدم (الآن تعمل مع جميع البيانات المشتركة) ==========
+        // ========== دوال البحث المتقدم ==========
         function searchContent() {
             if (!AppState.currentUser || AppState.currentUser.type !== 'student') return;
 
@@ -1091,7 +1148,7 @@
             AppState.filters.subject = document.getElementById('subjectFilter')?.value || '';
             AppState.filters.teacherName = document.getElementById('teacherFilter')?.value.toLowerCase() || '';
 
-            // فلترة الأساتذة - نبحث في قاعدة البيانات الموحدة
+            // فلترة الأساتذة
             AppState.searchResults.teachers = Database.teachers.filter(teacher => {
                 let matches = true;
                 
@@ -1117,7 +1174,7 @@
                 return matches;
             });
 
-            // فلترة الدروس - نبحث في قاعدة البيانات الموحدة
+            // فلترة الدروس
             AppState.searchResults.lessons = Database.lessons.filter(lesson => {
                 let matches = true;
                 
@@ -1144,7 +1201,6 @@
                 return matches;
             });
 
-            // تحديث واجهة البحث
             const resultsCount = document.querySelector('.results-count');
             if (resultsCount) {
                 resultsCount.innerHTML = `${AppState.searchResults.teachers.length} أستاذ • ${AppState.searchResults.lessons.length} درس`;
@@ -1331,7 +1387,6 @@
                 <div id="studentContent"></div>
             `;
 
-            // تحديث نتائج البحث
             searchContent();
         }
 
@@ -1449,7 +1504,7 @@
             `;
         }
 
-        // ========== دوال التفاعل (تعدل في قاعدة البيانات الموحدة) ==========
+        // ========== دوال التفاعل ==========
         function toggleFollow(teacherId) {
             const student = Database.students.find(s => s.id === AppState.currentUser.id);
             const teacher = Database.teachers.find(t => t.id === teacherId);
@@ -1491,6 +1546,7 @@
             renderCurrentTab();
         }
 
+        // ========== عرض الدرس - تم إصلاح المشكلة ==========
         function viewLesson(lessonId) {
             const lesson = Database.lessons.find(l => l.id === lessonId);
             const teacher = Database.teachers.find(t => t.id === lesson.teacherId);
@@ -1498,6 +1554,9 @@
             // زيادة عدد المشاهدات
             lesson.views = (lesson.views || 0) + 1;
             Database.saveAll();
+
+            // التحقق من وجود رابط PDF صحيح
+            const pdfUrl = lesson.pdfUrl || SAMPLE_PDFS.default;
 
             showModal(`
                 <h2 style="color: var(--primary);">${lesson.title}</h2>
@@ -1512,12 +1571,50 @@
                     </div>
                 </div>
                 
-                <div style="text-align: center;">
-                    <button class="nav-btn" style="background: var(--primary); color: white;" onclick="window.open('${lesson.pdfUrl || '#'}', '_blank')">
-                        <i class="fas fa-file-pdf"></i> فتح PDF
+                <!-- معاينة PDF -->
+                <div class="pdf-preview">
+                    <iframe src="${pdfUrl}" type="application/pdf"></iframe>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button class="nav-btn" style="flex: 1; background: var(--primary); color: white;" onclick="window.open('${pdfUrl}', '_blank')">
+                        <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
+                    </button>
+                    <button class="nav-btn" style="flex: 1; background: var(--secondary); color: var(--primary);" onclick="downloadPdf('${lessonId}')">
+                        <i class="fas fa-download"></i> تحميل PDF
                     </button>
                 </div>
+                
+                <!-- روابط تجريبية للمساعدة -->
+                <div style="margin-top: 2rem; padding: 1rem; background: var(--light); border-radius: var(--radius-lg);">
+                    <p style="color: var(--gray); margin-bottom: 0.5rem;"><i class="fas fa-info-circle"></i> روابط PDF تجريبية للمشاهدة:</p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span class="sample-pdf-link" onclick="window.open('${SAMPLE_PDFS.math}', '_blank')">📐 رياضيات</span>
+                        <span class="sample-pdf-link" onclick="window.open('${SAMPLE_PDFS.physics}', '_blank')">⚡ فيزياء</span>
+                        <span class="sample-pdf-link" onclick="window.open('${SAMPLE_PDFS.default}', '_blank')">📄 عينة PDF</span>
+                    </div>
+                </div>
             `);
+        }
+
+        // ========== تحميل PDF ==========
+        function downloadPdf(lessonId) {
+            const lesson = Database.lessons.find(l => l.id === lessonId);
+            const pdfUrl = lesson.pdfUrl || SAMPLE_PDFS.default;
+            
+            // زيادة عدد التحميلات
+            lesson.downloads = (lesson.downloads || 0) + 1;
+            Database.saveAll();
+
+            // إنشاء رابط تحميل
+            const link = document.createElement('a');
+            link.href = pdfUrl;
+            link.download = `${lesson.title}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showToast('جاري تحميل الملف...', 'info');
         }
 
         function viewTeacherLessons(teacherId) {
@@ -1532,17 +1629,18 @@
             let html = `
                 <h2 style="color: var(--primary);">${teacher.name}</h2>
                 <p style="margin-bottom: 1rem;">${teacher.specialty || ''}</p>
-                <div style="display: grid; gap: 1rem;">
+                <div class="lessons-grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
             `;
 
             lessons.forEach(lesson => {
                 html += `
-                    <div style="background: var(--light); padding: 1rem; border-radius: var(--radius-md);">
-                        <h3>${lesson.title}</h3>
-                        <p>المستوى: ${getLevelName(lesson.level)}</p>
-                        <button class="nav-btn" style="background: var(--primary); color: white;" onclick="viewLesson(${lesson.id})">
-                            عرض الدرس
-                        </button>
+                    <div class="lesson-card" onclick="viewLesson(${lesson.id})">
+                        <div class="lesson-header" style="height: 100px;">📄</div>
+                        <div class="lesson-content">
+                            <h3>${lesson.title}</h3>
+                            <p>المستوى: ${getLevelName(lesson.level)}</p>
+                            <p>👁️ ${lesson.views || 0} مشاهدة</p>
+                        </div>
                     </div>
                 `;
             });
@@ -1709,7 +1807,21 @@
                         
                         <div class="form-group">
                             <label>رابط PDF</label>
-                            <input type="url" id="lessonUrl" placeholder="https://example.com/lesson.pdf">
+                            <input type="url" id="lessonUrl" placeholder="https://example.com/lesson.pdf" 
+                                value="${SAMPLE_PDFS.math}">
+                            <small style="color: var(--gray);">يمكنك استخدام روابط PDF تجريبية: رياضيات، فيزياء، عينة</small>
+                        </div>
+                        
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <button type="button" class="sample-pdf-link" onclick="document.getElementById('lessonUrl').value='${SAMPLE_PDFS.math}'">
+                                📐 رياضيات
+                            </button>
+                            <button type="button" class="sample-pdf-link" onclick="document.getElementById('lessonUrl').value='${SAMPLE_PDFS.physics}'">
+                                ⚡ فيزياء
+                            </button>
+                            <button type="button" class="sample-pdf-link" onclick="document.getElementById('lessonUrl').value='${SAMPLE_PDFS.default}'">
+                                📄 عينة
+                            </button>
                         </div>
                         
                         <button class="submit-btn" onclick="addNewLesson()">
@@ -1736,6 +1848,7 @@
                                             <th>المستوى</th>
                                             <th>المادة</th>
                                             <th>المشاهدات</th>
+                                            <th>التحميلات</th>
                                             <th>الإجراءات</th>
                                         </tr>
                                     </thead>
@@ -1746,6 +1859,7 @@
                                                 <td>${getLevelName(lesson.level)}</td>
                                                 <td>${getSubjectName(lesson.subject)}</td>
                                                 <td>${lesson.views || 0}</td>
+                                                <td>${lesson.downloads || 0}</td>
                                                 <td>
                                                     <button class="action-btn view-btn" onclick="viewLesson(${lesson.id})">
                                                         <i class="fas fa-eye"></i>
@@ -1802,7 +1916,7 @@
             }
         }
 
-        // ========== إضافة درس جديد (يضاف إلى قاعدة البيانات الموحدة) ==========
+        // ========== إضافة درس جديد مع رابط PDF حقيقي ==========
         function addNewLesson() {
             const title = document.getElementById('lessonTitle').value;
             const desc = document.getElementById('lessonDesc').value;
@@ -1832,10 +1946,7 @@
                 views: 0
             };
 
-            // إضافة الدرس إلى قاعدة البيانات الموحدة
             Database.lessons.push(newLesson);
-            
-            // حفظ جميع التغييرات
             Database.saveAll();
             
             showToast('✅ تم نشر الدرس بنجاح', 'success');
@@ -1846,10 +1957,7 @@
         function deleteLesson(lessonId) {
             if (!confirm('هل أنت متأكد من حذف هذا الدرس؟')) return;
 
-            // حذف الدرس من قاعدة البيانات الموحدة
             Database.lessons = Database.lessons.filter(l => l.id !== lessonId);
-            
-            // حفظ جميع التغييرات
             Database.saveAll();
             
             showToast('✅ تم حذف الدرس', 'info');
