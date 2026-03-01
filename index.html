@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعلّم.ما - المنصة التعليمية المغربية المتكاملة</title>
+    <title>تعلّم.ما - المنصة التعليمية المغربية</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,11 +11,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Chart.js للرسوم البيانية -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
     <style>
-        /* ========== متغيرات متقدمة ========== */
+        /* ========== جميع الأنماط السابقة ========== */
         :root {
             --primary: #1e3c72;
             --primary-light: #2a5298;
@@ -48,7 +45,6 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ========== إعادة تعيين ========== */
         * {
             margin: 0;
             padding: 0;
@@ -63,7 +59,7 @@
             min-height: 100vh;
         }
 
-        /* ========== خلفية متحركة ========== */
+        /* خلفية متحركة */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -90,7 +86,7 @@
             100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
         }
 
-        /* ========== شريط التحميل ========== */
+        /* شريط التحميل */
         .loading-bar {
             position: fixed;
             top: 0;
@@ -108,7 +104,7 @@
             transform: scaleX(1);
         }
 
-        /* ========== الشريط العلوي ========== */
+        /* الشريط العلوي */
         .navbar {
             background: rgba(30, 60, 114, 0.95);
             backdrop-filter: blur(10px);
@@ -171,14 +167,14 @@
             color: var(--white);
         }
 
-        /* ========== لوحة التحكم ========== */
+        /* لوحة التحكم */
         .dashboard {
             max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
-        /* ========== بطاقة الترحيب ========== */
+        /* بطاقة الترحيب */
         .welcome-card {
             background: linear-gradient(135deg, rgba(30,60,114,0.95), rgba(15,43,79,0.98));
             backdrop-filter: blur(10px);
@@ -186,12 +182,6 @@
             padding: 3rem;
             border-radius: var(--radius-2xl);
             margin-bottom: 2rem;
-            animation: slideUp 0.5s ease;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .welcome-title {
@@ -215,7 +205,7 @@
             border-radius: var(--radius-full);
         }
 
-        /* ========== شبكة الإحصائيات ========== */
+        /* شبكة الإحصائيات */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -233,12 +223,6 @@
             align-items: center;
             gap: 1.5rem;
             transition: var(--transition);
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .stat-card:hover {
@@ -265,7 +249,7 @@
             line-height: 1;
         }
 
-        /* ========== نظام البحث المتقدم ========== */
+        /* نظام البحث المتقدم */
         .search-section {
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
@@ -346,7 +330,7 @@
             box-shadow: var(--shadow-xl);
         }
 
-        /* ========== الفلاتر النشطة ========== */
+        /* الفلاتر النشطة */
         .active-filters {
             display: flex;
             flex-wrap: wrap;
@@ -362,12 +346,6 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
         }
 
         .filter-tag button {
@@ -378,7 +356,7 @@
             font-size: 1.2rem;
         }
 
-        /* ========== أقسام التلميذ ========== */
+        /* أقسام التلميذ */
         .student-tabs {
             display: flex;
             gap: 1rem;
@@ -404,7 +382,7 @@
             color: var(--primary);
         }
 
-        /* ========== شبكة الأساتذة ========== */
+        /* شبكة الأساتذة */
         .teachers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -437,11 +415,6 @@
             justify-content: center;
             font-size: 3rem;
             border: 4px solid var(--white);
-            transition: var(--transition);
-        }
-
-        .teacher-card:hover .teacher-avatar {
-            transform: rotate(360deg);
         }
 
         .teacher-info {
@@ -492,7 +465,7 @@
             background: var(--success);
         }
 
-        /* ========== شبكة الدروس ========== */
+        /* شبكة الدروس */
         .lessons-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -582,7 +555,7 @@
             color: var(--primary);
         }
 
-        /* ========== لوحة تحكم الأستاذ ========== */
+        /* لوحة تحكم الأستاذ */
         .teacher-dashboard {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -633,7 +606,7 @@
             color: var(--white);
         }
 
-        /* ========== نماذج الإدخال ========== */
+        /* نماذج الإدخال */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -682,7 +655,7 @@
             box-shadow: var(--shadow-xl);
         }
 
-        /* ========== جداول ========== */
+        /* جداول */
         .table-container {
             overflow-x: auto;
         }
@@ -722,7 +695,7 @@
         .edit-btn { background: var(--warning); color: var(--dark); }
         .delete-btn { background: var(--danger); color: var(--white); }
 
-        /* ========== حالات عدم وجود بيانات ========== */
+        /* حالات عدم وجود بيانات */
         .no-data {
             text-align: center;
             padding: 3rem;
@@ -737,7 +710,7 @@
             opacity: 0.5;
         }
 
-        /* ========== إشعارات ========== */
+        /* إشعارات */
         .toast-container {
             position: fixed;
             bottom: 20px;
@@ -766,7 +739,7 @@
         .toast.warning { border-right-color: var(--warning); }
         .toast.info { border-right-color: var(--info); }
 
-        /* ========== النافذة المنبثقة ========== */
+        /* النافذة المنبثقة */
         .modal {
             display: none;
             position: fixed;
@@ -821,7 +794,7 @@
             transform: rotate(90deg);
         }
 
-        /* ========== اختيار نوع المستخدم ========== */
+        /* اختيار نوع المستخدم */
         .user-type-selector {
             display: flex;
             gap: 1rem;
@@ -848,7 +821,7 @@
             color: var(--white);
         }
 
-        /* ========== التجاوب ========== */
+        /* التجاوب */
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -874,24 +847,6 @@
             .welcome-stats {
                 flex-direction: column;
             }
-        }
-
-        /* ========== شريط التمرير المخصص ========== */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--light);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: var(--radius-full);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
         }
     </style>
 </head>
@@ -925,12 +880,125 @@
     </div>
 
     <script>
-        // ========== نظام إدارة الحالة المتقدم ==========
-        const AppState = {
-            user: JSON.parse(localStorage.getItem('user')) || null,
+        // ========== نظام البيانات المشتركة (قاعدة البيانات الموحدة) ==========
+        const Database = {
+            // البيانات الأساسية - مخزنة في localStorage
             teachers: JSON.parse(localStorage.getItem('teachers')) || [],
             students: JSON.parse(localStorage.getItem('students')) || [],
             lessons: JSON.parse(localStorage.getItem('lessons')) || [],
+            
+            // حفظ جميع البيانات
+            saveAll() {
+                localStorage.setItem('teachers', JSON.stringify(this.teachers));
+                localStorage.setItem('students', JSON.stringify(this.students));
+                localStorage.setItem('lessons', JSON.stringify(this.lessons));
+            },
+            
+            // تهيئة البيانات التجريبية
+            initSampleData() {
+                if (this.teachers.length === 0) {
+                    // أساتذة تجريبيون
+                    this.teachers.push(
+                        {
+                            id: 1,
+                            name: 'أحمد الفاسي',
+                            email: 'ahmed@teacher.com',
+                            password: '123456',
+                            specialty: 'الرياضيات',
+                            bio: 'أستاذ مادة الرياضيات للبكالوريا - خبرة 15 سنة',
+                            avatar: '📐',
+                            rating: 4.8,
+                            followers: [],
+                            subjects: ['math', 'physique'],
+                            levels: ['bac1', 'bac2'],
+                            lessons: []
+                        },
+                        {
+                            id: 2,
+                            name: 'فاطمة المراكشي',
+                            email: 'fatima@teacher.com',
+                            password: '123456',
+                            specialty: 'الفيزياء',
+                            bio: 'دكتورة في الفيزياء النووية - متخصصة في تبسيط العلوم',
+                            avatar: '⚡',
+                            rating: 4.9,
+                            followers: [],
+                            subjects: ['physique', 'chimie'],
+                            levels: ['bac1', 'bac2'],
+                            lessons: []
+                        }
+                    );
+                }
+
+                if (this.students.length === 0) {
+                    // تلاميذ تجريبيون
+                    this.students.push(
+                        {
+                            id: 1,
+                            name: 'يوسف الطالبي',
+                            email: 'youssef@student.com',
+                            password: '123456',
+                            level: 'bac2',
+                            following: [],
+                            savedLessons: [],
+                            points: 150,
+                            streak: 5
+                        },
+                        {
+                            id: 2,
+                            name: 'سارة العلمي',
+                            email: 'sara@student.com',
+                            password: '123456',
+                            level: 'bac1',
+                            following: [],
+                            savedLessons: [],
+                            points: 80,
+                            streak: 3
+                        }
+                    );
+                }
+
+                if (this.lessons.length === 0) {
+                    // دروس تجريبية
+                    this.lessons.push(
+                        {
+                            id: 101,
+                            title: 'المعادلات من الدرجة الأولى',
+                            description: 'شرح مبسط مع تمارين تطبيقية',
+                            teacherId: 1,
+                            teacherName: 'أحمد الفاسي',
+                            level: 'bac1',
+                            subject: 'math',
+                            type: 'pdf',
+                            pdfUrl: '#',
+                            date: '2024-02-20',
+                            downloads: 45,
+                            views: 120
+                        },
+                        {
+                            id: 102,
+                            title: 'قوانين نيوتن في الحركة',
+                            description: 'شرح قوانين نيوتن الثلاثة مع أمثلة',
+                            teacherId: 2,
+                            teacherName: 'فاطمة المراكشي',
+                            level: 'bac2',
+                            subject: 'physique',
+                            type: 'pdf',
+                            pdfUrl: '#',
+                            date: '2024-02-21',
+                            downloads: 32,
+                            views: 89
+                        }
+                    );
+                }
+
+                this.saveAll();
+            }
+        };
+
+        // ========== نظام إدارة الحالة ==========
+        const AppState = {
+            currentUser: JSON.parse(localStorage.getItem('currentUser')) || null,
             filters: {
                 search: '',
                 level: '',
@@ -949,12 +1017,12 @@
             }
         };
 
-        // ========== حفظ البيانات في localStorage ==========
-        function saveData() {
-            localStorage.setItem('user', JSON.stringify(AppState.user));
-            localStorage.setItem('teachers', JSON.stringify(AppState.teachers));
-            localStorage.setItem('students', JSON.stringify(AppState.students));
-            localStorage.setItem('lessons', JSON.stringify(AppState.lessons));
+        // ========== تهيئة البيانات ==========
+        Database.initSampleData();
+
+        // ========== دوال حفظ واسترجاع البيانات ==========
+        function saveCurrentUser() {
+            localStorage.setItem('currentUser', JSON.stringify(AppState.currentUser));
         }
 
         // ========== إشعارات ==========
@@ -974,8 +1042,7 @@
             container.appendChild(toast);
             
             setTimeout(() => {
-                toast.style.animation = 'slideOutRight 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
+                toast.remove();
             }, 3000);
         }
 
@@ -983,12 +1050,12 @@
         function renderUI() {
             updateNavMenu();
             
-            if (!AppState.user) {
+            if (!AppState.currentUser) {
                 showAuthModal();
                 return;
             }
 
-            if (AppState.user.type === 'teacher') {
+            if (AppState.currentUser.type === 'teacher') {
                 renderTeacherDashboard();
             } else {
                 renderStudentDashboard();
@@ -998,14 +1065,14 @@
         function updateNavMenu() {
             const navMenu = document.getElementById('navMenu');
             
-            if (AppState.user) {
-                const userType = AppState.user.type === 'teacher' ? 'أستاذ' : 'تلميذ';
+            if (AppState.currentUser) {
+                const userType = AppState.currentUser.type === 'teacher' ? 'أستاذ' : 'تلميذ';
                 navMenu.innerHTML = `
                     <div class="user-badge">
-                        <i class="fas ${AppState.user.type === 'teacher' ? 'fa-chalkboard-teacher' : 'fa-user-graduate'}"></i>
+                        <i class="fas ${AppState.currentUser.type === 'teacher' ? 'fa-chalkboard-teacher' : 'fa-user-graduate'}"></i>
                         <span>${userType}</span>
                     </div>
-                    <span style="color: white;">👋 ${AppState.user.name}</span>
+                    <span style="color: white;">👋 ${AppState.currentUser.name}</span>
                     <button class="nav-btn" onclick="logout()">خروج</button>
                 `;
             } else {
@@ -1015,17 +1082,17 @@
             }
         }
 
-        // ========== دوال البحث المتقدم ==========
+        // ========== دوال البحث المتقدم (الآن تعمل مع جميع البيانات المشتركة) ==========
         function searchContent() {
-            if (!AppState.user || AppState.user.type !== 'student') return;
+            if (!AppState.currentUser || AppState.currentUser.type !== 'student') return;
 
             AppState.filters.search = document.getElementById('searchInput')?.value.toLowerCase() || '';
             AppState.filters.level = document.getElementById('levelFilter')?.value || '';
             AppState.filters.subject = document.getElementById('subjectFilter')?.value || '';
             AppState.filters.teacherName = document.getElementById('teacherFilter')?.value.toLowerCase() || '';
 
-            // فلترة الأساتذة
-            AppState.searchResults.teachers = AppState.teachers.filter(teacher => {
+            // فلترة الأساتذة - نبحث في قاعدة البيانات الموحدة
+            AppState.searchResults.teachers = Database.teachers.filter(teacher => {
                 let matches = true;
                 
                 if (AppState.filters.search) {
@@ -1050,12 +1117,15 @@
                 return matches;
             });
 
-            // فلترة الدروس
-            AppState.searchResults.lessons = AppState.lessons.filter(lesson => {
+            // فلترة الدروس - نبحث في قاعدة البيانات الموحدة
+            AppState.searchResults.lessons = Database.lessons.filter(lesson => {
                 let matches = true;
                 
                 if (AppState.filters.search) {
-                    matches = matches && lesson.title.toLowerCase().includes(AppState.filters.search);
+                    matches = matches && (
+                        lesson.title.toLowerCase().includes(AppState.filters.search) ||
+                        lesson.description?.toLowerCase().includes(AppState.filters.search)
+                    );
                 }
                 
                 if (AppState.filters.level) {
@@ -1066,13 +1136,19 @@
                     matches = matches && lesson.subject === AppState.filters.subject;
                 }
                 
-                const teacher = AppState.teachers.find(t => t.id === lesson.teacherId);
+                const teacher = Database.teachers.find(t => t.id === lesson.teacherId);
                 if (AppState.filters.teacherName && teacher) {
                     matches = matches && teacher.name.toLowerCase().includes(AppState.filters.teacherName);
                 }
                 
                 return matches;
             });
+
+            // تحديث واجهة البحث
+            const resultsCount = document.querySelector('.results-count');
+            if (resultsCount) {
+                resultsCount.innerHTML = `${AppState.searchResults.teachers.length} أستاذ • ${AppState.searchResults.lessons.length} درس`;
+            }
 
             showActiveFilters();
             renderCurrentTab();
@@ -1144,7 +1220,7 @@
         // ========== عرض لوحة تحكم التلميذ ==========
         function renderStudentDashboard() {
             const dashboard = document.getElementById('dashboard');
-            const student = AppState.students.find(s => s.id === AppState.user?.id);
+            const student = Database.students.find(s => s.id === AppState.currentUser?.id);
 
             if (!student) return;
 
@@ -1176,7 +1252,7 @@
                     <div class="search-header">
                         <h2><i class="fas fa-search"></i> بحث متقدم</h2>
                         <span class="results-count">
-                            ${AppState.teachers.length} أستاذ • ${AppState.lessons.length} درس
+                            ${Database.teachers.length} أستاذ • ${Database.lessons.length} درس
                         </span>
                     </div>
                     
@@ -1236,7 +1312,7 @@
                 <div class="student-tabs">
                     <button class="tab-btn ${AppState.ui.studentTab === 'all' ? 'active' : ''}" 
                         onclick="switchStudentTab('all')">
-                        <i class="fas fa-users"></i> جميع الأساتذة (${AppState.searchResults.teachers.length || AppState.teachers.length})
+                        <i class="fas fa-users"></i> جميع الأساتذة (${AppState.searchResults.teachers.length || Database.teachers.length})
                     </button>
                     <button class="tab-btn ${AppState.ui.studentTab === 'following' ? 'active' : ''}" 
                         onclick="switchStudentTab('following')">
@@ -1244,7 +1320,7 @@
                     </button>
                     <button class="tab-btn ${AppState.ui.studentTab === 'lessons' ? 'active' : ''}" 
                         onclick="switchStudentTab('lessons')">
-                        <i class="fas fa-book"></i> الدروس (${AppState.searchResults.lessons.length || AppState.lessons.length})
+                        <i class="fas fa-book"></i> الدروس (${AppState.searchResults.lessons.length || Database.lessons.length})
                     </button>
                     <button class="tab-btn ${AppState.ui.studentTab === 'saved' ? 'active' : ''}" 
                         onclick="switchStudentTab('saved')">
@@ -1255,6 +1331,7 @@
                 <div id="studentContent"></div>
             `;
 
+            // تحديث نتائج البحث
             searchContent();
         }
 
@@ -1265,19 +1342,19 @@
 
         function renderCurrentTab() {
             const content = document.getElementById('studentContent');
-            const student = AppState.students.find(s => s.id === AppState.user.id);
+            const student = Database.students.find(s => s.id === AppState.currentUser.id);
 
             if (!content) return;
 
             if (AppState.ui.studentTab === 'all') {
-                renderTeachers(content, student, AppState.searchResults.teachers.length ? AppState.searchResults.teachers : AppState.teachers);
+                renderTeachers(content, student, AppState.searchResults.teachers.length ? AppState.searchResults.teachers : Database.teachers);
             } else if (AppState.ui.studentTab === 'following') {
-                const followingTeachers = AppState.teachers.filter(t => student.following?.includes(t.id));
+                const followingTeachers = Database.teachers.filter(t => student.following?.includes(t.id));
                 renderTeachers(content, student, followingTeachers);
             } else if (AppState.ui.studentTab === 'lessons') {
-                renderLessons(content, student, AppState.searchResults.lessons.length ? AppState.searchResults.lessons : AppState.lessons);
+                renderLessons(content, student, AppState.searchResults.lessons.length ? AppState.searchResults.lessons : Database.lessons);
             } else if (AppState.ui.studentTab === 'saved') {
-                const savedLessons = AppState.lessons.filter(l => student.savedLessons?.includes(l.id));
+                const savedLessons = Database.lessons.filter(l => student.savedLessons?.includes(l.id));
                 renderLessons(content, student, savedLessons);
             }
         }
@@ -1309,7 +1386,7 @@
                                             <i class="fas fa-star" style="color: var(--secondary);"></i> ${teacher.rating || 0}
                                         </span>
                                         <span class="stat-badge">
-                                            <i class="fas fa-book"></i> ${teacher.lessons?.length || 0}
+                                            <i class="fas fa-book"></i> ${Database.lessons.filter(l => l.teacherId === teacher.id).length}
                                         </span>
                                     </div>
                                     <button class="follow-btn ${isFollowing ? 'following' : ''}" 
@@ -1340,7 +1417,7 @@
             content.innerHTML = `
                 <div class="lessons-grid">
                     ${lessons.map(lesson => {
-                        const teacher = AppState.teachers.find(t => t.id === lesson.teacherId);
+                        const teacher = Database.teachers.find(t => t.id === lesson.teacherId);
                         const isSaved = student.savedLessons?.includes(lesson.id);
                         return `
                             <div class="lesson-card">
@@ -1356,7 +1433,7 @@
                                         <span><i class="fas fa-download"></i> ${lesson.downloads || 0}</span>
                                     </div>
                                     <div class="lesson-actions">
-                                        <button class="lesson-btn pdf-btn" onclick="viewLesson('${lesson.id}')">
+                                        <button class="lesson-btn pdf-btn" onclick="viewLesson(${lesson.id})">
                                             <i class="fas fa-file-pdf"></i> عرض
                                         </button>
                                         <button class="lesson-btn save-btn ${isSaved ? 'saved' : ''}" 
@@ -1372,10 +1449,10 @@
             `;
         }
 
-        // ========== دوال التفاعل ==========
+        // ========== دوال التفاعل (تعدل في قاعدة البيانات الموحدة) ==========
         function toggleFollow(teacherId) {
-            const student = AppState.students.find(s => s.id === AppState.user.id);
-            const teacher = AppState.teachers.find(t => t.id === teacherId);
+            const student = Database.students.find(s => s.id === AppState.currentUser.id);
+            const teacher = Database.teachers.find(t => t.id === teacherId);
 
             if (!student.following) student.following = [];
 
@@ -1393,12 +1470,12 @@
                 showToast('تمت المتابعة +10 نقاط', 'success');
             }
 
-            saveData();
+            Database.saveAll();
             renderCurrentTab();
         }
 
         function toggleSaveLesson(lessonId) {
-            const student = AppState.students.find(s => s.id === AppState.user.id);
+            const student = Database.students.find(s => s.id === AppState.currentUser.id);
             if (!student.savedLessons) student.savedLessons = [];
 
             if (student.savedLessons.includes(lessonId)) {
@@ -1410,17 +1487,17 @@
                 showToast('تم حفظ الدرس +5 نقاط', 'success');
             }
 
-            saveData();
+            Database.saveAll();
             renderCurrentTab();
         }
 
         function viewLesson(lessonId) {
-            const lesson = AppState.lessons.find(l => l.id === lessonId);
-            const teacher = AppState.teachers.find(t => t.id === lesson.teacherId);
+            const lesson = Database.lessons.find(l => l.id === lessonId);
+            const teacher = Database.teachers.find(t => t.id === lesson.teacherId);
             
-            // Increment views
+            // زيادة عدد المشاهدات
             lesson.views = (lesson.views || 0) + 1;
-            saveData();
+            Database.saveAll();
 
             showModal(`
                 <h2 style="color: var(--primary);">${lesson.title}</h2>
@@ -1444,8 +1521,8 @@
         }
 
         function viewTeacherLessons(teacherId) {
-            const teacher = AppState.teachers.find(t => t.id === teacherId);
-            const lessons = AppState.lessons.filter(l => l.teacherId === teacherId);
+            const teacher = Database.teachers.find(t => t.id === teacherId);
+            const lessons = Database.lessons.filter(l => l.teacherId === teacherId);
 
             if (lessons.length === 0) {
                 showToast('لا توجد دروس بعد', 'info');
@@ -1477,8 +1554,8 @@
         // ========== عرض لوحة تحكم الأستاذ ==========
         function renderTeacherDashboard() {
             const dashboard = document.getElementById('dashboard');
-            const teacher = AppState.teachers.find(t => t.id === AppState.user.id);
-            const teacherLessons = AppState.lessons.filter(l => l.teacherId === teacher.id);
+            const teacher = Database.teachers.find(t => t.id === AppState.currentUser.id);
+            const teacherLessons = Database.lessons.filter(l => l.teacherId === teacher.id);
 
             const totalDownloads = teacherLessons.reduce((sum, l) => sum + (l.downloads || 0), 0);
             const totalViews = teacherLessons.reduce((sum, l) => sum + (l.views || 0), 0);
@@ -1549,8 +1626,8 @@
         }
 
         function switchTeacherTab(tab) {
-            const teacher = AppState.teachers.find(t => t.id === AppState.user.id);
-            const teacherLessons = AppState.lessons.filter(l => l.teacherId === teacher.id);
+            const teacher = Database.teachers.find(t => t.id === AppState.currentUser.id);
+            const teacherLessons = Database.lessons.filter(l => l.teacherId === teacher.id);
             
             document.querySelectorAll('.teacher-menu li').forEach(li => li.classList.remove('active'));
             event.target.classList.add('active');
@@ -1686,7 +1763,7 @@
                     `;
 
                 case 'followers':
-                    const followers = AppState.students.filter(s => teacher.followers?.includes(s.id));
+                    const followers = Database.students.filter(s => teacher.followers?.includes(s.id));
                     
                     return `
                         <h2 style="color: var(--primary); margin-bottom: 1.5rem;">المتابعون (${followers.length})</h2>
@@ -1725,7 +1802,7 @@
             }
         }
 
-        // ========== إضافة درس جديد ==========
+        // ========== إضافة درس جديد (يضاف إلى قاعدة البيانات الموحدة) ==========
         function addNewLesson() {
             const title = document.getElementById('lessonTitle').value;
             const desc = document.getElementById('lessonDesc').value;
@@ -1738,7 +1815,7 @@
                 return;
             }
 
-            const teacher = AppState.teachers.find(t => t.id === AppState.user.id);
+            const teacher = Database.teachers.find(t => t.id === AppState.currentUser.id);
             
             const newLesson = {
                 id: Date.now(),
@@ -1749,17 +1826,18 @@
                 type: 'pdf',
                 pdfUrl: url,
                 teacherId: teacher.id,
+                teacherName: teacher.name,
                 date: new Date().toISOString().split('T')[0],
                 downloads: 0,
                 views: 0
             };
 
-            AppState.lessons.push(newLesson);
+            // إضافة الدرس إلى قاعدة البيانات الموحدة
+            Database.lessons.push(newLesson);
             
-            if (!teacher.lessons) teacher.lessons = [];
-            teacher.lessons.push(newLesson.id);
+            // حفظ جميع التغييرات
+            Database.saveAll();
             
-            saveData();
             showToast('✅ تم نشر الدرس بنجاح', 'success');
             renderTeacherDashboard();
         }
@@ -1768,14 +1846,12 @@
         function deleteLesson(lessonId) {
             if (!confirm('هل أنت متأكد من حذف هذا الدرس؟')) return;
 
-            AppState.lessons = AppState.lessons.filter(l => l.id !== lessonId);
+            // حذف الدرس من قاعدة البيانات الموحدة
+            Database.lessons = Database.lessons.filter(l => l.id !== lessonId);
             
-            const teacher = AppState.teachers.find(t => t.id === AppState.user.id);
-            if (teacher.lessons) {
-                teacher.lessons = teacher.lessons.filter(id => id !== lessonId);
-            }
+            // حفظ جميع التغييرات
+            Database.saveAll();
             
-            saveData();
             showToast('✅ تم حذف الدرس', 'info');
             renderTeacherDashboard();
         }
@@ -1885,19 +1961,19 @@
 
             let user;
             if (AppState.selectedUserType === 'teacher') {
-                user = AppState.teachers.find(t => t.email === email && t.password === password);
+                user = Database.teachers.find(t => t.email === email && t.password === password);
             } else {
-                user = AppState.students.find(s => s.email === email && s.password === password);
+                user = Database.students.find(s => s.email === email && s.password === password);
             }
 
             if (user) {
-                AppState.user = {
+                AppState.currentUser = {
                     id: user.id,
                     name: user.name,
                     email: user.email,
                     type: AppState.selectedUserType
                 };
-                saveData();
+                saveCurrentUser();
                 closeModal();
                 renderUI();
                 showToast('مرحباً بك ' + user.name, 'success');
@@ -1917,7 +1993,7 @@
             }
 
             if (AppState.selectedUserType === 'teacher') {
-                if (AppState.teachers.find(t => t.email === email)) {
+                if (Database.teachers.find(t => t.email === email)) {
                     showToast('البريد الإلكتروني موجود مسبقاً', 'error');
                     return;
                 }
@@ -1926,25 +2002,24 @@
                 const bio = document.getElementById('regBio').value;
 
                 const newTeacher = {
-                    id: AppState.teachers.length + 1,
+                    id: Database.teachers.length + 1,
                     name: name,
                     email: email,
                     password: password,
                     specialty: specialty || 'أستاذ',
                     bio: bio || 'أستاذ جديد',
                     avatar: '👨‍🏫',
-                    levels: [],
-                    subjects: [],
                     rating: 0,
                     followers: [],
-                    lessons: []
+                    subjects: [],
+                    levels: []
                 };
 
-                AppState.teachers.push(newTeacher);
-                AppState.user = { id: newTeacher.id, name: name, email: email, type: 'teacher' };
+                Database.teachers.push(newTeacher);
+                AppState.currentUser = { id: newTeacher.id, name: name, email: email, type: 'teacher' };
                 
             } else {
-                if (AppState.students.find(s => s.email === email)) {
+                if (Database.students.find(s => s.email === email)) {
                     showToast('البريد الإلكتروني موجود مسبقاً', 'error');
                     return;
                 }
@@ -1952,7 +2027,7 @@
                 const level = document.getElementById('regLevel').value;
 
                 const newStudent = {
-                    id: AppState.students.length + 1,
+                    id: Database.students.length + 1,
                     name: name,
                     email: email,
                     password: password,
@@ -1963,11 +2038,12 @@
                     streak: 0
                 };
 
-                AppState.students.push(newStudent);
-                AppState.user = { id: newStudent.id, name: name, email: email, type: 'student' };
+                Database.students.push(newStudent);
+                AppState.currentUser = { id: newStudent.id, name: name, email: email, type: 'student' };
             }
 
-            saveData();
+            Database.saveAll();
+            saveCurrentUser();
             closeModal();
             renderUI();
             showToast('تم التسجيل بنجاح', 'success');
@@ -1980,14 +2056,14 @@
         }
 
         function logout() {
-            AppState.user = null;
-            localStorage.removeItem('user');
+            AppState.currentUser = null;
+            localStorage.removeItem('currentUser');
             renderUI();
             showToast('تم تسجيل الخروج', 'info');
         }
 
         function goHome() {
-            if (AppState.user) {
+            if (AppState.currentUser) {
                 renderUI();
             } else {
                 showAuthModal();
@@ -2049,39 +2125,6 @@
         // ========== تهيئة المشروع ==========
         function init() {
             initAnimatedBg();
-            
-            // إضافة بيانات تجريبية إذا كانت فارغة
-            if (AppState.teachers.length === 0) {
-                // أستاذ تجريبي
-                AppState.teachers.push({
-                    id: 1,
-                    name: 'أحمد الفاسي',
-                    email: 'ahmed@teacher.com',
-                    password: '123456',
-                    specialty: 'الرياضيات',
-                    bio: 'أستاذ مادة الرياضيات للبكالوريا',
-                    avatar: '📐',
-                    rating: 4.8,
-                    followers: [],
-                    lessons: []
-                });
-            }
-
-            if (AppState.students.length === 0) {
-                // تلميذ تجريبي
-                AppState.students.push({
-                    id: 1,
-                    name: 'يوسف الطالبي',
-                    email: 'youssef@student.com',
-                    password: '123456',
-                    level: 'bac2',
-                    following: [],
-                    savedLessons: [],
-                    points: 0,
-                    streak: 0
-                });
-            }
-
             renderUI();
 
             window.onclick = function(event) {
