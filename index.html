@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعلّم.ما - منصة التعليم المغربية</title>
+    <title>تعلّم.ما - المنصة التعليمية المغربية</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* جميع الأنماط السابقة مع إضافة أنماط لرفع الملفات */
+        /* جميع الأنماط السابقة كما هي */
         :root {
             --primary: #1e3c72;
             --primary-light: #2a5298;
@@ -278,6 +278,7 @@
             color: var(--white);
             padding: 0.5rem 1.5rem;
             border-radius: var(--radius-full);
+            font-size: 1rem;
         }
 
         .search-grid {
@@ -606,7 +607,7 @@
             color: var(--white);
         }
 
-        /* نماذج الإدخال - محسنة لرفع الملفات */
+        /* نماذج الإدخال */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -637,7 +638,7 @@
             box-shadow: 0 0 0 3px rgba(30,60,114,0.1);
         }
 
-        /* حقل رفع الملفات المخصص */
+        /* حقل رفع الملفات */
         .file-upload {
             border: 2px dashed var(--primary);
             border-radius: var(--radius-lg);
@@ -681,7 +682,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0.5rem;
-            background: var(--light);
+            background: var(--white);
             border-radius: var(--radius-md);
             margin-top: 0.5rem;
         }
@@ -712,11 +713,6 @@
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-xl);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
         }
 
         /* جداول */
@@ -914,11 +910,6 @@
             color: var(--white);
         }
 
-        .pdf-option-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
         /* التجاوب */
         @media (max-width: 768px) {
             .nav-container {
@@ -990,7 +981,7 @@
     </div>
 
     <script>
-        // ========== الحد الأقصى لحجم الملف (5MB) ==========
+        // ========== الحد الأقصى لحجم الملف ==========
         const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
         // ========== نظام البيانات المشتركة ==========
@@ -1005,8 +996,14 @@
                 localStorage.setItem('lessons', JSON.stringify(this.lessons));
             },
             
+            // تهيئة البيانات التجريبية (مرة واحدة فقط إذا كانت القاعدة فارغة)
             initSampleData() {
-                if (this.teachers.length === 0) {
+                // نتحقق أولاً مما إذا كانت هناك أي بيانات مخزنة
+                const hasTeachers = this.teachers.length > 0;
+                
+                // فقط إذا كانت القاعدة فارغة تماماً، نضيف البيانات التجريبية
+                if (!hasTeachers) {
+                    console.log('إضافة بيانات تجريبية للأساتذة');
                     this.teachers.push(
                         {
                             id: 1,
@@ -1033,6 +1030,34 @@
                             rating: 4.9,
                             followers: [],
                             subjects: ['physique', 'chimie'],
+                            levels: ['bac1', 'bac2'],
+                            lessons: []
+                        },
+                        {
+                            id: 3,
+                            name: 'محمد البيضاوي',
+                            email: 'mohamed@teacher.com',
+                            password: '123456',
+                            specialty: 'العربية',
+                            bio: 'أستاذ اللغة العربية - خبير في تدريس النحو والصرف',
+                            avatar: '📝',
+                            rating: 4.7,
+                            followers: [],
+                            subjects: ['arabic'],
+                            levels: ['tronc', 'bac1'],
+                            lessons: []
+                        },
+                        {
+                            id: 4,
+                            name: 'سعاد المغربية',
+                            email: 'souad@teacher.com',
+                            password: '123456',
+                            specialty: 'الفلسفة',
+                            bio: 'أستاذة الفلسفة - متخصصة في المنطق والفكر الإسلامي',
+                            avatar: '📚',
+                            rating: 4.6,
+                            followers: [],
+                            subjects: ['philosophy'],
                             levels: ['bac1', 'bac2'],
                             lessons: []
                         }
@@ -1066,6 +1091,37 @@
                     );
                 }
 
+                if (this.lessons.length === 0) {
+                    this.lessons.push(
+                        {
+                            id: 101,
+                            title: 'المعادلات من الدرجة الأولى',
+                            description: 'شرح مبسط مع تمارين تطبيقية',
+                            teacherId: 1,
+                            teacherName: 'أحمد الفاسي',
+                            level: 'bac1',
+                            subject: 'math',
+                            type: 'pdf',
+                            date: '2024-02-20',
+                            downloads: 45,
+                            views: 120
+                        },
+                        {
+                            id: 102,
+                            title: 'قوانين نيوتن في الحركة',
+                            description: 'شرح قوانين نيوتن الثلاثة مع أمثلة',
+                            teacherId: 2,
+                            teacherName: 'فاطمة المراكشي',
+                            level: 'bac2',
+                            subject: 'physique',
+                            type: 'pdf',
+                            date: '2024-02-21',
+                            downloads: 32,
+                            views: 89
+                        }
+                    );
+                }
+
                 this.saveAll();
             }
         };
@@ -1089,10 +1145,10 @@
                 studentTab: 'all',
                 loading: false
             },
-            currentFile: null // الملف المرفوع حالياً
+            currentFile: null
         };
 
-        // ========== تهيئة البيانات ==========
+        // ========== تهيئة البيانات (مع التأكد من وجود بيانات كافية) ==========
         Database.initSampleData();
 
         // ========== حفظ المستخدم الحالي ==========
@@ -1166,7 +1222,7 @@
             AppState.filters.subject = document.getElementById('subjectFilter')?.value || '';
             AppState.filters.teacherName = document.getElementById('teacherFilter')?.value.toLowerCase() || '';
 
-            // فلترة الأساتذة
+            // فلترة الأساتذة - نعرض جميع الأساتذة المسجلين
             AppState.searchResults.teachers = Database.teachers.filter(teacher => {
                 let matches = true;
                 
@@ -1301,6 +1357,10 @@
             const followingCount = student.following?.length || 0;
             const savedCount = student.savedLessons?.length || 0;
 
+            // حساب إجمالي عدد الأساتذة والدروس
+            const totalTeachers = Database.teachers.length;
+            const totalLessons = Database.lessons.length;
+
             dashboard.innerHTML = `
                 <!-- بطاقة الترحيب -->
                 <div class="welcome-card">
@@ -1326,7 +1386,7 @@
                     <div class="search-header">
                         <h2><i class="fas fa-search"></i> بحث متقدم</h2>
                         <span class="results-count">
-                            ${Database.teachers.length} أستاذ • ${Database.lessons.length} درس
+                            ${totalTeachers} أستاذ • ${totalLessons} درس
                         </span>
                     </div>
                     
@@ -1386,7 +1446,7 @@
                 <div class="student-tabs">
                     <button class="tab-btn ${AppState.ui.studentTab === 'all' ? 'active' : ''}" 
                         onclick="switchStudentTab('all')">
-                        <i class="fas fa-users"></i> جميع الأساتذة (${AppState.searchResults.teachers.length || Database.teachers.length})
+                        <i class="fas fa-users"></i> جميع الأساتذة (${totalTeachers})
                     </button>
                     <button class="tab-btn ${AppState.ui.studentTab === 'following' ? 'active' : ''}" 
                         onclick="switchStudentTab('following')">
@@ -1394,7 +1454,7 @@
                     </button>
                     <button class="tab-btn ${AppState.ui.studentTab === 'lessons' ? 'active' : ''}" 
                         onclick="switchStudentTab('lessons')">
-                        <i class="fas fa-book"></i> الدروس (${AppState.searchResults.lessons.length || Database.lessons.length})
+                        <i class="fas fa-book"></i> جميع الدروس (${totalLessons})
                     </button>
                     <button class="tab-btn ${AppState.ui.studentTab === 'saved' ? 'active' : ''}" 
                         onclick="switchStudentTab('saved')">
@@ -1420,6 +1480,7 @@
             if (!content) return;
 
             if (AppState.ui.studentTab === 'all') {
+                // عرض جميع الأساتذة (مع أو بدون فلترة)
                 renderTeachers(content, student, AppState.searchResults.teachers.length ? AppState.searchResults.teachers : Database.teachers);
             } else if (AppState.ui.studentTab === 'following') {
                 const followingTeachers = Database.teachers.filter(t => student.following?.includes(t.id));
@@ -1448,6 +1509,8 @@
                 <div class="teachers-grid">
                     ${teachers.map(teacher => {
                         const isFollowing = student.following?.includes(teacher.id);
+                        const teacherLessons = Database.lessons.filter(l => l.teacherId === teacher.id).length;
+                        
                         return `
                             <div class="teacher-card" onclick="viewTeacherLessons(${teacher.id})">
                                 <div class="teacher-avatar">${teacher.avatar || '👨‍🏫'}</div>
@@ -1459,7 +1522,7 @@
                                             <i class="fas fa-star" style="color: var(--secondary);"></i> ${teacher.rating || 0}
                                         </span>
                                         <span class="stat-badge">
-                                            <i class="fas fa-book"></i> ${Database.lessons.filter(l => l.teacherId === teacher.id).length}
+                                            <i class="fas fa-book"></i> ${teacherLessons}
                                         </span>
                                     </div>
                                     <button class="follow-btn ${isFollowing ? 'following' : ''}" 
@@ -2237,7 +2300,7 @@
                     password: password,
                     specialty: specialty || 'أستاذ',
                     bio: bio || 'أستاذ جديد',
-                    avatar: '👨‍🏫',
+                    avatar: getRandomAvatar(),
                     rating: 0,
                     followers: [],
                     subjects: [],
@@ -2276,6 +2339,12 @@
             closeModal();
             renderUI();
             showToast('تم التسجيل بنجاح', 'success');
+        }
+
+        // ========== الحصول على أفاتار عشوائي ==========
+        function getRandomAvatar() {
+            const avatars = ['👨‍🏫', '👩‍🏫', '📚', '🔬', '📐', '⚡', '📝', '🌍', '🧪', '🎓'];
+            return avatars[Math.floor(Math.random() * avatars.length)];
         }
 
         function selectUserType(type) {
@@ -2354,6 +2423,11 @@
         // ========== تهيئة المشروع ==========
         function init() {
             initAnimatedBg();
+            
+            // التأكد من وجود بيانات تجريبية كافية
+            Database.initSampleData();
+            
+            // عرض الواجهة
             renderUI();
 
             window.onclick = function(event) {
