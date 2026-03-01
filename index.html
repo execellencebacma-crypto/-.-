@@ -2,64 +2,145 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعلّم.ما - قنوات الأساتذة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- تحسين SEO -->
+    <title>تعلّم.ما - المنصة التعليمية المغربية المتطورة</title>
+    <meta name="description" content="أول منصة تعليمية مغربية متكاملة تربط الأساتذة بالتلاميذ في بيئة تفاعلية آمنة ومتطورة">
+    <meta name="keywords" content="تعليم, مغرب, دروس, أساتذة, تلاميذ, باكالوريا, إعدادي, رياضيات, فيزياء, علوم">
+    <meta name="author" content="تعلّم.ما">
+    <meta name="robots" content="index, follow">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Open Graph للتواصل الاجتماعي -->
+    <meta property="og:title" content="تعلّم.ما - منصة تعليم مغربية">
+    <meta property="og:description" content="منصة تعليمية متكاملة للأساتذة والتلاميذ المغاربة">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://t3allam.ma/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    
+    <!-- Font Awesome 6 (أحدث إصدار) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts محسن -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS للأنيميشن -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* نفس الأنماط السابقة مع إضافة أنماط جديدة للقنوات */
+        /* ========== متغيرات محسنة ========== */
         :root {
+            /* الألوان الأساسية */
             --primary: #1e3c72;
             --primary-light: #2a5298;
             --primary-dark: #0f2b4f;
+            --primary-gradient: linear-gradient(135deg, #1e3c72, #2a5298);
+            
             --secondary: #ffd700;
             --secondary-light: #ffed4a;
             --secondary-dark: #e6b800;
+            --secondary-gradient: linear-gradient(135deg, #ffd700, #ffed4a);
+            
+            /* ألوان الحالة */
             --success: #28a745;
+            --success-light: #d4edda;
             --danger: #dc3545;
+            --danger-light: #f8d7da;
             --warning: #ffc107;
+            --warning-light: #fff3cd;
             --info: #17a2b8;
+            --info-light: #d1ecf1;
+            
+            /* ألوان محايدة */
             --dark: #343a40;
+            --dark-light: #6c757d;
             --light: #f8f9fa;
+            --light-dark: #e9ecef;
             --gray: #6c757d;
+            --gray-light: #adb5bd;
             --white: #ffffff;
             
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
-            --shadow-2xl: 0 25px 50px rgba(0,0,0,0.25);
+            /* الظلال */
+            --shadow-xs: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+            --shadow-xl: 0 12px 32px rgba(0,0,0,0.1);
+            --shadow-2xl: 0 20px 48px rgba(0,0,0,0.15);
             
-            --radius-sm: 5px;
-            --radius-md: 10px;
-            --radius-lg: 15px;
-            --radius-xl: 20px;
-            --radius-2xl: 30px;
+            /* الحواف الدائرية */
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-2xl: 32px;
             --radius-full: 9999px;
             
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* التحولات */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* التباعد */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            
+            /* الخطوط */
+            --font-primary: 'Cairo', 'Tajawal', sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-md: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 2rem;
+            --font-size-4xl: 2.5rem;
+            
+            /* الأوزان */
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --font-weight-extrabold: 800;
         }
 
-        * {
+        /* ========== إعادة تعيين محسنة ========== */
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: var(--font-primary);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* خلفية متحركة */
+        /* ========== خلفية متحركة محسنة ========== */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -75,18 +156,25 @@
             display: block;
             width: 20px;
             height: 20px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             animation: animate 25s linear infinite;
             bottom: -150px;
             border-radius: 50%;
+            will-change: transform, opacity;
         }
 
         @keyframes animate {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
         }
 
-        /* شريط التحميل */
+        /* ========== شريط التحميل ========== */
         .loading-bar {
             position: fixed;
             top: 0;
@@ -104,16 +192,18 @@
             transform: scaleX(1);
         }
 
-        /* الشريط العلوي */
+        /* ========== الشريط العلوي المحسن ========== */
         .navbar {
             background: rgba(30, 60, 114, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: var(--white);
             padding: 1rem 5%;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .nav-container {
@@ -126,11 +216,34 @@
 
         .logo {
             font-size: 2rem;
-            font-weight: 800;
+            font-weight: var(--font-weight-extrabold);
             background: linear-gradient(135deg, var(--white), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             cursor: pointer;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
         }
 
         .nav-menu {
@@ -147,14 +260,36 @@
             border-radius: var(--radius-full);
             cursor: pointer;
             font-size: 1rem;
-            font-weight: 600;
-            transition: var(--transition);
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .nav-btn:hover {
             background: var(--white);
             color: var(--primary);
+            border-color: var(--white);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .user-badge {
@@ -165,28 +300,50 @@
             padding: 0.5rem 1rem;
             border-radius: var(--radius-full);
             color: var(--white);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* لوحة التحكم */
+        /* ========== لوحة التحكم ========== */
         .dashboard {
             max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* بطاقة الترحيب */
+        /* ========== بطاقة الترحيب المحسنة ========== */
         .welcome-card {
             background: linear-gradient(135deg, rgba(30,60,114,0.95), rgba(15,43,79,0.98));
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: var(--white);
             padding: 3rem;
             border-radius: var(--radius-2xl);
             margin-bottom: 2rem;
+            animation: slideUp 0.5s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .welcome-title {
-            font-size: 2.5rem;
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
             margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
         .welcome-stats {
@@ -203,9 +360,17 @@
             background: rgba(255,255,255,0.1);
             padding: 0.5rem 1rem;
             border-radius: var(--radius-full);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: var(--transition-fast);
         }
 
-        /* شبكة الإحصائيات */
+        .welcome-stat:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ========== شبكة الإحصائيات ========== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -216,47 +381,88 @@
         .stat-card {
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            transition: var(--transition);
+            transition: var(--transition-normal);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .stat-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: var(--shadow-2xl);
         }
 
         .stat-icon {
             width: 70px;
             height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--primary-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
             color: var(--white);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .stat-content {
+            flex: 1;
         }
 
         .stat-value {
             font-size: 2.5rem;
-            font-weight: 800;
+            font-weight: var(--font-weight-extrabold);
             color: var(--primary);
             line-height: 1;
         }
 
-        /* نظام البحث المتقدم */
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.5rem;
+            font-size: var(--font-size-sm);
+        }
+
+        .trend-up {
+            color: var(--success);
+        }
+
+        .trend-down {
+            color: var(--danger);
+        }
+
+        /* ========== نظام البحث المتقدم ========== */
         .search-section {
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
-            padding: 2rem;
+            -webkit-backdrop-filter: blur(10px);
+            padding: 2.5rem;
             border-radius: var(--radius-2xl);
             box-shadow: var(--shadow-xl);
             margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .search-header {
@@ -270,7 +476,8 @@
 
         .search-header h2 {
             color: var(--primary);
-            font-size: 1.8rem;
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
         }
 
         .results-count {
@@ -279,6 +486,8 @@
             padding: 0.5rem 1.5rem;
             border-radius: var(--radius-full);
             font-size: 1rem;
+            font-weight: var(--font-weight-medium);
+            box-shadow: var(--shadow-sm);
         }
 
         .search-grid {
@@ -297,33 +506,60 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
+            z-index: 1;
         }
 
         .search-input {
             width: 100%;
             padding: 1rem 1rem 1rem 2.5rem;
-            border: 2px solid #e9ecef;
+            border: 2px solid var(--light-dark);
             border-radius: var(--radius-full);
             font-size: 1rem;
-            transition: var(--transition);
+            transition: var(--transition-fast);
+            background: var(--white);
+            color: var(--dark);
         }
 
         .search-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(30,60,114,0.1);
+            box-shadow: 0 0 0 4px rgba(30,60,114,0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--gray-light);
         }
 
         .search-btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--primary-gradient);
             color: var(--white);
             border: none;
             padding: 1rem 2rem;
             border-radius: var(--radius-full);
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: var(--font-weight-semibold);
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .search-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .search-btn:hover {
@@ -331,22 +567,36 @@
             box-shadow: var(--shadow-xl);
         }
 
-        /* الفلاتر النشطة */
+        /* ========== الفلاتر النشطة ========== */
         .active-filters {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
 
         .filter-tag {
             background: var(--primary);
             color: var(--white);
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: var(--radius-full);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            animation: slideIn 0.3s ease;
+            font-size: var(--font-size-sm);
+            box-shadow: var(--shadow-sm);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .filter-tag button {
@@ -355,9 +605,18 @@
             color: var(--white);
             cursor: pointer;
             font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            transition: var(--transition-fast);
         }
 
-        /* أقسام التلميذ */
+        .filter-tag button:hover {
+            color: var(--secondary);
+            transform: scale(1.2);
+        }
+
+        /* ========== أقسام التلميذ ========== */
         .student-tabs {
             display: flex;
             gap: 1rem;
@@ -373,17 +632,26 @@
             border-radius: var(--radius-full);
             cursor: pointer;
             font-size: 1rem;
-            font-weight: 600;
-            transition: var(--transition);
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-normal);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .tab-btn:hover,
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
         .tab-btn.active {
             background: var(--secondary);
             color: var(--primary);
+            border-color: var(--secondary);
         }
 
-        /* شبكة الأساتذة */
+        /* ========== شبكة الأساتذة ========== */
         .teachers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -393,44 +661,75 @@
         .teacher-card {
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: var(--radius-2xl);
             overflow: hidden;
             box-shadow: var(--shadow-xl);
-            transition: var(--transition);
+            transition: var(--transition-normal);
             cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .teacher-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: var(--shadow-2xl);
+        }
+
+        .teacher-header {
+            height: 100px;
+            background: var(--primary-gradient);
+            position: relative;
         }
 
         .teacher-avatar {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--white);
             border-radius: 50%;
-            margin: -50px auto 0;
+            position: absolute;
+            bottom: -40px;
+            right: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
+            box-shadow: var(--shadow-xl);
             border: 4px solid var(--white);
+            transition: var(--transition-normal);
+        }
+
+        .teacher-card:hover .teacher-avatar {
+            transform: rotate(360deg);
         }
 
         .teacher-info {
-            padding: 2rem;
+            padding: 4rem 1.5rem 1.5rem;
             text-align: center;
         }
 
         .teacher-name {
-            font-size: 1.5rem;
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
             color: var(--primary);
+            margin-bottom: 0.3rem;
         }
 
         .teacher-specialty {
             color: var(--secondary-dark);
-            margin: 0.5rem 0;
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: 1rem;
         }
 
         .teacher-stats {
@@ -444,10 +743,16 @@
             background: var(--light);
             padding: 0.3rem 1rem;
             border-radius: var(--radius-full);
-            font-size: 0.9rem;
+            font-size: var(--font-size-sm);
             display: flex;
             align-items: center;
             gap: 0.3rem;
+            transition: var(--transition-fast);
+        }
+
+        .stat-badge:hover {
+            background: var(--primary);
+            color: var(--white);
         }
 
         .follow-btn {
@@ -455,18 +760,44 @@
             padding: 0.8rem;
             border: none;
             border-radius: var(--radius-full);
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--primary-gradient);
             color: var(--white);
-            font-weight: 600;
+            font-weight: var(--font-weight-semibold);
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-normal);
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .follow-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .follow-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .follow-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .follow-btn.following {
             background: var(--success);
         }
 
-        /* شبكة الدروس */
+        /* ========== شبكة الدروس ========== */
         .lessons-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -476,20 +807,22 @@
         .lesson-card {
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: var(--radius-xl);
             overflow: hidden;
             box-shadow: var(--shadow-lg);
-            transition: var(--transition);
+            transition: var(--transition-normal);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .lesson-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
             box-shadow: var(--shadow-2xl);
         }
 
         .lesson-header {
             height: 150px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--primary-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -505,7 +838,10 @@
             color: var(--primary);
             padding: 0.3rem 1rem;
             border-radius: var(--radius-full);
-            font-size: 0.9rem;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            z-index: 1;
+            box-shadow: var(--shadow-sm);
         }
 
         .lesson-content {
@@ -513,7 +849,8 @@
         }
 
         .lesson-title {
-            font-size: 1.2rem;
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
             color: var(--primary);
             margin-bottom: 0.5rem;
         }
@@ -522,7 +859,7 @@
             display: flex;
             gap: 1rem;
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: var(--font-size-sm);
             margin: 0.5rem 0;
         }
 
@@ -538,7 +875,8 @@
             border: none;
             border-radius: var(--radius-md);
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-fast);
+            font-weight: var(--font-weight-medium);
         }
 
         .pdf-btn {
@@ -546,9 +884,21 @@
             color: var(--white);
         }
 
+        .pdf-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
         .save-btn {
             background: var(--primary);
             color: var(--white);
+        }
+
+        .save-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .save-btn.saved {
@@ -556,19 +906,17 @@
             color: var(--primary);
         }
 
-        /* ========== أنماط جديدة للقنوات ========== */
-        
-        /* صفحة القناة */
+        /* ========== صفحة القناة ========== */
         .channel-page {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 2rem;
+            animation: fadeIn 0.5s ease;
         }
 
-        /* غلاف القناة */
         .channel-cover {
             height: 300px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: var(--primary-gradient);
             border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
             position: relative;
             overflow: hidden;
@@ -585,6 +933,11 @@
             animation: rotate 20s linear infinite;
         }
 
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         .channel-cover-content {
             position: absolute;
             bottom: 20px;
@@ -594,16 +947,15 @@
         }
 
         .channel-cover-content h1 {
-            font-size: 2.5rem;
+            font-size: var(--font-size-3xl);
             margin-bottom: 0.5rem;
         }
 
         .channel-cover-content p {
-            font-size: 1.2rem;
+            font-size: var(--font-size-lg);
             opacity: 0.9;
         }
 
-        /* معلومات القناة */
         .channel-info {
             background: var(--white);
             padding: 2rem;
@@ -618,7 +970,7 @@
         .channel-avatar-large {
             width: 150px;
             height: 150px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--primary-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -628,6 +980,11 @@
             border: 5px solid var(--secondary);
             margin-top: -100px;
             box-shadow: var(--shadow-2xl);
+            transition: var(--transition-normal);
+        }
+
+        .channel-avatar-large:hover {
+            transform: rotate(360deg);
         }
 
         .channel-details {
@@ -636,14 +993,15 @@
 
         .channel-details h2 {
             color: var(--primary);
-            font-size: 2rem;
+            font-size: var(--font-size-3xl);
             margin-bottom: 0.5rem;
         }
 
         .channel-specialty {
             color: var(--secondary-dark);
-            font-size: 1.2rem;
+            font-size: var(--font-size-lg);
             margin-bottom: 1rem;
+            font-weight: var(--font-weight-medium);
         }
 
         .channel-bio {
@@ -663,19 +1021,22 @@
         }
 
         .channel-meta-value {
-            font-size: 2rem;
-            font-weight: 800;
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-extrabold);
             color: var(--primary);
+            line-height: 1;
         }
 
         .channel-meta-label {
             color: var(--gray);
+            font-size: var(--font-size-sm);
         }
 
         .channel-actions {
             display: flex;
             gap: 1rem;
             margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .channel-btn {
@@ -683,22 +1044,42 @@
             border: none;
             border-radius: var(--radius-full);
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: var(--font-weight-semibold);
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-normal);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .channel-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .channel-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .channel-btn-primary {
-            background: var(--primary);
+            background: var(--primary-gradient);
             color: var(--white);
         }
 
         .channel-btn-primary:hover {
-            background: var(--primary-light);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .channel-btn-secondary {
@@ -709,6 +1090,7 @@
         .channel-btn-secondary:hover {
             background: var(--secondary-light);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .channel-btn-outline {
@@ -720,247 +1102,121 @@
         .channel-btn-outline:hover {
             background: var(--primary);
             color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* أقسام القناة */
-        .channel-tabs {
+        /* ========== إشعارات محسنة ========== */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 3000;
             display: flex;
-            gap: 1rem;
-            margin: 2rem 0;
-            border-bottom: 2px solid rgba(255,255,255,0.2);
-            padding-bottom: 1rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
-        .channel-tab-btn {
-            padding: 0.8rem 2rem;
-            border: none;
-            background: transparent;
-            color: var(--white);
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
+        .toast {
+            background: var(--white);
+            color: var(--dark);
+            padding: 1rem 2rem;
             border-radius: var(--radius-full);
-            transition: var(--transition);
-        }
-
-        .channel-tab-btn:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
-        .channel-tab-btn.active {
-            background: var(--secondary);
-            color: var(--primary);
-        }
-
-        /* محتوى القناة */
-        .channel-content {
-            background: rgba(255,255,255,0.95);
+            box-shadow: var(--shadow-2xl);
+            border-right: 4px solid var(--success);
+            animation: slideInRight 0.3s ease;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.95);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .toast.success { border-right-color: var(--success); }
+        .toast.error { border-right-color: var(--danger); }
+        .toast.warning { border-right-color: var(--warning); }
+        .toast.info { border-right-color: var(--info); }
+
+        .toast i {
+            font-size: 1.5rem;
+        }
+
+        .toast.success i { color: var(--success); }
+        .toast.error i { color: var(--danger); }
+        .toast.warning i { color: var(--warning); }
+        .toast.info i { color: var(--info); }
+
+        /* ========== نافذة منبثقة محسنة ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
             padding: 2rem;
             border-radius: var(--radius-2xl);
-            box-shadow: var(--shadow-xl);
-            margin-bottom: 2rem;
-        }
-
-        /* شبكة المنشورات */
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .post-card {
-            background: var(--white);
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            transition: var(--transition);
-        }
-
-        .post-card:hover {
-            transform: translateY(-5px);
+            position: relative;
+            animation: modalZoom 0.5s ease;
             box-shadow: var(--shadow-2xl);
         }
 
-        .post-header {
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            position: relative;
-            overflow: hidden;
+        @keyframes modalZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        .post-header img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .post-type {
+        .modal-close {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: var(--secondary);
-            color: var(--primary);
-            padding: 0.3rem 1rem;
-            border-radius: var(--radius-full);
-            font-size: 0.9rem;
-            font-weight: 600;
-            z-index: 1;
-        }
-
-        .post-content {
-            padding: 1.5rem;
-        }
-
-        .post-title {
-            color: var(--primary);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .post-description {
-            color: var(--gray);
-            margin-bottom: 1rem;
-        }
-
-        .post-meta {
-            display: flex;
-            gap: 1rem;
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .post-stats {
-            display: flex;
-            gap: 1rem;
-            color: var(--gray);
-            font-size: 0.9rem;
-            padding-top: 1rem;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .post-stats span {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .post-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .post-btn {
-            flex: 1;
-            padding: 0.5rem;
-            border: none;
-            border-radius: var(--radius-md);
+            left: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.3rem;
-        }
-
-        .post-btn-primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .post-btn-primary:hover {
-            background: var(--primary-light);
-        }
-
-        .post-btn-secondary {
-            background: var(--secondary);
-            color: var(--primary);
-        }
-
-        .post-btn-secondary:hover {
-            background: var(--secondary-light);
-        }
-
-        /* نموذج إضافة منشور */
-        .add-post-form {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: var(--radius-xl);
-            margin-bottom: 2rem;
-        }
-
-        .add-post-form h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .post-type-selector {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .post-type-option {
-            flex: 1;
-            padding: 1rem;
-            border: 2px solid #e9ecef;
-            border-radius: var(--radius-md);
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .post-type-option:hover {
-            border-color: var(--primary);
-        }
-
-        .post-type-option.active {
-            border-color: var(--primary);
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .post-type-option i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* نموذج إضافة فيديو */
-        .video-input-group {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .video-input-group input {
-            flex: 1;
-        }
-
-        .video-preview {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: var(--light);
-            border-radius: var(--radius-md);
-            display: none;
-        }
-
-        .video-preview iframe {
-            width: 100%;
-            height: 200px;
-            border: none;
-            border-radius: var(--radius-md);
-        }
-
-        /* روابط التواصل الاجتماعي */
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-link {
             width: 40px;
             height: 40px;
             background: var(--light);
@@ -968,26 +1224,129 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary);
-            text-decoration: none;
-            transition: var(--transition);
+            transition: var(--transition-normal);
+            z-index: 10;
         }
 
-        .social-link:hover {
-            background: var(--primary);
+        .modal-close:hover {
+            background: var(--danger);
             color: var(--white);
-            transform: translateY(-3px);
+            transform: rotate(90deg);
         }
 
-        /* التجاوب */
+        /* ========== حالات عدم وجود بيانات ========== */
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius-xl);
+            color: var(--white);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .no-data i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .no-data h3 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: 0.5rem;
+        }
+
+        .no-data p {
+            opacity: 0.8;
+        }
+
+        /* ========== شريط التمرير المخصص ========== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        /* ========== تحسينات التحميل ========== */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: var(--radius-md);
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ========== تحسينات الأداء ========== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ========== تحسينات الطباعة ========== */
+        @media print {
+            .navbar, .animated-bg, .toast-container, .modal {
+                display: none !important;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+        }
+
+        /* ========== تحسينات التجاوب ========== */
+        @media (max-width: 1200px) {
+            .dashboard {
+                padding: 0 1.5rem;
+            }
+            
+            .welcome-title {
+                font-size: var(--font-size-3xl);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .teacher-dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .channel-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .channel-avatar-large {
+                margin-top: -50px;
+            }
+            
+            .channel-meta {
+                justify-content: center;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
                 gap: 1rem;
-            }
-
-            .teacher-dashboard {
-                grid-template-columns: 1fr;
             }
 
             .search-grid {
@@ -1004,24 +1363,31 @@
 
             .welcome-stats {
                 flex-direction: column;
+                gap: 0.5rem;
             }
 
-            .channel-info {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
+            .welcome-stat {
+                width: 100%;
             }
 
-            .channel-avatar-large {
-                margin-top: -50px;
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
 
-            .channel-meta {
-                justify-content: center;
+            .teachers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
             }
 
             .channel-actions {
                 flex-direction: column;
+            }
+
+            .channel-btn {
+                width: 100%;
             }
 
             .channel-tabs {
@@ -1032,12 +1398,65 @@
                 width: 100%;
             }
 
-            .post-type-selector {
-                flex-direction: column;
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
             }
 
-            .video-input-group {
-                flex-direction: column;
+            .toast {
+                min-width: auto;
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .stat-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 2rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .teacher-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+
+            .teacher-name {
+                font-size: var(--font-size-xl);
+            }
+
+            .channel-avatar-large {
+                width: 120px;
+                height: 120px;
+                font-size: 4rem;
+            }
+
+            .channel-details h2 {
+                font-size: var(--font-size-2xl);
+            }
+        }
+
+        /* ========== دعم الوضع المظلم ========== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --light: #2d2d2d;
+                --light-dark: #3d3d3d;
+                --dark: #ffffff;
+                --gray: #b0b0b0;
+                --gray-light: #808080;
             }
         }
     </style>
@@ -1071,46 +1490,102 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
-        // ========== الحد الأقصى لحجم الملف ==========
-        const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+        // تهيئة AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            disable: window.innerWidth < 768
+        });
 
-        // ========== دوال الوصول إلى البيانات ==========
+        // ========== إعدادات متقدمة ==========
+        const CONFIG = {
+            MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
+            APP_NAME: 'تعلّم.ما',
+            APP_VERSION: '2.0.0',
+            CACHE_VERSION: '2024.03',
+            DEFAULT_AVATARS: ['👨‍🏫', '👩‍🏫', '📚', '🔬', '📐', '⚡', '📝', '🌍', '🧪', '🎓'],
+            ANIMATION_ENABLED: true,
+            TOAST_DURATION: 3000
+        };
+
+        // ========== دوال الوصول إلى البيانات المحسنة ==========
+        const Storage = {
+            get: (key) => {
+                try {
+                    const data = localStorage.getItem(key);
+                    return data ? JSON.parse(data) : null;
+                } catch (error) {
+                    console.error(`Error reading ${key} from localStorage:`, error);
+                    return null;
+                }
+            },
+            
+            set: (key, value) => {
+                try {
+                    localStorage.setItem(key, JSON.stringify(value));
+                    return true;
+                } catch (error) {
+                    console.error(`Error writing ${key} to localStorage:`, error);
+                    return false;
+                }
+            },
+            
+            remove: (key) => {
+                try {
+                    localStorage.removeItem(key);
+                    return true;
+                } catch (error) {
+                    console.error(`Error removing ${key} from localStorage:`, error);
+                    return false;
+                }
+            },
+            
+            clear: () => {
+                try {
+                    localStorage.clear();
+                    return true;
+                } catch (error) {
+                    console.error('Error clearing localStorage:', error);
+                    return false;
+                }
+            }
+        };
+
+        // ========== دوال البيانات ==========
         function getTeachers() {
-            const teachers = localStorage.getItem('teachers');
-            return teachers ? JSON.parse(teachers) : [];
+            return Storage.get('teachers') || [];
         }
         
         function saveTeachers(teachers) {
-            localStorage.setItem('teachers', JSON.stringify(teachers));
+            return Storage.set('teachers', teachers);
         }
         
         function getStudents() {
-            const students = localStorage.getItem('students');
-            return students ? JSON.parse(students) : [];
+            return Storage.get('students') || [];
         }
         
         function saveStudents(students) {
-            localStorage.setItem('students', JSON.stringify(students));
+            return Storage.set('students', students);
         }
         
         function getLessons() {
-            const lessons = localStorage.getItem('lessons');
-            return lessons ? JSON.parse(lessons) : [];
+            return Storage.get('lessons') || [];
         }
         
         function saveLessons(lessons) {
-            localStorage.setItem('lessons', JSON.stringify(lessons));
+            return Storage.set('lessons', lessons);
         }
 
-        // ========== دوال جديدة للقنوات والمنشورات ==========
         function getPosts() {
-            const posts = localStorage.getItem('posts');
-            return posts ? JSON.parse(posts) : [];
+            return Storage.get('posts') || [];
         }
 
         function savePosts(posts) {
-            localStorage.setItem('posts', JSON.stringify(posts));
+            return Storage.set('posts', posts);
         }
 
         // ========== تهيئة البيانات التجريبية ==========
@@ -1118,7 +1593,7 @@
             // التحقق من وجود أساتذة
             let teachers = getTeachers();
             if (teachers.length === 0) {
-                console.log('إضافة بيانات تجريبية للأساتذة');
+                console.log('📚 إضافة بيانات تجريبية للأساتذة');
                 teachers = [
                     {
                         id: 1,
@@ -1181,7 +1656,7 @@
             // التحقق من وجود تلاميذ
             let students = getStudents();
             if (students.length === 0) {
-                console.log('إضافة بيانات تجريبية للتلاميذ');
+                console.log('👨‍🎓 إضافة بيانات تجريبية للتلاميذ');
                 students = [
                     {
                         id: 1,
@@ -1212,7 +1687,7 @@
             // التحقق من وجود دروس
             let lessons = getLessons();
             if (lessons.length === 0) {
-                console.log('إضافة بيانات تجريبية للدروس');
+                console.log('📖 إضافة بيانات تجريبية للدروس');
                 lessons = [
                     {
                         id: 101,
@@ -1247,7 +1722,7 @@
             // التحقق من وجود منشورات
             let posts = getPosts();
             if (posts.length === 0) {
-                console.log('إضافة بيانات تجريبية للمنشورات');
+                console.log('📝 إضافة بيانات تجريبية للمنشورات');
                 posts = [
                     {
                         id: 1001,
@@ -1295,7 +1770,7 @@
 
         // ========== نظام إدارة الحالة ==========
         const AppState = {
-            currentUser: JSON.parse(localStorage.getItem('currentUser')) || null,
+            currentUser: Storage.get('currentUser') || null,
             filters: {
                 search: '',
                 level: '',
@@ -1314,6 +1789,7 @@
                 loading: false
             },
             currentFile: null,
+            currentPostFile: null,
             currentPostType: 'video',
             viewingChannel: null
         };
@@ -1323,28 +1799,31 @@
 
         // ========== حفظ المستخدم الحالي ==========
         function saveCurrentUser() {
-            localStorage.setItem('currentUser', JSON.stringify(AppState.currentUser));
+            Storage.set('currentUser', AppState.currentUser);
         }
 
-        // ========== إشعارات ==========
+        // ========== إشعارات محسنة ==========
         function showToast(message, type = 'success') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             
-            const icon = {
+            const icons = {
                 success: 'fa-check-circle',
                 error: 'fa-exclamation-circle',
                 warning: 'fa-exclamation-triangle',
                 info: 'fa-info-circle'
-            }[type];
+            };
+            
+            const icon = icons[type] || 'fa-info-circle';
             
             toast.innerHTML = `<i class="fas ${icon}"></i> <span>${message}</span>`;
             container.appendChild(toast);
             
             setTimeout(() => {
-                toast.remove();
-            }, 3000);
+                toast.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, CONFIG.TOAST_DURATION);
         }
 
         // ========== تحديث واجهة المستخدم ==========
@@ -1376,12 +1855,12 @@
                         <span>${userType}</span>
                     </div>
                     <span style="color: white;">👋 ${AppState.currentUser.name}</span>
-                    <button class="nav-btn" onclick="goHome()">الرئيسية</button>
-                    <button class="nav-btn" onclick="logout()">خروج</button>
+                    <button class="nav-btn" onclick="goHome()"><i class="fas fa-home"></i> الرئيسية</button>
+                    <button class="nav-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> خروج</button>
                 `;
             } else {
                 navMenu.innerHTML = `
-                    <button class="nav-btn" onclick="showAuthModal()">دخول</button>
+                    <button class="nav-btn" onclick="showAuthModal()"><i class="fas fa-sign-in-alt"></i> دخول</button>
                 `;
             }
         }
@@ -1393,6 +1872,13 @@
             const dashboard = document.getElementById('dashboard');
             const teachers = getTeachers();
             const teacher = teachers.find(t => t.id === teacherId);
+            
+            if (!teacher) {
+                showToast('الأستاذ غير موجود', 'error');
+                goHome();
+                return;
+            }
+            
             const posts = getPosts().filter(p => p.teacherId === teacherId);
             const lessons = getLessons().filter(l => l.teacherId === teacherId);
             const students = getStudents();
@@ -1513,7 +1999,6 @@
             
             document.getElementById('channelContent').innerHTML = getChannelTabContent(teacher, posts, lessons);
             
-            // تحديث الأزرار
             document.querySelectorAll('.channel-tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
         }
@@ -1537,7 +2022,7 @@
                                 <div class="post-card">
                                     <div class="post-header">
                                         ${post.type === 'video' ? `
-                                            <img src="https://img.youtube.com/vi/${post.videoId}/hqdefault.jpg" alt="${post.title}">
+                                            <img src="https://img.youtube.com/vi/${post.videoId}/hqdefault.jpg" alt="${post.title}" loading="lazy">
                                         ` : `
                                             <div style="height: 100%; display: flex; align-items: center; justify-content: center; font-size: 4rem; background: linear-gradient(135deg, var(--primary), var(--primary-light));">
                                                 <i class="fas fa-file-pdf" style="color: var(--white);"></i>
@@ -1730,7 +2215,7 @@
             
             if (videoId) {
                 document.getElementById('videoPreview').innerHTML = `
-                    <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen loading="lazy"></iframe>
                 `;
                 document.getElementById('videoPreview').style.display = 'block';
             }
@@ -1750,7 +2235,7 @@
             const file = event.target.files[0];
             if (!file) return;
 
-            if (file.size > MAX_FILE_SIZE) {
+            if (file.size > CONFIG.MAX_FILE_SIZE) {
                 showToast('حجم الملف يجب أن يكون أقل من 5 ميجابايت', 'error');
                 return;
             }
@@ -1862,7 +2347,6 @@
         function watchVideo(videoId) {
             window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
             
-            // زيادة عدد المشاهدات
             const posts = getPosts();
             const postIndex = posts.findIndex(p => p.videoId === videoId);
             if (postIndex !== -1) {
@@ -1894,12 +2378,10 @@
         }
 
         function sharePost(postId) {
-            // محاكاة مشاركة المنشور
             showToast('تم نسخ رابط المنشور', 'success');
         }
 
         function shareChannel(teacherId) {
-            // محاكاة مشاركة القناة
             showToast('تم نسخ رابط القناة', 'success');
         }
 
@@ -1907,19 +2389,828 @@
             showToast('سيتم إضافة خاصية تعديل القناة قريباً', 'info');
         }
 
-        // ========== باقي الدوال (searchContent, renderStudentDashboard, renderTeachers, renderLessons, toggleFollow, toggleSaveLesson, viewLesson, downloadPdf, handleFileSelect, removeSelectedFile, triggerFileInput, viewTeacherLessons, renderTeacherDashboard, switchTeacherTab, getTeacherTabContent, addNewLesson, deleteLesson, showAuthModal, showLoginForm, showRegisterForm, handleLogin, handleRegister, getRandomAvatar, selectUserType, logout, goHome, getLevelName, getSubjectName, showModal, closeModal, initAnimatedBg) تبقى كما هي مع إضافة استدعاء renderChannelPage في viewTeacherLessons ==========
-        
-        // تعديل viewTeacherLessons لعرض صفحة القناة بدلاً من النافذة المنبثقة
+        // ========== دوال البحث ==========
+        function searchContent() {
+            if (!AppState.currentUser || AppState.currentUser.type !== 'student') return;
+
+            AppState.filters.search = document.getElementById('searchInput')?.value.toLowerCase() || '';
+            AppState.filters.level = document.getElementById('levelFilter')?.value || '';
+            AppState.filters.subject = document.getElementById('subjectFilter')?.value || '';
+            AppState.filters.teacherName = document.getElementById('teacherFilter')?.value.toLowerCase() || '';
+
+            const teachers = getTeachers();
+            const lessons = getLessons();
+
+            AppState.searchResults.teachers = teachers.filter(teacher => {
+                let matches = true;
+                
+                if (AppState.filters.search) {
+                    matches = matches && (
+                        teacher.name.toLowerCase().includes(AppState.filters.search) ||
+                        teacher.specialty?.toLowerCase().includes(AppState.filters.search)
+                    );
+                }
+                
+                if (AppState.filters.level) {
+                    matches = matches && teacher.levels?.includes(AppState.filters.level);
+                }
+                
+                if (AppState.filters.subject) {
+                    matches = matches && teacher.subjects?.includes(AppState.filters.subject);
+                }
+                
+                if (AppState.filters.teacherName) {
+                    matches = matches && teacher.name.toLowerCase().includes(AppState.filters.teacherName);
+                }
+                
+                return matches;
+            });
+
+            AppState.searchResults.lessons = lessons.filter(lesson => {
+                let matches = true;
+                
+                if (AppState.filters.search) {
+                    matches = matches && (
+                        lesson.title.toLowerCase().includes(AppState.filters.search) ||
+                        lesson.description?.toLowerCase().includes(AppState.filters.search)
+                    );
+                }
+                
+                if (AppState.filters.level) {
+                    matches = matches && lesson.level === AppState.filters.level;
+                }
+                
+                if (AppState.filters.subject) {
+                    matches = matches && lesson.subject === AppState.filters.subject;
+                }
+                
+                const teacher = teachers.find(t => t.id === lesson.teacherId);
+                if (AppState.filters.teacherName && teacher) {
+                    matches = matches && teacher.name.toLowerCase().includes(AppState.filters.teacherName);
+                }
+                
+                return matches;
+            });
+
+            const resultsCount = document.querySelector('.results-count');
+            if (resultsCount) {
+                resultsCount.innerHTML = `${AppState.searchResults.teachers.length} أستاذ • ${AppState.searchResults.lessons.length} درس`;
+            }
+
+            showActiveFilters();
+            renderCurrentTab();
+        }
+
+        function showActiveFilters() {
+            const container = document.getElementById('activeFilters');
+            if (!container) return;
+
+            let html = '';
+            
+            if (AppState.filters.search) {
+                html += `
+                    <div class="filter-tag">
+                        <i class="fas fa-search"></i> ${AppState.filters.search}
+                        <button onclick="removeFilter('search')">&times;</button>
+                    </div>
+                `;
+            }
+            
+            if (AppState.filters.level) {
+                html += `
+                    <div class="filter-tag">
+                        <i class="fas fa-layer-group"></i> ${getLevelName(AppState.filters.level)}
+                        <button onclick="removeFilter('level')">&times;</button>
+                    </div>
+                `;
+            }
+            
+            if (AppState.filters.subject) {
+                html += `
+                    <div class="filter-tag">
+                        <i class="fas fa-book"></i> ${getSubjectName(AppState.filters.subject)}
+                        <button onclick="removeFilter('subject')">&times;</button>
+                    </div>
+                `;
+            }
+            
+            if (AppState.filters.teacherName) {
+                html += `
+                    <div class="filter-tag">
+                        <i class="fas fa-user"></i> ${AppState.filters.teacherName}
+                        <button onclick="removeFilter('teacherName')">&times;</button>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function removeFilter(filter) {
+            AppState.filters[filter] = '';
+            if (document.getElementById('searchInput')) document.getElementById('searchInput').value = '';
+            if (document.getElementById('levelFilter')) document.getElementById('levelFilter').value = '';
+            if (document.getElementById('subjectFilter')) document.getElementById('subjectFilter').value = '';
+            if (document.getElementById('teacherFilter')) document.getElementById('teacherFilter').value = '';
+            searchContent();
+        }
+
+        function clearAllFilters() {
+            AppState.filters = { search: '', level: '', subject: '', teacherName: '' };
+            if (document.getElementById('searchInput')) document.getElementById('searchInput').value = '';
+            if (document.getElementById('levelFilter')) document.getElementById('levelFilter').value = '';
+            if (document.getElementById('subjectFilter')) document.getElementById('subjectFilter').value = '';
+            if (document.getElementById('teacherFilter')) document.getElementById('teacherFilter').value = '';
+            searchContent();
+        }
+
+        // ========== عرض لوحة تحكم التلميذ ==========
+        function renderStudentDashboard() {
+            const dashboard = document.getElementById('dashboard');
+            const students = getStudents();
+            const student = students.find(s => s.id === AppState.currentUser?.id);
+
+            if (!student) return;
+
+            const teachers = getTeachers();
+            const lessons = getLessons();
+
+            const followingCount = student.following?.length || 0;
+            const savedCount = student.savedLessons?.length || 0;
+
+            const totalTeachers = teachers.length;
+            const totalLessons = lessons.length;
+
+            dashboard.innerHTML = `
+                <!-- بطاقة الترحيب -->
+                <div class="welcome-card">
+                    <h1 class="welcome-title">مرحباً بك ${student.name} 👋</h1>
+                    <div class="welcome-stats">
+                        <div class="welcome-stat">
+                            <i class="fas fa-fire" style="color: var(--secondary);"></i>
+                            <span>${student.streak || 0} يوم متتالي</span>
+                        </div>
+                        <div class="welcome-stat">
+                            <i class="fas fa-star" style="color: var(--secondary);"></i>
+                            <span>${student.points || 0} نقطة</span>
+                        </div>
+                        <div class="welcome-stat">
+                            <i class="fas fa-graduation-cap" style="color: var(--secondary);"></i>
+                            <span>${getLevelName(student.level)}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- نظام البحث المتقدم -->
+                <div class="search-section">
+                    <div class="search-header">
+                        <h2><i class="fas fa-search"></i> بحث متقدم</h2>
+                        <span class="results-count">
+                            ${totalTeachers} أستاذ • ${totalLessons} درس
+                        </span>
+                    </div>
+                    
+                    <div class="search-grid">
+                        <div class="search-input-group">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" class="search-input" placeholder="بحث في الدروس والأساتذة..." 
+                                value="${AppState.filters.search}" onkeyup="searchContent()">
+                        </div>
+                        
+                        <div class="search-input-group">
+                            <i class="fas fa-layer-group"></i>
+                            <select id="levelFilter" class="search-input" onchange="searchContent()">
+                                <option value="">كل المستويات</option>
+                                <option value="premiere">الأولى إعدادي</option>
+                                <option value="deuxieme">الثانية إعدادي</option>
+                                <option value="troisieme">الثالثة إعدادي</option>
+                                <option value="tronc">جذع مشترك</option>
+                                <option value="bac1">الأولى باكالوريا</option>
+                                <option value="bac2">الثانية باكالوريا</option>
+                            </select>
+                        </div>
+                        
+                        <div class="search-input-group">
+                            <i class="fas fa-book"></i>
+                            <select id="subjectFilter" class="search-input" onchange="searchContent()">
+                                <option value="">كل المواد</option>
+                                <option value="math">الرياضيات</option>
+                                <option value="physique">الفيزياء</option>
+                                <option value="chimie">الكيمياء</option>
+                                <option value="svt">علوم الحياة</option>
+                                <option value="philosophy">الفلسفة</option>
+                                <option value="arabic">العربية</option>
+                                <option value="french">الفرنسية</option>
+                                <option value="english">الإنجليزية</option>
+                                <option value="islamic">التربية الإسلامية</option>
+                                <option value="history">التاريخ</option>
+                                <option value="geo">الجغرافيا</option>
+                            </select>
+                        </div>
+                        
+                        <div class="search-input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="teacherFilter" class="search-input" placeholder="اسم الأستاذ..." 
+                                value="${AppState.filters.teacherName}" onkeyup="searchContent()">
+                        </div>
+                    </div>
+
+                    <div class="active-filters" id="activeFilters"></div>
+                    
+                    <button class="search-btn" onclick="clearAllFilters()" style="margin-top: 1rem;">
+                        <i class="fas fa-times"></i> مسح الكل
+                    </button>
+                </div>
+
+                <!-- أقسام التلميذ -->
+                <div class="student-tabs">
+                    <button class="tab-btn ${AppState.ui.studentTab === 'all' ? 'active' : ''}" 
+                        onclick="switchStudentTab('all')">
+                        <i class="fas fa-users"></i> جميع الأساتذة (${totalTeachers})
+                    </button>
+                    <button class="tab-btn ${AppState.ui.studentTab === 'following' ? 'active' : ''}" 
+                        onclick="switchStudentTab('following')">
+                        <i class="fas fa-heart"></i> أساتذتي (${followingCount})
+                    </button>
+                    <button class="tab-btn ${AppState.ui.studentTab === 'lessons' ? 'active' : ''}" 
+                        onclick="switchStudentTab('lessons')">
+                        <i class="fas fa-book"></i> جميع الدروس (${totalLessons})
+                    </button>
+                    <button class="tab-btn ${AppState.ui.studentTab === 'saved' ? 'active' : ''}" 
+                        onclick="switchStudentTab('saved')">
+                        <i class="fas fa-bookmark"></i> المحفوظات (${savedCount})
+                    </button>
+                </div>
+
+                <div id="studentContent"></div>
+            `;
+
+            searchContent();
+        }
+
+        function switchStudentTab(tab) {
+            AppState.ui.studentTab = tab;
+            renderCurrentTab();
+        }
+
+        function renderCurrentTab() {
+            const content = document.getElementById('studentContent');
+            const students = getStudents();
+            const student = students.find(s => s.id === AppState.currentUser.id);
+            const teachers = getTeachers();
+            const lessons = getLessons();
+
+            if (!content || !student) return;
+
+            if (AppState.ui.studentTab === 'all') {
+                renderTeachers(content, student, AppState.searchResults.teachers.length ? AppState.searchResults.teachers : teachers);
+            } else if (AppState.ui.studentTab === 'following') {
+                const followingTeachers = teachers.filter(t => student.following?.includes(t.id));
+                renderTeachers(content, student, followingTeachers);
+            } else if (AppState.ui.studentTab === 'lessons') {
+                renderLessons(content, student, AppState.searchResults.lessons.length ? AppState.searchResults.lessons : lessons);
+            } else if (AppState.ui.studentTab === 'saved') {
+                const savedLessons = lessons.filter(l => student.savedLessons?.includes(l.id));
+                renderLessons(content, student, savedLessons);
+            }
+        }
+
+        function renderTeachers(content, student, teachers) {
+            if (!teachers || teachers.length === 0) {
+                content.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-users"></i>
+                        <h3>لا توجد نتائج</h3>
+                        <p>جرب تغيير معايير البحث</p>
+                    </div>
+                `;
+                return;
+            }
+
+            content.innerHTML = `
+                <div class="teachers-grid">
+                    ${teachers.map(teacher => {
+                        const isFollowing = student.following?.includes(teacher.id);
+                        const teacherLessons = getLessons().filter(l => l.teacherId === teacher.id).length;
+                        
+                        return `
+                            <div class="teacher-card" onclick="viewTeacherLessons(${teacher.id})">
+                                <div class="teacher-header"></div>
+                                <div class="teacher-avatar">${teacher.avatar || '👨‍🏫'}</div>
+                                <div class="teacher-info">
+                                    <h3 class="teacher-name">${teacher.name}</h3>
+                                    <p class="teacher-specialty">${teacher.specialty || 'أستاذ'}</p>
+                                    <div class="teacher-stats">
+                                        <span class="stat-badge">
+                                            <i class="fas fa-star" style="color: var(--secondary);"></i> ${teacher.rating || 0}
+                                        </span>
+                                        <span class="stat-badge">
+                                            <i class="fas fa-book"></i> ${teacherLessons}
+                                        </span>
+                                    </div>
+                                    <button class="follow-btn ${isFollowing ? 'following' : ''}" 
+                                        onclick="event.stopPropagation(); toggleFollow(${teacher.id})">
+                                        <i class="fas ${isFollowing ? 'fa-check' : 'fa-plus'}"></i>
+                                        ${isFollowing ? 'متابعة' : 'متابعة'}
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function renderLessons(content, student, lessons) {
+            if (!lessons || lessons.length === 0) {
+                content.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-book-open"></i>
+                        <h3>لا توجد دروس</h3>
+                        <p>ابحث عن دروس في المواد التي تهمك</p>
+                    </div>
+                `;
+                return;
+            }
+
+            content.innerHTML = `
+                <div class="lessons-grid">
+                    ${lessons.map(lesson => {
+                        const teacher = getTeachers().find(t => t.id === lesson.teacherId);
+                        const isSaved = student.savedLessons?.includes(lesson.id);
+                        const hasFile = lesson.fileData && lesson.fileName;
+                        
+                        return `
+                            <div class="lesson-card">
+                                <div class="lesson-header">
+                                    ${hasFile ? '📄' : '📄'}
+                                    <span class="lesson-type">PDF</span>
+                                </div>
+                                <div class="lesson-content">
+                                    <h3 class="lesson-title">${lesson.title}</h3>
+                                    <p>${teacher?.name || ''}</p>
+                                    <div class="lesson-meta">
+                                        <span><i class="fas fa-layer-group"></i> ${getLevelName(lesson.level)}</span>
+                                        <span><i class="fas fa-download"></i> ${lesson.downloads || 0}</span>
+                                    </div>
+                                    <div class="lesson-actions">
+                                        <button class="lesson-btn pdf-btn" onclick="viewLesson(${lesson.id})">
+                                            <i class="fas fa-file-pdf"></i> عرض
+                                        </button>
+                                        <button class="lesson-btn save-btn ${isSaved ? 'saved' : ''}" 
+                                            onclick="event.stopPropagation(); toggleSaveLesson(${lesson.id})">
+                                            <i class="fas ${isSaved ? 'fa-bookmark' : 'fa-bookmark'}"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        // ========== دوال التفاعل ==========
+        function toggleFollow(teacherId) {
+            const students = getStudents();
+            const studentIndex = students.findIndex(s => s.id === AppState.currentUser.id);
+            const student = students[studentIndex];
+            
+            const teachers = getTeachers();
+            const teacherIndex = teachers.findIndex(t => t.id === teacherId);
+            const teacher = teachers[teacherIndex];
+
+            if (!student.following) student.following = [];
+
+            if (student.following.includes(teacherId)) {
+                student.following = student.following.filter(id => id !== teacherId);
+                if (teacher.followers) {
+                    teacher.followers = teacher.followers.filter(id => id !== student.id);
+                }
+                showToast('تم إلغاء المتابعة', 'info');
+            } else {
+                student.following.push(teacherId);
+                if (!teacher.followers) teacher.followers = [];
+                teacher.followers.push(student.id);
+                student.points = (student.points || 0) + 10;
+                showToast('تمت المتابعة +10 نقاط', 'success');
+            }
+
+            students[studentIndex] = student;
+            saveStudents(students);
+            
+            teachers[teacherIndex] = teacher;
+            saveTeachers(teachers);
+            
+            if (AppState.viewingChannel === teacherId) {
+                renderChannelPage(teacherId);
+            } else {
+                renderCurrentTab();
+            }
+        }
+
+        function toggleSaveLesson(lessonId) {
+            const students = getStudents();
+            const studentIndex = students.findIndex(s => s.id === AppState.currentUser.id);
+            const student = students[studentIndex];
+            
+            if (!student.savedLessons) student.savedLessons = [];
+
+            if (student.savedLessons.includes(lessonId)) {
+                student.savedLessons = student.savedLessons.filter(id => id !== lessonId);
+                showToast('تم إزالة الدرس من المحفوظات', 'info');
+            } else {
+                student.savedLessons.push(lessonId);
+                student.points = (student.points || 0) + 5;
+                showToast('تم حفظ الدرس +5 نقاط', 'success');
+            }
+
+            students[studentIndex] = student;
+            saveStudents(students);
+            
+            renderCurrentTab();
+        }
+
+        function viewLesson(lessonId) {
+            const lessons = getLessons();
+            const lessonIndex = lessons.findIndex(l => l.id === lessonId);
+            const lesson = lessons[lessonIndex];
+            
+            const teachers = getTeachers();
+            const teacher = teachers.find(t => t.id === lesson.teacherId);
+            
+            lesson.views = (lesson.views || 0) + 1;
+            lessons[lessonIndex] = lesson;
+            saveLessons(lessons);
+
+            const hasFile = lesson.fileData && lesson.fileName;
+            let fileUrl = hasFile ? lesson.fileData : '';
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <h2 style="color: var(--primary);">${lesson.title}</h2>
+                <p style="margin: 1rem 0; color: var(--gray);">${lesson.description || ''}</p>
+                
+                <div style="background: var(--light); padding: 1.5rem; border-radius: var(--radius-lg); margin: 1.5rem 0;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <div><i class="fas fa-chalkboard-teacher" style="color: var(--primary);"></i> ${teacher?.name}</div>
+                        <div><i class="fas fa-layer-group" style="color: var(--primary);"></i> ${getLevelName(lesson.level)}</div>
+                        <div><i class="fas fa-calendar" style="color: var(--primary);"></i> ${lesson.date || '2024-02-20'}</div>
+                        <div><i class="fas fa-eye" style="color: var(--primary);"></i> ${lesson.views || 0} مشاهدة</div>
+                    </div>
+                </div>
+                
+                ${hasFile ? `
+                    <div class="pdf-options">
+                        <button class="pdf-option-btn" onclick="openPdfInNewTab('${fileUrl}')">
+                            <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
+                        </button>
+                        <button class="pdf-option-btn secondary" onclick="downloadLessonPdf(${lessonId})">
+                            <i class="fas fa-download"></i> تحميل PDF
+                        </button>
+                    </div>
+                    
+                    <div class="pdf-viewer-container">
+                        <object
+                            data="${fileUrl}"
+                            type="application/pdf"
+                            width="100%"
+                            height="100%"
+                        >
+                            <div class="pdf-error">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h3>تعذر تحميل المعاينة</h3>
+                                <p>المتصفح لا يدعم عرض PDF مباشرة</p>
+                                <div style="margin-top: 1rem;">
+                                    <button class="pdf-option-btn" onclick="openPdfInNewTab('${fileUrl}')">
+                                        <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
+                                    </button>
+                                    <button class="pdf-option-btn secondary" onclick="downloadLessonPdf(${lessonId})">
+                                        <i class="fas fa-download"></i> تحميل PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </object>
+                    </div>
+                ` : `
+                    <div class="pdf-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>لا يوجد ملف PDF</h3>
+                        <p>لم يتم رفع ملف لهذا الدرس بعد</p>
+                    </div>
+                `}
+            `;
+
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function openPdfInNewTab(url) {
+            window.open(url, '_blank');
+        }
+
+        function downloadLessonPdf(lessonId) {
+            const lessons = getLessons();
+            const lessonIndex = lessons.findIndex(l => l.id === lessonId);
+            const lesson = lessons[lessonIndex];
+            
+            if (!lesson.fileData) {
+                showToast('لا يوجد ملف للتحميل', 'error');
+                return;
+            }
+            
+            lesson.downloads = (lesson.downloads || 0) + 1;
+            lessons[lessonIndex] = lesson;
+            saveLessons(lessons);
+
+            const link = document.createElement('a');
+            link.href = lesson.fileData;
+            link.download = lesson.fileName || 'lesson.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showToast('جاري تحميل الملف...', 'info');
+        }
+
         function viewTeacherLessons(teacherId) {
             renderChannelPage(teacherId);
         }
 
-        // تعديل goHome لإعادة تعيين viewingChannel
         function goHome() {
             AppState.viewingChannel = null;
             renderUI();
         }
 
+        // ========== دوال المصادقة ==========
+        function showAuthModal() {
+            showModal(`
+                <h2 style="color: var(--primary); text-align: center; margin-bottom: 1.5rem;">
+                    <i class="fas fa-graduation-cap"></i> مرحباً بك في تعلّم.ما
+                </h2>
+                
+                <div class="user-type-selector">
+                    <button class="user-type-btn ${AppState.selectedUserType === 'student' ? 'active' : ''}" 
+                        onclick="selectUserType('student')">
+                        <i class="fas fa-user-graduate"></i> تلميذ
+                    </button>
+                    <button class="user-type-btn ${AppState.selectedUserType === 'teacher' ? 'active' : ''}" 
+                        onclick="selectUserType('teacher')">
+                        <i class="fas fa-chalkboard-teacher"></i> أستاذ
+                    </button>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <button class="nav-btn" style="width:100%; background: var(--primary); color: white; margin-bottom: 0.5rem;" 
+                        onclick="showRegisterForm()">
+                        <i class="fas fa-user-plus"></i> تسجيل جديد
+                    </button>
+                    <button class="nav-btn" style="width:100%;" onclick="showLoginForm()">
+                        <i class="fas fa-sign-in-alt"></i> لدي حساب
+                    </button>
+                </div>
+            `);
+        }
+
+        function showLoginForm() {
+            showModal(`
+                <h2 style="color: var(--primary); margin-bottom: 1.5rem;">تسجيل الدخول</h2>
+                
+                <div class="form-group">
+                    <input type="email" id="loginEmail" class="search-input" placeholder="البريد الإلكتروني">
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" id="loginPassword" class="search-input" placeholder="كلمة السر">
+                </div>
+                
+                <button class="submit-btn" onclick="handleLogin()">
+                    <i class="fas fa-sign-in-alt"></i> دخول
+                </button>
+                
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" onclick="showAuthModal()">رجوع</a>
+                </p>
+            `);
+        }
+
+        function showRegisterForm() {
+            showModal(`
+                <h2 style="color: var(--primary); margin-bottom: 1.5rem;">${AppState.selectedUserType === 'teacher' ? 'تسجيل أستاذ جديد' : 'تسجيل تلميذ جديد'}</h2>
+                
+                <div class="form-group">
+                    <input type="text" id="regName" class="search-input" placeholder="الاسم الكامل">
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" id="regEmail" class="search-input" placeholder="البريد الإلكتروني">
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" id="regPassword" class="search-input" placeholder="كلمة السر">
+                </div>
+                
+                ${AppState.selectedUserType === 'student' ? `
+                    <div class="form-group">
+                        <select id="regLevel" class="search-input">
+                            <option value="premiere">الأولى إعدادي</option>
+                            <option value="deuxieme">الثانية إعدادي</option>
+                            <option value="troisieme">الثالثة إعدادي</option>
+                            <option value="tronc">جذع مشترك</option>
+                            <option value="bac1">الأولى باكالوريا</option>
+                            <option value="bac2">الثانية باكالوريا</option>
+                        </select>
+                    </div>
+                ` : `
+                    <div class="form-group">
+                        <input type="text" id="regSpecialty" class="search-input" placeholder="الاختصاص">
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea id="regBio" class="search-input" rows="3" placeholder="نبذة عنك"></textarea>
+                    </div>
+                `}
+                
+                <button class="submit-btn" onclick="handleRegister()">
+                    <i class="fas fa-user-plus"></i> تسجيل
+                </button>
+                
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" onclick="showAuthModal()">رجوع</a>
+                </p>
+            `);
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            let user;
+            if (AppState.selectedUserType === 'teacher') {
+                const teachers = getTeachers();
+                user = teachers.find(t => t.email === email && t.password === password);
+            } else {
+                const students = getStudents();
+                user = students.find(s => s.email === email && s.password === password);
+            }
+
+            if (user) {
+                AppState.currentUser = {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    type: AppState.selectedUserType
+                };
+                saveCurrentUser();
+                closeModal();
+                renderUI();
+                showToast('مرحباً بك ' + user.name, 'success');
+            } else {
+                showToast('البريد الإلكتروني أو كلمة السر غير صحيحة', 'error');
+            }
+        }
+
+        function handleRegister() {
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            if (!name || !email || !password) {
+                showToast('الرجاء ملء جميع الحقول', 'warning');
+                return;
+            }
+
+            if (AppState.selectedUserType === 'teacher') {
+                const teachers = getTeachers();
+                if (teachers.find(t => t.email === email)) {
+                    showToast('البريد الإلكتروني موجود مسبقاً', 'error');
+                    return;
+                }
+
+                const specialty = document.getElementById('regSpecialty').value;
+                const bio = document.getElementById('regBio').value;
+
+                const newTeacher = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    password: password,
+                    specialty: specialty || 'أستاذ',
+                    bio: bio || 'أستاذ جديد',
+                    avatar: getRandomAvatar(),
+                    rating: 0,
+                    followers: [],
+                    subjects: [],
+                    levels: []
+                };
+
+                teachers.push(newTeacher);
+                saveTeachers(teachers);
+                
+                AppState.currentUser = { id: newTeacher.id, name: name, email: email, type: 'teacher' };
+                
+            } else {
+                const students = getStudents();
+                if (students.find(s => s.email === email)) {
+                    showToast('البريد الإلكتروني موجود مسبقاً', 'error');
+                    return;
+                }
+
+                const level = document.getElementById('regLevel').value;
+
+                const newStudent = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    password: password,
+                    level: level,
+                    following: [],
+                    savedLessons: [],
+                    points: 0,
+                    streak: 0
+                };
+
+                students.push(newStudent);
+                saveStudents(students);
+                
+                AppState.currentUser = { id: newStudent.id, name: name, email: email, type: 'student' };
+            }
+
+            saveCurrentUser();
+            closeModal();
+            renderUI();
+            showToast('تم التسجيل بنجاح', 'success');
+        }
+
+        function getRandomAvatar() {
+            return CONFIG.DEFAULT_AVATARS[Math.floor(Math.random() * CONFIG.DEFAULT_AVATARS.length)];
+        }
+
+        function selectUserType(type) {
+            AppState.selectedUserType = type;
+            document.querySelectorAll('.user-type-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function logout() {
+            AppState.currentUser = null;
+            Storage.remove('currentUser');
+            renderUI();
+            showToast('تم تسجيل الخروج', 'info');
+        }
+
+        // ========== دوال مساعدة ==========
+        function getLevelName(level) {
+            const levels = {
+                'premiere': 'الأولى إعدادي',
+                'deuxieme': 'الثانية إعدادي',
+                'troisieme': 'الثالثة إعدادي',
+                'tronc': 'جذع مشترك',
+                'bac1': 'الأولى باكالوريا',
+                'bac2': 'الثانية باكالوريا'
+            };
+            return levels[level] || level;
+        }
+
+        function getSubjectName(subject) {
+            const subjects = {
+                'math': 'الرياضيات',
+                'physique': 'الفيزياء',
+                'chimie': 'الكيمياء',
+                'svt': 'علوم الحياة',
+                'philosophy': 'الفلسفة',
+                'arabic': 'العربية',
+                'french': 'الفرنسية',
+                'english': 'الإنجليزية',
+                'islamic': 'التربية الإسلامية',
+                'history': 'التاريخ',
+                'geo': 'الجغرافيا'
+            };
+            return subjects[subject] || subject;
+        }
+
+        function showModal(content) {
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function initAnimatedBg() {
+            const bg = document.getElementById('animatedBg');
+            for (let i = 0; i < 20; i++) {
+                const span = document.createElement('span');
+                span.style.left = Math.random() * 100 + '%';
+                span.style.width = Math.random() * 20 + 5 + 'px';
+                span.style.height = span.style.width;
+                span.style.animationDuration = Math.random() * 20 + 10 + 's';
+                span.style.animationDelay = Math.random() * 10 + 's';
+                bg.appendChild(span);
+            }
+        }
+
+        // ========== تهيئة المشروع ==========
         function init() {
             initAnimatedBg();
             initSampleData();
@@ -1929,6 +3220,11 @@
                 const modal = document.getElementById('modal');
                 if (event.target === modal) closeModal();
             };
+
+            // تحسين الأداء على الهاتف
+            if ('ontouchstart' in window) {
+                document.body.classList.add('touch-device');
+            }
         }
 
         init();
