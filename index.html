@@ -11,11 +11,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- PDF.js لعرض PDF بشكل موثوق -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-    
     <style>
-        /* جميع الأنماط السابقة مع إضافة أنماط لعرض PDF */
+        /* جميع الأنماط السابقة مع إضافة أنماط لعرض PDF المحسن */
         :root {
             --primary: #1e3c72;
             --primary-light: #2a5298;
@@ -797,7 +794,7 @@
             transform: rotate(90deg);
         }
 
-        /* عارض PDF المحسن */
+        /* ========== عارض PDF المحسن - بدون Google ========== */
         .pdf-viewer-container {
             width: 100%;
             height: 600px;
@@ -814,54 +811,63 @@
             border: none;
         }
 
-        .pdf-fallback {
+        /* خيارات عرض PDF المتعددة */
+        .pdf-options {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pdf-option-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--radius-full);
+            background: var(--primary);
+            color: var(--white);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pdf-option-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pdf-option-btn.secondary {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .pdf-option-btn.danger {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        /* رسالة الخطأ */
+        .pdf-error {
             text-align: center;
             padding: 3rem;
             background: var(--light);
             border-radius: var(--radius-lg);
+            margin: 1rem 0;
         }
 
-        .pdf-fallback i {
+        .pdf-error i {
             font-size: 4rem;
             color: var(--danger);
             margin-bottom: 1rem;
         }
 
-        .pdf-fallback h3 {
+        .pdf-error h3 {
             color: var(--danger);
             margin-bottom: 1rem;
-        }
-
-        .pdf-fallback .btn-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-        .pdf-fallback .btn {
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .pdf-fallback .btn-primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .pdf-fallback .btn-secondary {
-            background: var(--secondary);
-            color: var(--primary);
-        }
-
-        .pdf-fallback .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
         }
 
         /* روابط PDF تجريبية */
@@ -940,8 +946,12 @@
                 height: 400px;
             }
 
-            .pdf-fallback .btn-group {
+            .pdf-options {
                 flex-direction: column;
+            }
+
+            .pdf-option-btn {
+                width: 100%;
             }
         }
     </style>
@@ -976,9 +986,6 @@
     </div>
 
     <script>
-        // تهيئة PDF.js
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-
         // ========== روابط PDF تجريبية حقيقية ==========
         const SAMPLE_PDFS = {
             math: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
@@ -1591,7 +1598,7 @@
             renderCurrentTab();
         }
 
-        // ========== عرض الدرس - مع معاينة PDF محسنة ==========
+        // ========== عرض الدرس - مع خيارات متعددة ==========
         function viewLesson(lessonId) {
             const lesson = Database.lessons.find(l => l.id === lessonId);
             const teacher = Database.teachers.find(t => t.id === lesson.teacherId);
@@ -1603,7 +1610,7 @@
             // التحقق من وجود رابط PDF صحيح
             const pdfUrl = lesson.pdfUrl || SAMPLE_PDFS.default;
 
-            // عرض النافذة مع معاينة PDF
+            // عرض النافذة مع خيارات متعددة
             const modalContent = document.getElementById('modalContent');
             modalContent.innerHTML = `
                 <h2 style="color: var(--primary);">${lesson.title}</h2>
@@ -1618,38 +1625,42 @@
                     </div>
                 </div>
                 
-                <!-- عارض PDF المحسن -->
-                <div class="pdf-viewer-container">
-                    <iframe 
-                        src="https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true" 
-                        class="pdf-viewer"
-                        frameborder="0"
-                        allowfullscreen
-                        onload="this.style.display='block'"
-                        onerror="this.style.display='none'; document.getElementById('pdf-fallback-${lessonId}').style.display='block'">
-                    </iframe>
-                    <div id="pdf-fallback-${lessonId}" style="display: none;" class="pdf-fallback">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h3>تعذر تحميل المعاينة</h3>
-                        <p>يمكنك تحميل الملف مباشرة أو فتحه في نافذة جديدة</p>
-                        <div class="btn-group">
-                            <button class="btn btn-primary" onclick="window.open('${pdfUrl}', '_blank')">
-                                <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
-                            </button>
-                            <button class="btn btn-secondary" onclick="downloadPdf(${lessonId})">
-                                <i class="fas fa-download"></i> تحميل PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                    <button class="nav-btn" style="flex: 1; background: var(--primary); color: white;" onclick="window.open('${pdfUrl}', '_blank')">
+                <!-- خيارات عرض PDF المتعددة -->
+                <div class="pdf-options">
+                    <button class="pdf-option-btn" onclick="openPdfInNewTab('${pdfUrl}')">
                         <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
                     </button>
-                    <button class="nav-btn" style="flex: 1; background: var(--secondary); color: var(--primary);" onclick="downloadPdf(${lessonId})">
+                    <button class="pdf-option-btn secondary" onclick="downloadPdf(${lessonId})">
                         <i class="fas fa-download"></i> تحميل PDF
                     </button>
+                    <button class="pdf-option-btn danger" onclick="tryAlternativeViewer('${pdfUrl}', ${lessonId})">
+                        <i class="fas fa-sync-alt"></i> محاولة عرض بديل
+                    </button>
+                </div>
+                
+                <!-- عارض PDF أساسي -->
+                <div class="pdf-viewer-container" id="pdfViewerContainer">
+                    <object
+                        data="${pdfUrl}"
+                        type="application/pdf"
+                        width="100%"
+                        height="100%"
+                        onerror="handlePdfError(${lessonId})"
+                    >
+                        <div class="pdf-error">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>تعذر تحميل المعاينة</h3>
+                            <p>المتصفح لا يدعم عرض PDF مباشرة</p>
+                            <div style="margin-top: 1rem;">
+                                <button class="pdf-option-btn" onclick="openPdfInNewTab('${pdfUrl}')">
+                                    <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
+                                </button>
+                                <button class="pdf-option-btn secondary" onclick="downloadPdf(${lessonId})">
+                                    <i class="fas fa-download"></i> تحميل PDF
+                                </button>
+                            </div>
+                        </div>
+                    </object>
                 </div>
                 
                 <!-- روابط PDF تجريبية -->
@@ -1664,6 +1675,49 @@
             `;
 
             document.getElementById('modal').style.display = 'flex';
+        }
+
+        // ========== معالجة أخطاء PDF ==========
+        function handlePdfError(lessonId) {
+            const container = document.getElementById('pdfViewerContainer');
+            if (container) {
+                container.innerHTML = `
+                    <div class="pdf-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>خطأ في تحميل PDF</h3>
+                        <p>قد يكون الرابط غير صحيح أو لا يدعم العرض المباشر</p>
+                        <div style="margin-top: 1rem;">
+                            <button class="pdf-option-btn" onclick="tryAlternativeViewer('${Database.lessons.find(l => l.id === lessonId).pdfUrl}', ${lessonId})">
+                                <i class="fas fa-sync-alt"></i> محاولة عرض بديل
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // ========== فتح PDF في نافذة جديدة ==========
+        function openPdfInNewTab(url) {
+            window.open(url, '_blank');
+        }
+
+        // ========== محاولة عرض بديل ==========
+        function tryAlternativeViewer(url, lessonId) {
+            // استخدام خدمة بديلة لعرض PDF
+            const alternativeViewer = `https://drive.google.com/viewerng/viewer?embedded=true&url=${encodeURIComponent(url)}`;
+            
+            const container = document.getElementById('pdfViewerContainer');
+            if (container) {
+                container.innerHTML = `
+                    <iframe 
+                        src="${alternativeViewer}" 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0"
+                        allowfullscreen
+                    ></iframe>
+                `;
+            }
         }
 
         // ========== تحديث رابط PDF ==========
