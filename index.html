@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعلّم.ما - المنصة التعليمية المغربية</title>
+    <title>تعلّم.ما - منصة التعليم المغربية</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* جميع الأنماط السابقة مع إضافة أنماط لعرض PDF المحسن */
+        /* جميع الأنماط السابقة مع إضافة أنماط لرفع الملفات */
         :root {
             --primary: #1e3c72;
             --primary-light: #2a5298;
@@ -606,7 +606,7 @@
             color: var(--white);
         }
 
-        /* نماذج الإدخال */
+        /* نماذج الإدخال - محسنة لرفع الملفات */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -637,6 +637,65 @@
             box-shadow: 0 0 0 3px rgba(30,60,114,0.1);
         }
 
+        /* حقل رفع الملفات المخصص */
+        .file-upload {
+            border: 2px dashed var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        .file-upload:hover {
+            background: rgba(30,60,114,0.05);
+            border-color: var(--secondary);
+        }
+
+        .file-upload i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .file-upload p {
+            color: var(--gray);
+        }
+
+        .file-upload .file-name {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: var(--light);
+            border-radius: var(--radius-md);
+            margin-top: 0.5rem;
+        }
+
+        .file-info .file-size {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .remove-file {
+            color: var(--danger);
+            cursor: pointer;
+        }
+
         .submit-btn {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: var(--white);
@@ -653,6 +712,11 @@
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-xl);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         /* جداول */
@@ -794,7 +858,7 @@
             transform: rotate(90deg);
         }
 
-        /* ========== عارض PDF المحسن - بدون Google ========== */
+        /* عارض PDF */
         .pdf-viewer-container {
             width: 100%;
             height: 600px;
@@ -811,7 +875,7 @@
             border: none;
         }
 
-        /* خيارات عرض PDF المتعددة */
+        /* خيارات PDF */
         .pdf-options {
             display: flex;
             gap: 1rem;
@@ -850,69 +914,9 @@
             color: var(--white);
         }
 
-        /* رسالة الخطأ */
-        .pdf-error {
-            text-align: center;
-            padding: 3rem;
-            background: var(--light);
-            border-radius: var(--radius-lg);
-            margin: 1rem 0;
-        }
-
-        .pdf-error i {
-            font-size: 4rem;
-            color: var(--danger);
-            margin-bottom: 1rem;
-        }
-
-        .pdf-error h3 {
-            color: var(--danger);
-            margin-bottom: 1rem;
-        }
-
-        /* روابط PDF تجريبية */
-        .sample-pdf-link {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: var(--info);
-            color: var(--white);
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            margin: 0.5rem;
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
-        }
-
-        .sample-pdf-link:hover {
-            background: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* مؤشر التحميل */
-        .pdf-loading {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 400px;
-            background: var(--light);
-            border-radius: var(--radius-lg);
-        }
-
-        .pdf-loading .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .pdf-option-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         /* التجاوب */
@@ -986,14 +990,8 @@
     </div>
 
     <script>
-        // ========== روابط PDF تجريبية حقيقية ==========
-        const SAMPLE_PDFS = {
-            math: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            physics: 'https://www.africau.edu/images/default/sample.pdf',
-            default: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            arabic: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            french: 'https://www.africau.edu/images/default/sample.pdf'
-        };
+        // ========== الحد الأقصى لحجم الملف (5MB) ==========
+        const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
         // ========== نظام البيانات المشتركة ==========
         const Database = {
@@ -1068,39 +1066,6 @@
                     );
                 }
 
-                if (this.lessons.length === 0) {
-                    this.lessons.push(
-                        {
-                            id: 101,
-                            title: 'المعادلات من الدرجة الأولى',
-                            description: 'شرح مبسط مع تمارين تطبيقية',
-                            teacherId: 1,
-                            teacherName: 'أحمد الفاسي',
-                            level: 'bac1',
-                            subject: 'math',
-                            type: 'pdf',
-                            pdfUrl: SAMPLE_PDFS.math,
-                            date: '2024-02-20',
-                            downloads: 45,
-                            views: 120
-                        },
-                        {
-                            id: 102,
-                            title: 'قوانين نيوتن في الحركة',
-                            description: 'شرح قوانين نيوتن الثلاثة مع أمثلة',
-                            teacherId: 2,
-                            teacherName: 'فاطمة المراكشي',
-                            level: 'bac2',
-                            subject: 'physique',
-                            type: 'pdf',
-                            pdfUrl: SAMPLE_PDFS.physics,
-                            date: '2024-02-21',
-                            downloads: 32,
-                            views: 89
-                        }
-                    );
-                }
-
                 this.saveAll();
             }
         };
@@ -1123,7 +1088,8 @@
                 teacherTab: 'dashboard',
                 studentTab: 'all',
                 loading: false
-            }
+            },
+            currentFile: null // الملف المرفوع حالياً
         };
 
         // ========== تهيئة البيانات ==========
@@ -1526,11 +1492,15 @@
                     ${lessons.map(lesson => {
                         const teacher = Database.teachers.find(t => t.id === lesson.teacherId);
                         const isSaved = student.savedLessons?.includes(lesson.id);
+                        
+                        // تحديد ما إذا كان الدرس يحتوي على ملف مرفوع
+                        const hasFile = lesson.fileData && lesson.fileName;
+                        
                         return `
                             <div class="lesson-card">
                                 <div class="lesson-header">
-                                    ${lesson.type === 'pdf' ? '📄' : '🎥'}
-                                    <span class="lesson-type">${lesson.type === 'pdf' ? 'PDF' : 'فيديو'}</span>
+                                    ${hasFile ? '📄' : '📄'}
+                                    <span class="lesson-type">PDF</span>
                                 </div>
                                 <div class="lesson-content">
                                     <h3 class="lesson-title">${lesson.title}</h3>
@@ -1598,7 +1568,7 @@
             renderCurrentTab();
         }
 
-        // ========== عرض الدرس - مع خيارات متعددة ==========
+        // ========== عرض الدرس مع الملف المرفوع ==========
         function viewLesson(lessonId) {
             const lesson = Database.lessons.find(l => l.id === lessonId);
             const teacher = Database.teachers.find(t => t.id === lesson.teacherId);
@@ -1607,8 +1577,14 @@
             lesson.views = (lesson.views || 0) + 1;
             Database.saveAll();
 
-            // التحقق من وجود رابط PDF صحيح
-            const pdfUrl = lesson.pdfUrl || SAMPLE_PDFS.default;
+            // التحقق من وجود ملف مرفوع
+            const hasFile = lesson.fileData && lesson.fileName;
+            
+            // إنشاء رابط الملف (إذا كان موجوداً)
+            let fileUrl = '';
+            if (hasFile) {
+                fileUrl = lesson.fileData;
+            }
 
             // عرض النافذة مع خيارات متعددة
             const modalContent = document.getElementById('modalContent');
@@ -1625,75 +1601,48 @@
                     </div>
                 </div>
                 
-                <!-- خيارات عرض PDF المتعددة -->
-                <div class="pdf-options">
-                    <button class="pdf-option-btn" onclick="openPdfInNewTab('${pdfUrl}')">
-                        <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
-                    </button>
-                    <button class="pdf-option-btn secondary" onclick="downloadPdf(${lessonId})">
-                        <i class="fas fa-download"></i> تحميل PDF
-                    </button>
-                    <button class="pdf-option-btn danger" onclick="tryAlternativeViewer('${pdfUrl}', ${lessonId})">
-                        <i class="fas fa-sync-alt"></i> محاولة عرض بديل
-                    </button>
-                </div>
-                
-                <!-- عارض PDF أساسي -->
-                <div class="pdf-viewer-container" id="pdfViewerContainer">
-                    <object
-                        data="${pdfUrl}"
-                        type="application/pdf"
-                        width="100%"
-                        height="100%"
-                        onerror="handlePdfError(${lessonId})"
-                    >
-                        <div class="pdf-error">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <h3>تعذر تحميل المعاينة</h3>
-                            <p>المتصفح لا يدعم عرض PDF مباشرة</p>
-                            <div style="margin-top: 1rem;">
-                                <button class="pdf-option-btn" onclick="openPdfInNewTab('${pdfUrl}')">
-                                    <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
-                                </button>
-                                <button class="pdf-option-btn secondary" onclick="downloadPdf(${lessonId})">
-                                    <i class="fas fa-download"></i> تحميل PDF
-                                </button>
-                            </div>
-                        </div>
-                    </object>
-                </div>
-                
-                <!-- روابط PDF تجريبية -->
-                <div style="margin-top: 2rem; padding: 1rem; background: var(--light); border-radius: var(--radius-lg);">
-                    <p style="color: var(--gray); margin-bottom: 0.5rem;"><i class="fas fa-info-circle"></i> روابط PDF تجريبية للمساعدة:</p>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <button class="sample-pdf-link" onclick="updatePdfUrl(${lessonId}, '${SAMPLE_PDFS.math}')">📐 رياضيات</button>
-                        <button class="sample-pdf-link" onclick="updatePdfUrl(${lessonId}, '${SAMPLE_PDFS.physics}')">⚡ فيزياء</button>
-                        <button class="sample-pdf-link" onclick="updatePdfUrl(${lessonId}, '${SAMPLE_PDFS.default}')">📄 عينة PDF</button>
+                ${hasFile ? `
+                    <div class="pdf-options">
+                        <button class="pdf-option-btn" onclick="openPdfInNewTab('${fileUrl}')">
+                            <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
+                        </button>
+                        <button class="pdf-option-btn secondary" onclick="downloadPdf(${lessonId})">
+                            <i class="fas fa-download"></i> تحميل PDF
+                        </button>
                     </div>
-                </div>
+                    
+                    <div class="pdf-viewer-container">
+                        <object
+                            data="${fileUrl}"
+                            type="application/pdf"
+                            width="100%"
+                            height="100%"
+                        >
+                            <div class="pdf-error">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h3>تعذر تحميل المعاينة</h3>
+                                <p>المتصفح لا يدعم عرض PDF مباشرة</p>
+                                <div style="margin-top: 1rem;">
+                                    <button class="pdf-option-btn" onclick="openPdfInNewTab('${fileUrl}')">
+                                        <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
+                                    </button>
+                                    <button class="pdf-option-btn secondary" onclick="downloadPdf(${lessonId})">
+                                        <i class="fas fa-download"></i> تحميل PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </object>
+                    </div>
+                ` : `
+                    <div class="pdf-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>لا يوجد ملف PDF</h3>
+                        <p>لم يتم رفع ملف لهذا الدرس بعد</p>
+                    </div>
+                `}
             `;
 
             document.getElementById('modal').style.display = 'flex';
-        }
-
-        // ========== معالجة أخطاء PDF ==========
-        function handlePdfError(lessonId) {
-            const container = document.getElementById('pdfViewerContainer');
-            if (container) {
-                container.innerHTML = `
-                    <div class="pdf-error">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h3>خطأ في تحميل PDF</h3>
-                        <p>قد يكون الرابط غير صحيح أو لا يدعم العرض المباشر</p>
-                        <div style="margin-top: 1rem;">
-                            <button class="pdf-option-btn" onclick="tryAlternativeViewer('${Database.lessons.find(l => l.id === lessonId).pdfUrl}', ${lessonId})">
-                                <i class="fas fa-sync-alt"></i> محاولة عرض بديل
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
         }
 
         // ========== فتح PDF في نافذة جديدة ==========
@@ -1701,40 +1650,14 @@
             window.open(url, '_blank');
         }
 
-        // ========== محاولة عرض بديل ==========
-        function tryAlternativeViewer(url, lessonId) {
-            // استخدام خدمة بديلة لعرض PDF
-            const alternativeViewer = `https://drive.google.com/viewerng/viewer?embedded=true&url=${encodeURIComponent(url)}`;
-            
-            const container = document.getElementById('pdfViewerContainer');
-            if (container) {
-                container.innerHTML = `
-                    <iframe 
-                        src="${alternativeViewer}" 
-                        width="100%" 
-                        height="100%" 
-                        frameborder="0"
-                        allowfullscreen
-                    ></iframe>
-                `;
-            }
-        }
-
-        // ========== تحديث رابط PDF ==========
-        function updatePdfUrl(lessonId, newUrl) {
-            const lesson = Database.lessons.find(l => l.id === lessonId);
-            if (lesson) {
-                lesson.pdfUrl = newUrl;
-                Database.saveAll();
-                viewLesson(lessonId); // إعادة تحميل النافذة
-                showToast('تم تحديث رابط PDF', 'success');
-            }
-        }
-
         // ========== تحميل PDF ==========
         function downloadPdf(lessonId) {
             const lesson = Database.lessons.find(l => l.id === lessonId);
-            const pdfUrl = lesson.pdfUrl || SAMPLE_PDFS.default;
+            
+            if (!lesson.fileData) {
+                showToast('لا يوجد ملف للتحميل', 'error');
+                return;
+            }
             
             // زيادة عدد التحميلات
             lesson.downloads = (lesson.downloads || 0) + 1;
@@ -1742,14 +1665,71 @@
 
             // إنشاء رابط تحميل
             const link = document.createElement('a');
-            link.href = pdfUrl;
-            link.download = `${lesson.title}.pdf`;
-            link.target = '_blank';
+            link.href = lesson.fileData;
+            link.download = lesson.fileName || 'lesson.pdf';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             
             showToast('جاري تحميل الملف...', 'info');
+        }
+
+        // ========== دوال رفع الملفات ==========
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // التحقق من حجم الملف
+            if (file.size > MAX_FILE_SIZE) {
+                showToast('حجم الملف يجب أن يكون أقل من 5 ميجابايت', 'error');
+                return;
+            }
+
+            // التحقق من نوع الملف
+            if (file.type !== 'application/pdf') {
+                showToast('الرجاء اختيار ملف PDF فقط', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                AppState.currentFile = {
+                    name: file.name,
+                    size: file.size,
+                    type: file.type,
+                    data: e.target.result
+                };
+
+                // عرض معلومات الملف
+                const fileInfo = document.getElementById('fileInfo');
+                if (fileInfo) {
+                    fileInfo.innerHTML = `
+                        <div class="file-info">
+                            <span><i class="fas fa-file-pdf"></i> ${file.name}</span>
+                            <span class="file-size">${(file.size / 1024).toFixed(2)} KB</span>
+                            <span class="remove-file" onclick="removeSelectedFile()">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    `;
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeSelectedFile() {
+            AppState.currentFile = null;
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput) fileInput.value = '';
+            
+            const fileInfo = document.getElementById('fileInfo');
+            if (fileInfo) {
+                fileInfo.innerHTML = '';
+            }
+        }
+
+        function triggerFileInput() {
+            document.getElementById('fileInput').click();
         }
 
         function viewTeacherLessons(teacherId) {
@@ -1884,6 +1864,7 @@
                                             <th>المستوى</th>
                                             <th>المادة</th>
                                             <th>المشاهدات</th>
+                                            <th>الملف</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1893,6 +1874,7 @@
                                                 <td>${getLevelName(lesson.level)}</td>
                                                 <td>${getSubjectName(lesson.subject)}</td>
                                                 <td>${lesson.views || 0}</td>
+                                                <td>${lesson.fileName ? '✓' : '✗'}</td>
                                             </tr>
                                         `).join('')}
                                     </tbody>
@@ -1941,27 +1923,17 @@
                         </div>
                         
                         <div class="form-group">
-                            <label>رابط PDF</label>
-                            <input type="url" id="lessonUrl" placeholder="https://example.com/lesson.pdf" 
-                                value="${SAMPLE_PDFS.math}">
-                            <small style="color: var(--gray); display: block; margin-top: 0.3rem;">
-                                <i class="fas fa-info-circle"></i> يمكنك استخدام الروابط التجريبية أدناه
-                            </small>
+                            <label>ملف PDF</label>
+                            <div class="file-upload" onclick="triggerFileInput()">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>اضغط لاختيار ملف PDF</p>
+                                <p style="font-size: 0.9rem;">(الحد الأقصى: 5 ميجابايت)</p>
+                                <div id="fileInfo"></div>
+                            </div>
+                            <input type="file" id="fileInput" class="file-input" accept=".pdf" onchange="handleFileSelect(event)">
                         </div>
                         
-                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
-                            <button type="button" class="sample-pdf-link" onclick="document.getElementById('lessonUrl').value='${SAMPLE_PDFS.math}'">
-                                📐 رياضيات
-                            </button>
-                            <button type="button" class="sample-pdf-link" onclick="document.getElementById('lessonUrl').value='${SAMPLE_PDFS.physics}'">
-                                ⚡ فيزياء
-                            </button>
-                            <button type="button" class="sample-pdf-link" onclick="document.getElementById('lessonUrl').value='${SAMPLE_PDFS.default}'">
-                                📄 عينة
-                            </button>
-                        </div>
-                        
-                        <button class="submit-btn" onclick="addNewLesson()">
+                        <button class="submit-btn" onclick="addNewLesson()" id="submitBtn">
                             <i class="fas fa-plus"></i> نشر الدرس
                         </button>
                     `;
@@ -1986,6 +1958,7 @@
                                             <th>المادة</th>
                                             <th>المشاهدات</th>
                                             <th>التحميلات</th>
+                                            <th>الملف</th>
                                             <th>الإجراءات</th>
                                         </tr>
                                     </thead>
@@ -1997,6 +1970,7 @@
                                                 <td>${getSubjectName(lesson.subject)}</td>
                                                 <td>${lesson.views || 0}</td>
                                                 <td>${lesson.downloads || 0}</td>
+                                                <td>${lesson.fileName || 'لا يوجد'}</td>
                                                 <td>
                                                     <button class="action-btn view-btn" onclick="viewLesson(${lesson.id})">
                                                         <i class="fas fa-eye"></i>
@@ -2053,16 +2027,20 @@
             }
         }
 
-        // ========== إضافة درس جديد ==========
+        // ========== إضافة درس جديد مع ملف مرفوع ==========
         function addNewLesson() {
             const title = document.getElementById('lessonTitle').value;
             const desc = document.getElementById('lessonDesc').value;
             const level = document.getElementById('lessonLevel').value;
             const subject = document.getElementById('lessonSubject').value;
-            const url = document.getElementById('lessonUrl').value;
 
-            if (!title || !desc || !url) {
+            if (!title || !desc) {
                 showToast('الرجاء ملء جميع الحقول', 'warning');
+                return;
+            }
+
+            if (!AppState.currentFile) {
+                showToast('الرجاء اختيار ملف PDF', 'warning');
                 return;
             }
 
@@ -2075,16 +2053,22 @@
                 level: level,
                 subject: subject,
                 type: 'pdf',
-                pdfUrl: url,
                 teacherId: teacher.id,
                 teacherName: teacher.name,
                 date: new Date().toISOString().split('T')[0],
                 downloads: 0,
-                views: 0
+                views: 0,
+                fileName: AppState.currentFile.name,
+                fileSize: AppState.currentFile.size,
+                fileData: AppState.currentFile.data
             };
 
             Database.lessons.push(newLesson);
             Database.saveAll();
+            
+            // مسح الملف المحدد
+            AppState.currentFile = null;
+            removeSelectedFile();
             
             showToast('✅ تم نشر الدرس بنجاح', 'success');
             renderTeacherDashboard();
