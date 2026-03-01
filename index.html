@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعلّم.ما - شبكة الأساتذة المتكاملة</title>
+    <title>تعلّم.ما - المنصة التعليمية المتكاملة</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -25,7 +25,7 @@
             min-height: 100vh;
         }
 
-        /* الشريط العلوي */
+        /* ========== الشريط العلوي ========== */
         .navbar {
             background: rgba(30, 60, 114, 0.95);
             backdrop-filter: blur(10px);
@@ -80,7 +80,7 @@
 
         .user-badge {
             background: rgba(255,255,255,0.1);
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
             color: white;
             display: flex;
@@ -88,34 +88,43 @@
             gap: 0.5rem;
         }
 
-        /* المحتوى الرئيسي */
+        /* ========== المحتوى الرئيسي ========== */
         .dashboard {
             max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
-        /* بطاقة الترحيب */
+        /* ========== بطاقة الترحيب ========== */
         .welcome-card {
             background: linear-gradient(135deg, #1e3c72, #0f2b4f);
             color: white;
             padding: 2rem;
             border-radius: 15px;
             margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
         }
 
-        .welcome-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ffd700, #1e3c72);
+        .welcome-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
 
+        .welcome-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .welcome-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        /* ========== إحصائيات ========== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -131,7 +140,7 @@
             text-align: center;
         }
 
-        .stat-card i {
+        .stat-icon {
             font-size: 2rem;
             color: #1e3c72;
             margin-bottom: 0.5rem;
@@ -143,12 +152,38 @@
             color: #1e3c72;
         }
 
-        /* شبكة الأساتذة */
+        /* ========== أقسام التلميذ ========== */
+        .student-tabs {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: #ffd700;
+            color: #1e3c72;
+        }
+
+        /* ========== شبكة الأساتذة ========== */
         .teachers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
-            margin: 2rem 0;
+            margin-bottom: 2rem;
         }
 
         .teacher-card {
@@ -158,7 +193,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
         }
 
         .teacher-card:hover {
@@ -166,20 +200,9 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
 
-        .teacher-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ffd700, #1e3c72);
-        }
-
         .teacher-header {
-            height: 100px;
+            height: 80px;
             background: linear-gradient(135deg, #1e3c72, #2a5298);
-            position: relative;
         }
 
         .teacher-avatar {
@@ -213,12 +236,6 @@
             margin-bottom: 0.5rem;
         }
 
-        .teacher-bio {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
         .teacher-stats {
             display: flex;
             justify-content: center;
@@ -231,9 +248,6 @@
             padding: 0.3rem 1rem;
             border-radius: 50px;
             font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
         }
 
         .follow-btn {
@@ -246,19 +260,92 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .follow-btn:hover {
-            background: #2a5298;
-            transform: translateY(-2px);
         }
 
         .follow-btn.following {
             background: #28a745;
         }
 
-        /* صفحة القناة */
+        /* ========== شبكة الدروس ========== */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .lesson-header {
+            height: 120px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .lesson-content {
+            padding: 1.5rem;
+        }
+
+        .lesson-title {
+            font-size: 1.2rem;
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        .lesson-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .lesson-btn {
+            flex: 1;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .view-btn {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .save-btn {
+            background: #ffd700;
+            color: #1e3c72;
+        }
+
+        .save-btn.saved {
+            background: #28a745;
+            color: white;
+        }
+
+        /* ========== صفحة القناة ========== */
         .channel-page {
             background: white;
             border-radius: 20px;
@@ -295,40 +382,22 @@
         .channel-name {
             font-size: 2rem;
             color: #1e3c72;
-            margin-bottom: 0.3rem;
         }
 
         .channel-specialty {
             color: #e6b800;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
+            margin: 0.5rem 0;
         }
 
         .channel-bio {
             color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
+            margin: 1rem 0;
         }
 
         .channel-meta {
             display: flex;
             gap: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .channel-meta-item {
-            text-align: center;
-        }
-
-        .channel-meta-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #1e3c72;
-        }
-
-        .channel-meta-label {
-            color: #666;
-            font-size: 0.9rem;
+            margin: 1rem 0;
         }
 
         .channel-actions {
@@ -344,7 +413,6 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
 
         .channel-btn-primary {
@@ -352,155 +420,12 @@
             color: white;
         }
 
-        .channel-btn-primary:hover {
-            background: #2a5298;
-            transform: translateY(-2px);
-        }
-
         .channel-btn-secondary {
             background: #ffd700;
             color: #1e3c72;
         }
 
-        .channel-btn-secondary:hover {
-            background: #e6b800;
-            transform: translateY(-2px);
-        }
-
-        /* أقسام القناة */
-        .channel-tabs {
-            display: flex;
-            gap: 1rem;
-            padding: 0 2rem;
-            border-bottom: 2px solid #e9ecef;
-        }
-
-        .channel-tab {
-            padding: 1rem 2rem;
-            border: none;
-            background: none;
-            color: #666;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .channel-tab.active {
-            color: #1e3c72;
-        }
-
-        .channel-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #1e3c72;
-        }
-
-        .channel-content {
-            padding: 2rem;
-        }
-
-        /* شبكة المنشورات */
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .post-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .post-title {
-            font-size: 1.2rem;
-            color: #1e3c72;
-            margin-bottom: 0.5rem;
-        }
-
-        .post-meta {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .post-content {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .post-stats {
-            display: flex;
-            gap: 1rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* نموذج إضافة منشور */
-        .add-post-form {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #1e3c72;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #1e3c72;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: #1e3c72;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background: #2a5298;
-            transform: translateY(-2px);
-        }
-
-        /* النافذة المنبثقة */
+        /* ========== النافذة المنبثقة ========== */
         .modal {
             display: none;
             position: fixed;
@@ -517,7 +442,7 @@
         .modal-content {
             background: white;
             width: 90%;
-            max-width: 600px;
+            max-width: 500px;
             padding: 2rem;
             border-radius: 20px;
             position: relative;
@@ -529,21 +454,35 @@
             top: 1rem;
             font-size: 1.5rem;
             cursor: pointer;
-            width: 40px;
-            height: 40px;
-            background: #f8f9fa;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .modal-close:hover {
-            background: #dc3545;
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #1e3c72;
             color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        /* إشعارات */
+        /* ========== إشعارات ========== */
         .toast-container {
             position: fixed;
             bottom: 20px;
@@ -560,8 +499,16 @@
             border-right: 4px solid #28a745;
         }
 
-        /* التجاوب */
+        /* ========== التجاوب ========== */
         @media (max-width: 768px) {
+            .welcome-stats {
+                flex-direction: column;
+            }
+            
+            .student-tabs {
+                flex-direction: column;
+            }
+            
             .channel-avatar-large {
                 right: 50%;
                 transform: translateX(50%);
@@ -578,17 +525,13 @@
             .channel-actions {
                 flex-direction: column;
             }
-            
-            .teachers-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo" onclick="goHome()">تعلّم<span>.ما</span></div>
+            <div class="logo" onclick="App.goHome()">تعلّم<span>.ما</span></div>
             <div class="nav-menu" id="navMenu"></div>
         </div>
     </nav>
@@ -599,15 +542,15 @@
 
     <div class="modal" id="modal">
         <div class="modal-content">
-            <span class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></span>
+            <span class="modal-close" onclick="App.closeModal()"><i class="fas fa-times"></i></span>
             <div id="modalContent"></div>
         </div>
     </div>
 
     <script>
-        // ========== نظام الشبكة المتكامل ==========
+        // ========== التطبيق المتكامل ==========
         const App = {
-            // البيانات الأساسية
+            // ========== البيانات ==========
             teachers: [],
             students: [],
             lessons: [],
@@ -615,14 +558,13 @@
             currentUser: null,
             viewingChannel: null,
             
-            // تهيئة التطبيق
+            // ========== تهيئة ==========
             init() {
                 this.loadData();
                 this.initSampleData();
                 this.render();
             },
             
-            // تحميل البيانات من localStorage
             loadData() {
                 this.teachers = JSON.parse(localStorage.getItem('teachers')) || [];
                 this.students = JSON.parse(localStorage.getItem('students')) || [];
@@ -631,7 +573,6 @@
                 this.currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
             },
             
-            // حفظ جميع البيانات
             saveAll() {
                 localStorage.setItem('teachers', JSON.stringify(this.teachers));
                 localStorage.setItem('students', JSON.stringify(this.students));
@@ -642,8 +583,8 @@
                 }
             },
             
-            // بيانات تجريبية أولية
             initSampleData() {
+                // أساتذة تجريبيون
                 if (this.teachers.length === 0) {
                     this.teachers.push(
                         {
@@ -652,7 +593,7 @@
                             email: 'ahmed@teacher.com',
                             password: '123456',
                             specialty: 'الرياضيات',
-                            bio: 'أستاذ الرياضيات - خبرة 15 سنة في تدريس البكالوريا',
+                            bio: 'أستاذ الرياضيات - خبرة 15 سنة',
                             avatar: '📐',
                             rating: 4.8,
                             followers: [],
@@ -665,7 +606,7 @@
                             email: 'fatima@teacher.com',
                             password: '123456',
                             specialty: 'الفيزياء',
-                            bio: 'دكتورة في الفيزياء النووية - متخصصة في تبسيط العلوم',
+                            bio: 'دكتورة في الفيزياء',
                             avatar: '⚡',
                             rating: 4.9,
                             followers: [],
@@ -678,29 +619,17 @@
                             email: 'mohamed@teacher.com',
                             password: '123456',
                             specialty: 'العربية',
-                            bio: 'أستاذ اللغة العربية - خبير في تدريس النحو والصرف',
+                            bio: 'أستاذ اللغة العربية',
                             avatar: '📝',
                             rating: 4.7,
                             followers: [],
                             subjects: ['arabic'],
                             levels: ['tronc', 'bac1']
-                        },
-                        {
-                            id: 4,
-                            name: 'سعاد المغربية',
-                            email: 'souad@teacher.com',
-                            password: '123456',
-                            specialty: 'الفلسفة',
-                            bio: 'أستاذة الفلسفة - متخصصة في المنطق والفكر الإسلامي',
-                            avatar: '📚',
-                            rating: 4.6,
-                            followers: [],
-                            subjects: ['philosophy'],
-                            levels: ['bac1', 'bac2']
                         }
                     );
                 }
                 
+                // تلاميذ تجريبيون
                 if (this.students.length === 0) {
                     this.students.push(
                         {
@@ -713,6 +642,45 @@
                             savedLessons: [],
                             points: 150,
                             streak: 5
+                        },
+                        {
+                            id: 2,
+                            name: 'سارة العلمي',
+                            email: 'sara@student.com',
+                            password: '123456',
+                            level: 'bac1',
+                            following: [],
+                            savedLessons: [],
+                            points: 80,
+                            streak: 3
+                        }
+                    );
+                }
+                
+                // دروس تجريبية
+                if (this.lessons.length === 0) {
+                    this.lessons.push(
+                        {
+                            id: 101,
+                            title: 'المعادلات من الدرجة الأولى',
+                            description: 'شرح مبسط مع تمارين',
+                            teacherId: 1,
+                            teacherName: 'أحمد الفاسي',
+                            level: 'bac1',
+                            subject: 'math',
+                            date: '2024-02-20',
+                            views: 120
+                        },
+                        {
+                            id: 102,
+                            title: 'قوانين نيوتن',
+                            description: 'شرح قوانين الحركة',
+                            teacherId: 2,
+                            teacherName: 'فاطمة المراكشي',
+                            level: 'bac2',
+                            subject: 'physique',
+                            date: '2024-02-21',
+                            views: 89
                         }
                     );
                 }
@@ -720,7 +688,7 @@
                 this.saveAll();
             },
             
-            // إشعارات
+            // ========== دوال مساعدة ==========
             toast(message, type = 'success') {
                 const toast = document.createElement('div');
                 toast.className = 'toast';
@@ -730,7 +698,6 @@
                 setTimeout(() => toast.remove(), 3000);
             },
             
-            // نافذة منبثقة
             showModal(content) {
                 document.getElementById('modalContent').innerHTML = content;
                 document.getElementById('modal').style.display = 'flex';
@@ -740,7 +707,6 @@
                 document.getElementById('modal').style.display = 'none';
             },
             
-            // دوال مساعدة
             getLevelName(level) {
                 const levels = {
                     'premiere': 'الأولى إعدادي',
@@ -753,26 +719,12 @@
                 return levels[level] || level;
             },
             
-            getSubjectName(subject) {
-                const subjects = {
-                    'math': 'الرياضيات',
-                    'physique': 'الفيزياء',
-                    'chimie': 'الكيمياء',
-                    'svt': 'علوم الحياة',
-                    'philosophy': 'الفلسفة',
-                    'arabic': 'العربية',
-                    'french': 'الفرنسية',
-                    'english': 'الإنجليزية'
-                };
-                return subjects[subject] || subject;
-            },
-            
             getRandomAvatar() {
-                const avatars = ['👨‍🏫', '👩‍🏫', '📚', '🔬', '📐', '⚡', '📝', '🌍', '🧪', '🎓'];
+                const avatars = ['👨‍🏫', '👩‍🏫', '📚', '🔬', '📐', '⚡', '📝'];
                 return avatars[Math.floor(Math.random() * avatars.length)];
             },
             
-            // ========== عرض الصفحات ==========
+            // ========== واجهة المستخدم ==========
             render() {
                 this.updateNavMenu();
                 
@@ -799,50 +751,96 @@
                             <i class="fas ${this.currentUser.type === 'teacher' ? 'fa-chalkboard-teacher' : 'fa-user-graduate'}"></i>
                             <span>${this.currentUser.name}</span>
                         </div>
-                        <button class="nav-btn" onclick="App.goHome()"><i class="fas fa-home"></i> الرئيسية</button>
-                        <button class="nav-btn" onclick="App.logout()"><i class="fas fa-sign-out-alt"></i> خروج</button>
+                        <button class="nav-btn" onclick="App.goHome()">الرئيسية</button>
+                        <button class="nav-btn" onclick="App.logout()">خروج</button>
                     `;
                 } else {
                     navMenu.innerHTML = `
-                        <button class="nav-btn" onclick="App.showAuthModal()"><i class="fas fa-sign-in-alt"></i> دخول</button>
+                        <button class="nav-btn" onclick="App.showAuthModal()">دخول</button>
                     `;
                 }
             },
             
-            // ========== صفحة قائمة الأساتذة للتلميذ ==========
+            // ========== منطقة التلاميذ (الكاملة) ==========
             renderStudentDashboard() {
                 const student = this.students.find(s => s.id === this.currentUser.id);
                 if (!student) return;
                 
                 const followingCount = student.following?.length || 0;
+                const savedCount = student.savedLessons?.length || 0;
+                const allLessons = this.lessons.length;
                 
                 const dashboard = document.getElementById('dashboard');
                 dashboard.innerHTML = `
+                    <!-- بطاقة الترحيب -->
                     <div class="welcome-card">
-                        <h1>مرحباً بك ${student.name} 👋</h1>
-                        <p>المستوى: ${this.getLevelName(student.level)}</p>
+                        <h1 class="welcome-title">مرحباً بك ${student.name} 👋</h1>
+                        <div class="welcome-stats">
+                            <div class="welcome-stat">
+                                <i class="fas fa-fire" style="color: #ffd700;"></i>
+                                <span>${student.streak} يوم متتالي</span>
+                            </div>
+                            <div class="welcome-stat">
+                                <i class="fas fa-star" style="color: #ffd700;"></i>
+                                <span>${student.points} نقطة</span>
+                            </div>
+                            <div class="welcome-stat">
+                                <i class="fas fa-graduation-cap" style="color: #ffd700;"></i>
+                                <span>${this.getLevelName(student.level)}</span>
+                            </div>
+                        </div>
                     </div>
                     
+                    <!-- إحصائيات سريعة -->
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <i class="fas fa-chalkboard-teacher"></i>
+                            <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
                             <div class="stat-number">${this.teachers.length}</div>
                             <div>أستاذ</div>
                         </div>
                         <div class="stat-card">
-                            <i class="fas fa-heart"></i>
+                            <div class="stat-icon"><i class="fas fa-heart"></i></div>
                             <div class="stat-number">${followingCount}</div>
                             <div>متابعة</div>
                         </div>
                         <div class="stat-card">
-                            <i class="fas fa-star"></i>
-                            <div class="stat-number">${student.points}</div>
-                            <div>نقطة</div>
+                            <div class="stat-icon"><i class="fas fa-book"></i></div>
+                            <div class="stat-number">${allLessons}</div>
+                            <div>درس متاح</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-bookmark"></i></div>
+                            <div class="stat-number">${savedCount}</div>
+                            <div>درس محفوظ</div>
                         </div>
                     </div>
                     
-                    <h2 style="color: white; margin-bottom: 1rem;">قائمة الأساتذة (${this.teachers.length})</h2>
+                    <!-- أقسام التلميذ -->
+                    <div class="student-tabs">
+                        <button class="tab-btn active" onclick="App.showStudentTab('teachers')">
+                            <i class="fas fa-users"></i> جميع الأساتذة (${this.teachers.length})
+                        </button>
+                        <button class="tab-btn" onclick="App.showStudentTab('following')">
+                            <i class="fas fa-heart"></i> أساتذتي (${followingCount})
+                        </button>
+                        <button class="tab-btn" onclick="App.showStudentTab('lessons')">
+                            <i class="fas fa-book"></i> كل الدروس (${allLessons})
+                        </button>
+                        <button class="tab-btn" onclick="App.showStudentTab('saved')">
+                            <i class="fas fa-bookmark"></i> محفوظاتي (${savedCount})
+                        </button>
+                    </div>
                     
+                    <div id="studentContent">
+                        ${this.renderAllTeachers()}
+                    </div>
+                `;
+            },
+            
+            renderAllTeachers() {
+                const student = this.students.find(s => s.id === this.currentUser.id);
+                
+                return `
                     <div class="teachers-grid">
                         ${this.teachers.map(teacher => {
                             const isFollowing = student.following?.includes(teacher.id);
@@ -855,11 +853,9 @@
                                     <div class="teacher-info">
                                         <h3 class="teacher-name">${teacher.name}</h3>
                                         <p class="teacher-specialty">${teacher.specialty}</p>
-                                        <p class="teacher-bio">${teacher.bio.substring(0, 50)}...</p>
                                         <div class="teacher-stats">
                                             <span class="stat-badge"><i class="fas fa-star" style="color: #ffd700;"></i> ${teacher.rating}</span>
                                             <span class="stat-badge"><i class="fas fa-book"></i> ${teacherLessons}</span>
-                                            <span class="stat-badge"><i class="fas fa-users"></i> ${teacher.followers?.length || 0}</span>
                                         </div>
                                         <button class="follow-btn ${isFollowing ? 'following' : ''}" 
                                             onclick="event.stopPropagation(); App.toggleFollow(${teacher.id})">
@@ -874,11 +870,188 @@
                 `;
             },
             
+            renderFollowingTeachers() {
+                const student = this.students.find(s => s.id === this.currentUser.id);
+                const followingTeachers = this.teachers.filter(t => student.following?.includes(t.id));
+                
+                if (followingTeachers.length === 0) {
+                    return `<p style="text-align: center; color: white;">لم تتابع أي أستاذ بعد</p>`;
+                }
+                
+                return `
+                    <div class="teachers-grid">
+                        ${followingTeachers.map(teacher => {
+                            const teacherLessons = this.lessons.filter(l => l.teacherId === teacher.id).length;
+                            
+                            return `
+                                <div class="teacher-card" onclick="App.viewTeacherChannel(${teacher.id})">
+                                    <div class="teacher-header"></div>
+                                    <div class="teacher-avatar">${teacher.avatar}</div>
+                                    <div class="teacher-info">
+                                        <h3 class="teacher-name">${teacher.name}</h3>
+                                        <p class="teacher-specialty">${teacher.specialty}</p>
+                                        <div class="teacher-stats">
+                                            <span class="stat-badge"><i class="fas fa-star"></i> ${teacher.rating}</span>
+                                            <span class="stat-badge"><i class="fas fa-book"></i> ${teacherLessons}</span>
+                                        </div>
+                                        <button class="follow-btn following" onclick="event.stopPropagation(); App.toggleFollow(${teacher.id})">
+                                            <i class="fas fa-check"></i> متابعة
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            },
+            
+            renderAllLessons() {
+                return `
+                    <div class="lessons-grid">
+                        ${this.lessons.map(lesson => {
+                            const student = this.students.find(s => s.id === this.currentUser.id);
+                            const isSaved = student.savedLessons?.includes(lesson.id);
+                            
+                            return `
+                                <div class="lesson-card">
+                                    <div class="lesson-header">📄</div>
+                                    <div class="lesson-content">
+                                        <h3 class="lesson-title">${lesson.title}</h3>
+                                        <p>${lesson.teacherName}</p>
+                                        <div class="lesson-meta">
+                                            <span>${this.getLevelName(lesson.level)}</span>
+                                            <span>👁️ ${lesson.views}</span>
+                                        </div>
+                                        <div class="lesson-actions">
+                                            <button class="lesson-btn view-btn" onclick="App.viewLesson(${lesson.id})">
+                                                <i class="fas fa-eye"></i> عرض
+                                            </button>
+                                            <button class="lesson-btn save-btn ${isSaved ? 'saved' : ''}" 
+                                                onclick="App.toggleSaveLesson(${lesson.id})">
+                                                <i class="fas ${isSaved ? 'fa-bookmark' : 'fa-bookmark'}"></i>
+                                                ${isSaved ? 'محفوظ' : 'حفظ'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            },
+            
+            renderSavedLessons() {
+                const student = this.students.find(s => s.id === this.currentUser.id);
+                const savedLessons = this.lessons.filter(l => student.savedLessons?.includes(l.id));
+                
+                if (savedLessons.length === 0) {
+                    return `<p style="text-align: center; color: white;">لا توجد دروس محفوظة</p>`;
+                }
+                
+                return `
+                    <div class="lessons-grid">
+                        ${savedLessons.map(lesson => `
+                            <div class="lesson-card">
+                                <div class="lesson-header">📄</div>
+                                <div class="lesson-content">
+                                    <h3 class="lesson-title">${lesson.title}</h3>
+                                    <p>${lesson.teacherName}</p>
+                                    <div class="lesson-meta">
+                                        <span>${this.getLevelName(lesson.level)}</span>
+                                        <span>👁️ ${lesson.views}</span>
+                                    </div>
+                                    <button class="lesson-btn view-btn" onclick="App.viewLesson(${lesson.id})">
+                                        عرض
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            },
+            
+            showStudentTab(tab) {
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                let content = '';
+                if (tab === 'teachers') {
+                    content = this.renderAllTeachers();
+                } else if (tab === 'following') {
+                    content = this.renderFollowingTeachers();
+                } else if (tab === 'lessons') {
+                    content = this.renderAllLessons();
+                } else if (tab === 'saved') {
+                    content = this.renderSavedLessons();
+                }
+                
+                document.getElementById('studentContent').innerHTML = content;
+            },
+            
+            // ========== تفاعلات التلميذ ==========
+            toggleFollow(teacherId) {
+                const student = this.students.find(s => s.id === this.currentUser.id);
+                const teacher = this.teachers.find(t => t.id === teacherId);
+                
+                if (!student.following) student.following = [];
+                
+                if (student.following.includes(teacherId)) {
+                    student.following = student.following.filter(id => id !== teacherId);
+                    teacher.followers = teacher.followers?.filter(id => id !== student.id) || [];
+                    this.toast('تم إلغاء المتابعة', 'info');
+                } else {
+                    student.following.push(teacherId);
+                    if (!teacher.followers) teacher.followers = [];
+                    teacher.followers.push(student.id);
+                    student.points += 10;
+                    this.toast('تمت المتابعة +10 نقاط');
+                }
+                
+                this.saveAll();
+                
+                if (this.viewingChannel === teacherId) {
+                    this.viewTeacherChannel(teacherId);
+                } else {
+                    this.renderStudentDashboard();
+                }
+            },
+            
+            toggleSaveLesson(lessonId) {
+                const student = this.students.find(s => s.id === this.currentUser.id);
+                
+                if (!student.savedLessons) student.savedLessons = [];
+                
+                if (student.savedLessons.includes(lessonId)) {
+                    student.savedLessons = student.savedLessons.filter(id => id !== lessonId);
+                    this.toast('تم إزالة الدرس', 'info');
+                } else {
+                    student.savedLessons.push(lessonId);
+                    student.points += 5;
+                    this.toast('تم حفظ الدرس +5 نقاط');
+                }
+                
+                this.saveAll();
+                this.renderStudentDashboard();
+            },
+            
+            viewLesson(lessonId) {
+                const lesson = this.lessons.find(l => l.id === lessonId);
+                lesson.views += 1;
+                this.saveAll();
+                
+                this.showModal(`
+                    <h2 style="color: #1e3c72;">${lesson.title}</h2>
+                    <p style="margin: 1rem 0;">${lesson.description}</p>
+                    <p><strong>الأستاذ:</strong> ${lesson.teacherName}</p>
+                    <p><strong>المستوى:</strong> ${this.getLevelName(lesson.level)}</p>
+                    <p><strong>المشاهدات:</strong> ${lesson.views}</p>
+                `);
+            },
+            
             // ========== صفحة قناة الأستاذ ==========
             viewTeacherChannel(teacherId) {
                 this.viewingChannel = teacherId;
                 const teacher = this.teachers.find(t => t.id === teacherId);
-                if (!teacher) return;
                 
                 const student = this.students.find(s => s.id === this.currentUser?.id);
                 const isFollowing = student?.following?.includes(teacherId) || false;
@@ -898,18 +1071,9 @@
                             <p class="channel-bio">${teacher.bio}</p>
                             
                             <div class="channel-meta">
-                                <div class="channel-meta-item">
-                                    <div class="channel-meta-value">${teacher.followers?.length || 0}</div>
-                                    <div class="channel-meta-label">متابع</div>
-                                </div>
-                                <div class="channel-meta-item">
-                                    <div class="channel-meta-value">${teacherPosts.length}</div>
-                                    <div class="channel-meta-label">منشور</div>
-                                </div>
-                                <div class="channel-meta-item">
-                                    <div class="channel-meta-value">${teacherLessons.length}</div>
-                                    <div class="channel-meta-label">درس</div>
-                                </div>
+                                <div><strong>${teacher.followers?.length || 0}</strong> متابع</div>
+                                <div><strong>${teacherLessons.length}</strong> درس</div>
+                                <div><strong>${teacherPosts.length}</strong> منشور</div>
                             </div>
                             
                             <div class="channel-actions">
@@ -918,257 +1082,45 @@
                                         <i class="fas ${isFollowing ? 'fa-check' : 'fa-plus'}"></i>
                                         ${isFollowing ? 'متابعة' : 'متابعة'}
                                     </button>
-                                ` : this.currentUser?.id === teacher.id ? `
-                                    <button class="channel-btn channel-btn-primary" onclick="App.showAddPostForm()">
-                                        <i class="fas fa-plus"></i> إضافة منشور
-                                    </button>
-                                    <button class="channel-btn channel-btn-secondary" onclick="App.showAddLessonForm()">
-                                        <i class="fas fa-book"></i> إضافة درس
-                                    </button>
                                 ` : ''}
-                                <button class="channel-btn channel-btn-secondary" onclick="App.shareChannel()">
-                                    <i class="fas fa-share-alt"></i> مشاركة
-                                </button>
                                 <button class="channel-btn channel-btn-secondary" onclick="App.goHome()">
                                     <i class="fas fa-arrow-right"></i> رجوع
                                 </button>
                             </div>
                         </div>
-                        
-                        <div class="channel-tabs">
-                            <button class="channel-tab active" onclick="App.showChannelTab('posts')">
-                                <i class="fas fa-newspaper"></i> المنشورات
-                            </button>
-                            <button class="channel-tab" onclick="App.showChannelTab('lessons')">
-                                <i class="fas fa-book"></i> الدروس
-                            </button>
-                            <button class="channel-tab" onclick="App.showChannelTab('about')">
-                                <i class="fas fa-info-circle"></i> حول
-                            </button>
-                        </div>
-                        
-                        <div class="channel-content" id="channelContent">
-                            ${this.getChannelPostsHTML(teacherPosts)}
-                        </div>
                     </div>
                 `;
-            },
-            
-            getChannelPostsHTML(posts) {
-                if (posts.length === 0) {
-                    return `<p style="text-align: center; color: #666;">لا توجد منشورات بعد</p>`;
-                }
-                
-                return `
-                    <div class="posts-grid">
-                        ${posts.map(post => `
-                            <div class="post-card">
-                                <h3 class="post-title">${post.title}</h3>
-                                <div class="post-meta">📅 ${post.date}</div>
-                                <div class="post-content">${post.description}</div>
-                                <div class="post-stats">
-                                    <span><i class="fas fa-eye"></i> ${post.views || 0}</span>
-                                    <span><i class="fas fa-heart"></i> ${post.likes || 0}</span>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-            },
-            
-            showChannelTab(tab) {
-                const teacher = this.teachers.find(t => t.id === this.viewingChannel);
-                const teacherPosts = this.posts.filter(p => p.teacherId === teacher.id);
-                const teacherLessons = this.lessons.filter(l => l.teacherId === teacher.id);
-                
-                document.querySelectorAll('.channel-tab').forEach(btn => btn.classList.remove('active'));
-                event.target.classList.add('active');
-                
-                let content = '';
-                if (tab === 'posts') {
-                    content = this.getChannelPostsHTML(teacherPosts);
-                } else if (tab === 'lessons') {
-                    content = `<p style="text-align: center;">عدد الدروس: ${teacherLessons.length}</p>`;
-                } else {
-                    content = `
-                        <h3>عن الأستاذ</h3>
-                        <p>${teacher.bio}</p>
-                        <h3>المواد</h3>
-                        <p>${teacher.subjects?.map(s => this.getSubjectName(s)).join(' - ')}</p>
-                        <h3>المستويات</h3>
-                        <p>${teacher.levels?.map(l => this.getLevelName(l)).join(' - ')}</p>
-                    `;
-                }
-                
-                document.getElementById('channelContent').innerHTML = content;
-            },
-            
-            showAddPostForm() {
-                this.showModal(`
-                    <h2 style="color: #1e3c72; margin-bottom: 1.5rem;">إضافة منشور جديد</h2>
-                    <div class="form-group">
-                        <label>عنوان المنشور</label>
-                        <input type="text" id="postTitle" placeholder="أدخل عنوان المنشور">
-                    </div>
-                    <div class="form-group">
-                        <label>محتوى المنشور</label>
-                        <textarea id="postDesc" rows="5" placeholder="أدخل محتوى المنشور"></textarea>
-                    </div>
-                    <button class="submit-btn" onclick="App.addNewPost()">نشر</button>
-                `);
-            },
-            
-            addNewPost() {
-                const title = document.getElementById('postTitle').value;
-                const desc = document.getElementById('postDesc').value;
-                
-                if (!title || !desc) {
-                    this.toast('الرجاء ملء جميع الحقول', 'error');
-                    return;
-                }
-                
-                const newPost = {
-                    id: Date.now(),
-                    teacherId: this.currentUser.id,
-                    teacherName: this.currentUser.name,
-                    title: title,
-                    description: desc,
-                    date: new Date().toISOString().split('T')[0],
-                    views: 0,
-                    likes: 0
-                };
-                
-                this.posts.push(newPost);
-                this.saveAll();
-                this.closeModal();
-                this.viewTeacherChannel(this.currentUser.id);
-                this.toast('✅ تم نشر المنشور');
-            },
-            
-            showAddLessonForm() {
-                this.showModal(`
-                    <h2 style="color: #1e3c72; margin-bottom: 1.5rem;">إضافة درس جديد</h2>
-                    <div class="form-group">
-                        <label>عنوان الدرس</label>
-                        <input type="text" id="lessonTitle" placeholder="أدخل عنوان الدرس">
-                    </div>
-                    <div class="form-group">
-                        <label>وصف الدرس</label>
-                        <textarea id="lessonDesc" rows="5" placeholder="أدخل وصف الدرس"></textarea>
-                    </div>
-                    <button class="submit-btn" onclick="App.addNewLesson()">نشر</button>
-                `);
-            },
-            
-            addNewLesson() {
-                const title = document.getElementById('lessonTitle').value;
-                const desc = document.getElementById('lessonDesc').value;
-                
-                if (!title || !desc) {
-                    this.toast('الرجاء ملء جميع الحقول', 'error');
-                    return;
-                }
-                
-                const teacher = this.teachers.find(t => t.id === this.currentUser.id);
-                
-                const newLesson = {
-                    id: Date.now(),
-                    title: title,
-                    description: desc,
-                    teacherId: teacher.id,
-                    teacherName: teacher.name,
-                    date: new Date().toISOString().split('T')[0],
-                    downloads: 0,
-                    views: 0
-                };
-                
-                this.lessons.push(newLesson);
-                this.saveAll();
-                this.closeModal();
-                this.viewTeacherChannel(this.currentUser.id);
-                this.toast('✅ تم نشر الدرس');
-            },
-            
-            // ========== متابعة وإلغاء متابعة ==========
-            toggleFollow(teacherId) {
-                const student = this.students.find(s => s.id === this.currentUser.id);
-                const teacher = this.teachers.find(t => t.id === teacherId);
-                
-                if (!student.following) student.following = [];
-                
-                if (student.following.includes(teacherId)) {
-                    student.following = student.following.filter(id => id !== teacherId);
-                    if (teacher.followers) {
-                        teacher.followers = teacher.followers.filter(id => id !== student.id);
-                    }
-                    this.toast('تم إلغاء المتابعة', 'info');
-                } else {
-                    student.following.push(teacherId);
-                    if (!teacher.followers) teacher.followers = [];
-                    teacher.followers.push(student.id);
-                    student.points = (student.points || 0) + 10;
-                    this.toast('تمت المتابعة +10 نقاط', 'success');
-                }
-                
-                this.saveAll();
-                
-                if (this.viewingChannel === teacherId) {
-                    this.viewTeacherChannel(teacherId);
-                } else {
-                    this.renderStudentDashboard();
-                }
-            },
-            
-            shareChannel() {
-                this.toast('تم نسخ رابط القناة');
             },
             
             // ========== لوحة تحكم الأستاذ ==========
             renderTeacherDashboard() {
                 const teacher = this.teachers.find(t => t.id === this.currentUser.id);
-                if (!teacher) return;
-                
-                const teacherLessons = this.lessons.filter(l => l.teacherId === teacher.id);
-                const teacherPosts = this.posts.filter(p => p.teacherId === teacher.id);
                 
                 const dashboard = document.getElementById('dashboard');
                 dashboard.innerHTML = `
                     <div class="welcome-card">
                         <h1>مرحباً بك أ. ${teacher.name} 👨‍🏫</h1>
-                        <p>${teacher.bio || ''}</p>
+                        <p>${teacher.bio}</p>
                     </div>
                     
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <i class="fas fa-users"></i>
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
                             <div class="stat-number">${teacher.followers?.length || 0}</div>
                             <div>متابع</div>
                         </div>
                         <div class="stat-card">
-                            <i class="fas fa-newspaper"></i>
-                            <div class="stat-number">${teacherPosts.length}</div>
-                            <div>منشور</div>
-                        </div>
-                        <div class="stat-card">
-                            <i class="fas fa-book"></i>
-                            <div class="stat-number">${teacherLessons.length}</div>
-                            <div>درس</div>
+                            <div class="stat-icon"><i class="fas fa-star"></i></div>
+                            <div class="stat-number">${teacher.rating}</div>
+                            <div>تقييم</div>
                         </div>
                     </div>
                     
                     <div style="background: white; padding: 2rem; border-radius: 15px;">
                         <h2 style="color: #1e3c72; margin-bottom: 1rem;">إجراءات سريعة</h2>
-                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                            <button class="nav-btn" style="background: #1e3c72; color: white;" onclick="App.viewTeacherChannel(${teacher.id})">
-                                <i class="fas fa-eye"></i> عرض قناتي
-                            </button>
-                            <button class="nav-btn" style="background: #ffd700; color: #1e3c72;" onclick="App.showAddPostForm()">
-                                <i class="fas fa-plus"></i> إضافة منشور
-                            </button>
-                            <button class="nav-btn" style="background: #ffd700; color: #1e3c72;" onclick="App.showAddLessonForm()">
-                                <i class="fas fa-book"></i> إضافة درس
-                            </button>
-                        </div>
+                        <button class="nav-btn" style="background: #1e3c72; color: white;" onclick="App.viewTeacherChannel(${teacher.id})">
+                            عرض قناتي
+                        </button>
                     </div>
                 `;
             },
@@ -1176,8 +1128,8 @@
             // ========== المصادقة ==========
             showAuthModal() {
                 this.showModal(`
-                    <h2 style="color: #1e3c72; text-align: center; margin-bottom: 1.5rem;">مرحباً بك</h2>
-                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                    <h2 style="color: #1e3c72; text-align: center;">مرحباً بك</h2>
+                    <div style="display: flex; gap: 1rem; margin: 1rem 0;">
                         <button class="nav-btn" style="flex:1;" onclick="App.selectUserType('student')">تلميذ</button>
                         <button class="nav-btn" style="flex:1;" onclick="App.selectUserType('teacher')">أستاذ</button>
                     </div>
@@ -1194,7 +1146,7 @@
             
             showRegisterForm() {
                 this.showModal(`
-                    <h2 style="color: #1e3c72; text-align: center; margin-bottom: 1.5rem;">تسجيل جديد</h2>
+                    <h2 style="color: #1e3c72; text-align: center;">تسجيل جديد</h2>
                     <div class="form-group">
                         <input type="text" id="regName" placeholder="الاسم الكامل">
                     </div>
@@ -1244,7 +1196,7 @@
                     this.render();
                     this.toast('مرحباً بك');
                 } else {
-                    this.toast('خطأ في البريد أو كلمة السر', 'error');
+                    this.toast('خطأ في الدخول', 'error');
                 }
             },
             
@@ -1326,7 +1278,7 @@
             }
         };
 
-        // ========== تهيئة التطبيق ==========
+        // ========== تشغيل التطبيق ==========
         App.init();
     </script>
 </body>
