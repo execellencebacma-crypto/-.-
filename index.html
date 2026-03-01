@@ -3,38 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعلّم.ما - المنصة التعليمية المتكاملة</title>
+    <title>تعلّم.ما - المنصة التعليمية المغربية المتكاملة</title>
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS للأنيميشن -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        * {
+        /* ========== متغيرات متقدمة ========== */
+        :root {
+            --primary: #1e3c72;
+            --primary-light: #2a5298;
+            --primary-dark: #0f2b4f;
+            --primary-gradient: linear-gradient(135deg, #1e3c72, #2a5298);
+            
+            --secondary: #ffd700;
+            --secondary-light: #ffed4a;
+            --secondary-dark: #e6b800;
+            --secondary-gradient: linear-gradient(135deg, #ffd700, #ffed4a);
+            
+            --success: #28a745;
+            --success-light: #d4edda;
+            --danger: #dc3545;
+            --danger-light: #f8d7da;
+            --warning: #ffc107;
+            --warning-light: #fff3cd;
+            --info: #17a2b8;
+            --info-light: #d1ecf1;
+            
+            --dark: #343a40;
+            --dark-light: #6c757d;
+            --light: #f8f9fa;
+            --light-dark: #e9ecef;
+            --gray: #6c757d;
+            --gray-light: #adb5bd;
+            --white: #ffffff;
+            
+            --shadow-xs: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+            --shadow-xl: 0 12px 32px rgba(0,0,0,0.1);
+            --shadow-2xl: 0 20px 48px rgba(0,0,0,0.15);
+            
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-2xl: 32px;
+            --radius-full: 9999px;
+            
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            
+            --font-primary: 'Cairo', 'Tajawal', sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-md: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 2rem;
+            --font-size-4xl: 2.5rem;
+            
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --font-weight-extrabold: 800;
+        }
+
+        /* ========== إعادة تعيين محسنة ========== */
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* ========== الشريط العلوي ========== */
+        body {
+            font-family: var(--font-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========== خلفية متحركة ========== */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .animated-bg span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+            will-change: transform, opacity;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ========== شريط التحميل ========== */
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+            z-index: 9999;
+        }
+
+        .loading-bar.active {
+            transform: scaleX(1);
+        }
+
+        /* ========== الشريط العلوي المتطور ========== */
         .navbar {
             background: rgba(30, 60, 114, 0.95);
             backdrop-filter: blur(10px);
-            color: white;
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--white);
             padding: 1rem 5%;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .nav-container {
@@ -47,11 +192,34 @@
 
         .logo {
             font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, white, #ffd700);
+            font-weight: var(--font-weight-extrabold);
+            background: linear-gradient(135deg, var(--white), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             cursor: pointer;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
         }
 
         .nav-menu {
@@ -63,56 +231,129 @@
         .nav-btn {
             background: transparent;
             border: 2px solid rgba(255,255,255,0.2);
-            color: white;
+            color: var(--white);
             padding: 0.6rem 1.5rem;
-            border-radius: 50px;
+            border-radius: var(--radius-full);
             cursor: pointer;
             font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .nav-btn:hover {
-            background: white;
-            color: #1e3c72;
+            background: var(--white);
+            color: var(--primary);
+            border-color: var(--white);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .user-badge {
-            background: rgba(255,255,255,0.1);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            color: white;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-full);
+            color: var(--white);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: var(--font-size-md);
         }
 
-        /* ========== المحتوى الرئيسي ========== */
+        /* ========== لوحة التحكم الرئيسية ========== */
         .dashboard {
             max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* ========== بطاقة الترحيب ========== */
+        /* ========== بطاقة الترحيب المتطورة ========== */
         .welcome-card {
-            background: linear-gradient(135deg, #1e3c72, #0f2b4f);
-            color: white;
-            padding: 2rem;
-            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(30,60,114,0.95), rgba(15,43,79,0.98));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius-2xl);
             margin-bottom: 2rem;
+            animation: slideUp 0.5s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-card::before {
+            content: '📚';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.1;
+            left: -50px;
+            bottom: -50px;
+            transform: rotate(-15deg);
+        }
+
+        .welcome-card::after {
+            content: '🎓';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.1;
+            right: -50px;
+            top: -50px;
+            transform: rotate(15deg);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .welcome-title {
-            font-size: 2rem;
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
             margin-bottom: 1rem;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
         }
 
         .welcome-stats {
             display: flex;
             gap: 2rem;
+            margin-top: 1.5rem;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
 
         .welcome-stat {
@@ -121,35 +362,280 @@
             gap: 0.5rem;
             background: rgba(255,255,255,0.1);
             padding: 0.5rem 1rem;
-            border-radius: 50px;
+            border-radius: var(--radius-full);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: var(--transition-fast);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* ========== إحصائيات ========== */
+        .welcome-stat:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ========== شبكة الإحصائيات المتطورة ========== */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
         .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            text-align: center;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: var(--transition-normal);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: fadeIn 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-2xl);
         }
 
         .stat-icon {
-            font-size: 2rem;
-            color: #1e3c72;
-            margin-bottom: 0.5rem;
+            width: 70px;
+            height: 70px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--white);
+            animation: pulse 2s infinite;
         }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #1e3c72;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: var(--font-weight-extrabold);
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.5rem;
+            font-size: var(--font-size-sm);
+        }
+
+        .trend-up {
+            color: var(--success);
+        }
+
+        .trend-down {
+            color: var(--danger);
+        }
+
+        /* ========== نظام البحث المتقدم ========== */
+        .search-section {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-header h2 {
+            color: var(--primary);
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .results-count {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            font-weight: var(--font-weight-medium);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .search-input-group {
+            position: relative;
+        }
+
+        .search-input-group i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            z-index: 1;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 2.5rem;
+            border: 2px solid var(--light-dark);
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            transition: var(--transition-fast);
+            background: var(--white);
+            color: var(--dark);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(30,60,114,0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--gray-light);
+        }
+
+        .search-btn {
+            background: var(--primary-gradient);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-full);
+            font-size: 1.1rem;
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .search-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* ========== الفلاتر النشطة ========== */
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .filter-tag {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 1.2rem;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: slideIn 0.3s ease;
+            font-size: var(--font-size-sm);
+            box-shadow: var(--shadow-sm);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .filter-tag button {
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            transition: var(--transition-fast);
+        }
+
+        .filter-tag button:hover {
+            color: var(--secondary);
+            transform: scale(1.2);
         }
 
         /* ========== أقسام التلميذ ========== */
@@ -164,76 +650,161 @@
             padding: 0.8rem 2rem;
             border: none;
             background: rgba(255,255,255,0.1);
-            color: white;
-            border-radius: 50px;
+            color: var(--white);
+            border-radius: var(--radius-full);
             cursor: pointer;
             font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-normal);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .tab-btn:hover,
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
         .tab-btn.active {
-            background: #ffd700;
-            color: #1e3c72;
+            background: var(--secondary);
+            color: var(--primary);
+            border-color: var(--secondary);
         }
 
-        /* ========== شبكة الأساتذة ========== */
+        /* ========== شبكة الأساتذة المتطورة ========== */
         .teachers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
-            margin-bottom: 2rem;
         }
 
         .teacher-card {
-            background: white;
-            border-radius: 20px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: var(--radius-2xl);
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition-normal);
             cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: scaleIn 0.5s ease;
+            position: relative;
+        }
+
+        .teacher-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: var(--radius-2xl);
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, var(--secondary), var(--primary)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+            pointer-events: none;
+        }
+
+        .teacher-card:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .teacher-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-2xl);
         }
 
         .teacher-header {
-            height: 80px;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            height: 100px;
+            background: var(--primary-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .teacher-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .teacher-avatar {
             width: 100px;
             height: 100px;
-            background: white;
+            background: var(--white);
             border-radius: 50%;
-            margin: -50px auto 0;
+            position: absolute;
+            bottom: -40px;
+            right: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
-            border: 4px solid white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-xl);
+            border: 4px solid var(--white);
+            transition: var(--transition-normal);
+            z-index: 2;
+        }
+
+        .teacher-card:hover .teacher-avatar {
+            transform: rotate(360deg);
         }
 
         .teacher-info {
-            padding: 1.5rem;
+            padding: 4rem 1.5rem 1.5rem;
             text-align: center;
         }
 
         .teacher-name {
-            font-size: 1.5rem;
-            color: #1e3c72;
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--primary);
             margin-bottom: 0.3rem;
         }
 
         .teacher-specialty {
-            color: #e6b800;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            color: var(--secondary-dark);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: 1rem;
+            font-size: var(--font-size-lg);
+        }
+
+        .teacher-bio {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: var(--font-size-sm);
         }
 
         .teacher-stats {
@@ -244,57 +815,124 @@
         }
 
         .stat-badge {
-            background: #f8f9fa;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-fast);
+            border: 1px solid var(--light-dark);
+        }
+
+        .stat-badge:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
         }
 
         .follow-btn {
             width: 100%;
-            padding: 0.8rem;
+            padding: 1rem;
             border: none;
-            border-radius: 50px;
-            background: #1e3c72;
-            color: white;
-            font-weight: 600;
+            border-radius: var(--radius-full);
+            background: var(--primary-gradient);
+            color: var(--white);
+            font-weight: var(--font-weight-semibold);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition-normal);
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            font-size: var(--font-size-md);
+        }
+
+        .follow-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .follow-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .follow-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .follow-btn.following {
-            background: #28a745;
+            background: var(--success);
         }
 
-        /* ========== شبكة الدروس ========== */
+        /* ========== شبكة الدروس المتطورة ========== */
         .lessons-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 2rem;
+            margin-top: 1rem;
         }
 
         .lesson-card {
-            background: white;
-            border-radius: 15px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: var(--radius-xl);
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-normal);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .lesson-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-2xl);
         }
 
         .lesson-header {
-            height: 120px;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            height: 150px;
+            background: var(--primary-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            color: white;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .lesson-type {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            z-index: 1;
+            box-shadow: var(--shadow-sm);
         }
 
         .lesson-content {
@@ -302,16 +940,23 @@
         }
 
         .lesson-title {
-            font-size: 1.2rem;
-            color: #1e3c72;
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-teacher {
+            color: var(--secondary-dark);
+            font-size: var(--font-size-sm);
             margin-bottom: 0.5rem;
         }
 
         .lesson-meta {
             display: flex;
             gap: 1rem;
-            color: #666;
-            font-size: 0.9rem;
+            color: var(--gray);
+            font-size: var(--font-size-sm);
             margin: 0.5rem 0;
         }
 
@@ -323,109 +968,411 @@
 
         .lesson-btn {
             flex: 1;
-            padding: 0.5rem;
+            padding: 0.8rem;
             border: none;
-            border-radius: 5px;
+            border-radius: var(--radius-md);
             cursor: pointer;
-            font-weight: 600;
+            transition: var(--transition-fast);
+            font-weight: var(--font-weight-medium);
+            font-size: var(--font-size-sm);
         }
 
         .view-btn {
-            background: #1e3c72;
-            color: white;
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .view-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .save-btn {
-            background: #ffd700;
-            color: #1e3c72;
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .save-btn:hover {
+            background: var(--secondary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .save-btn.saved {
-            background: #28a745;
-            color: white;
+            background: var(--success);
+            color: var(--white);
         }
 
-        /* ========== صفحة القناة ========== */
+        /* ========== صفحة القناة المتكاملة ========== */
         .channel-page {
-            background: white;
-            border-radius: 20px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: var(--radius-2xl);
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-2xl);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .channel-cover {
-            height: 200px;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            height: 250px;
+            background: var(--primary-gradient);
             position: relative;
+            overflow: hidden;
+        }
+
+        .channel-cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .channel-cover-content {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
+        .channel-cover-content h1 {
+            font-size: var(--font-size-3xl);
+            margin-bottom: 0.5rem;
+        }
+
+        .channel-cover-content p {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
         }
 
         .channel-avatar-large {
-            width: 120px;
-            height: 120px;
-            background: white;
+            width: 150px;
+            height: 150px;
+            background: var(--white);
             border-radius: 50%;
             position: absolute;
-            bottom: -60px;
-            right: 30px;
+            bottom: -75px;
+            right: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            border: 4px solid white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-size: 5rem;
+            border: 5px solid var(--secondary);
+            box-shadow: var(--shadow-2xl);
+            transition: var(--transition-normal);
+            z-index: 2;
+        }
+
+        .channel-avatar-large:hover {
+            transform: rotate(360deg);
         }
 
         .channel-info {
-            padding: 4rem 2rem 2rem;
+            padding: 5rem 2rem 2rem;
         }
 
         .channel-name {
-            font-size: 2rem;
-            color: #1e3c72;
+            font-size: var(--font-size-3xl);
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
 
         .channel-specialty {
-            color: #e6b800;
-            margin: 0.5rem 0;
+            color: var(--secondary-dark);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+            font-weight: var(--font-weight-medium);
         }
 
         .channel-bio {
-            color: #666;
-            margin: 1rem 0;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
         }
 
         .channel-meta {
             display: flex;
-            gap: 2rem;
-            margin: 1rem 0;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
+        .channel-meta-item {
+            text-align: center;
+        }
+
+        .channel-meta-value {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-extrabold);
+            color: var(--primary);
+        }
+
+        .channel-meta-label {
+            color: var(--gray);
+            font-size: var(--font-size-sm);
         }
 
         .channel-actions {
             display: flex;
             gap: 1rem;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
 
         .channel-btn {
-            padding: 0.8rem 2rem;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
             cursor: pointer;
+            transition: var(--transition-normal);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .channel-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .channel-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .channel-btn-primary {
-            background: #1e3c72;
-            color: white;
+            background: var(--primary-gradient);
+            color: var(--white);
+        }
+
+        .channel-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .channel-btn-secondary {
-            background: #ffd700;
-            color: #1e3c72;
+            background: var(--secondary);
+            color: var(--primary);
         }
 
-        /* ========== النافذة المنبثقة ========== */
+        .channel-btn-secondary:hover {
+            background: var(--secondary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .channel-btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .channel-btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .channel-tabs {
+            display: flex;
+            gap: 1rem;
+            padding: 0 2rem;
+            border-bottom: 2px solid var(--light-dark);
+            flex-wrap: wrap;
+        }
+
+        .channel-tab {
+            padding: 1rem 2rem;
+            border: none;
+            background: none;
+            color: var(--gray);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition-fast);
+        }
+
+        .channel-tab:hover {
+            color: var(--primary);
+        }
+
+        .channel-tab.active {
+            color: var(--primary);
+        }
+
+        .channel-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .channel-content {
+            padding: 2rem;
+        }
+
+        /* ========== نموذج إضافة منشور ========== */
+        .add-post-form {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+        }
+
+        .post-type-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .post-type-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--light-dark);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .post-type-option:hover {
+            border-color: var(--primary);
+        }
+
+        .post-type-option.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .post-type-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ========== نموذج إدخال الملفات ========== */
+        .file-upload {
+            border: 2px dashed var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            background: var(--light);
+        }
+
+        .file-upload:hover {
+            background: rgba(30,60,114,0.05);
+            border-color: var(--secondary);
+        }
+
+        .file-upload i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            margin-top: 0.5rem;
+        }
+
+        /* ========== إشعارات متطورة ========== */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .toast {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--dark);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-2xl);
+            border-right: 4px solid var(--success);
+            animation: slideInRight 0.3s ease;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .toast.success { border-right-color: var(--success); }
+        .toast.error { border-right-color: var(--danger); }
+        .toast.warning { border-right-color: var(--warning); }
+        .toast.info { border-right-color: var(--info); }
+
+        .toast i {
+            font-size: 1.5rem;
+        }
+
+        .toast.success i { color: var(--success); }
+        .toast.error i { color: var(--danger); }
+        .toast.warning i { color: var(--warning); }
+        .toast.info i { color: var(--info); }
+
+        /* ========== النافذة المنبثقة المتطورة ========== */
         .modal {
             display: none;
             position: fixed;
@@ -433,19 +1380,36 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
         }
 
         .modal-content {
-            background: white;
+            background: var(--white);
             width: 90%;
-            max-width: 500px;
-            padding: 2rem;
-            border-radius: 20px;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            border-radius: var(--radius-2xl);
             position: relative;
+            animation: modalZoom 0.5s ease;
+            box-shadow: var(--shadow-2xl);
+        }
+
+        @keyframes modalZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .modal-close {
@@ -454,10 +1418,33 @@
             top: 1rem;
             font-size: 1.5rem;
             cursor: pointer;
+            width: 40px;
+            height: 40px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-normal);
+            z-index: 10;
         }
 
+        .modal-close:hover {
+            background: var(--danger);
+            color: var(--white);
+            transform: rotate(90deg);
+        }
+
+        /* ========== نماذج الإدخال ========== */
         .form-group {
             margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: var(--font-weight-semibold);
         }
 
         .form-group input,
@@ -465,50 +1452,190 @@
         .form-group textarea {
             width: 100%;
             padding: 1rem;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1rem;
+            border: 2px solid var(--light-dark);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-md);
+            transition: var(--transition-fast);
+            font-family: var(--font-primary);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(30,60,114,0.1);
         }
 
         .submit-btn {
             width: 100%;
             padding: 1rem;
-            background: #1e3c72;
-            color: white;
+            background: var(--primary-gradient);
+            color: var(--white);
             border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
             cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* ========== إشعارات ========== */
-        .toast-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 3000;
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        .toast {
-            background: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin-top: 0.5rem;
-            border-right: 4px solid #28a745;
+        .submit-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
-        /* ========== التجاوب ========== */
-        @media (max-width: 768px) {
-            .welcome-stats {
-                flex-direction: column;
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* ========== حالات عدم وجود بيانات ========== */
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius-xl);
+            color: var(--white);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .no-data i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .no-data h3 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: 0.5rem;
+        }
+
+        .no-data p {
+            opacity: 0.8;
+        }
+
+        /* ========== اختيار نوع المستخدم ========== */
+        .user-type-selector {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .user-type-btn {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-normal);
+        }
+
+        .user-type-btn:hover,
+        .user-type-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* ========== روابط التواصل الاجتماعي ========== */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* ========== شريط التمرير المخصص ========== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        /* ========== تحسينات الأداء ========== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ========== تحسينات الطباعة ========== */
+        @media print {
+            .navbar, .animated-bg, .toast-container, .modal {
+                display: none !important;
             }
             
-            .student-tabs {
-                flex-direction: column;
+            body {
+                background: white;
+                color: black;
+            }
+        }
+
+        /* ========== تحسينات التجاوب المتقدمة ========== */
+        @media (max-width: 1200px) {
+            .dashboard {
+                padding: 0 1.5rem;
             }
             
+            .welcome-title {
+                font-size: var(--font-size-3xl);
+            }
+        }
+
+        @media (max-width: 992px) {
             .channel-avatar-large {
                 right: 50%;
                 transform: translateX(50%);
@@ -523,12 +1650,144 @@
             }
             
             .channel-actions {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
                 flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .student-tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+
+            .welcome-stats {
+                flex-direction: column;
+            }
+
+            .welcome-stat {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .teachers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .channel-actions {
+                flex-direction: column;
+            }
+
+            .channel-btn {
+                width: 100%;
+            }
+
+            .channel-tabs {
+                flex-direction: column;
+            }
+
+            .channel-tab {
+                width: 100%;
+                text-align: center;
+            }
+
+            .post-type-selector {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+
+            .toast {
+                min-width: auto;
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .stat-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 2rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .teacher-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+
+            .teacher-name {
+                font-size: var(--font-size-xl);
+            }
+
+            .channel-avatar-large {
+                width: 120px;
+                height: 120px;
+                font-size: 4rem;
+            }
+
+            .channel-name {
+                font-size: var(--font-size-2xl);
+            }
+
+            .user-type-selector {
+                flex-direction: column;
+            }
+        }
+
+        /* ========== دعم الوضع المظلم ========== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --light: #2d2d2d;
+                --light-dark: #3d3d3d;
+                --dark: #ffffff;
+                --gray: #b0b0b0;
+                --gray-light: #808080;
             }
         }
     </style>
 </head>
 <body>
+    <!-- خلفية متحركة -->
+    <div class="animated-bg" id="animatedBg"></div>
+
+    <!-- شريط التحميل -->
+    <div class="loading-bar" id="loadingBar"></div>
+
+    <!-- الشريط العلوي -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo" onclick="App.goHome()">تعلّم<span>.ما</span></div>
@@ -536,10 +1795,13 @@
         </div>
     </nav>
 
+    <!-- لوحة التحكم -->
     <div class="dashboard" id="dashboard"></div>
 
+    <!-- حاوية الإشعارات -->
     <div class="toast-container" id="toastContainer"></div>
 
+    <!-- النافذة المنبثقة -->
     <div class="modal" id="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="App.closeModal()"><i class="fas fa-times"></i></span>
@@ -547,24 +1809,50 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
+        // تهيئة AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            disable: window.innerWidth < 768
+        });
+
+        // ========== إعدادات متقدمة ==========
+        const CONFIG = {
+            MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
+            APP_NAME: 'تعلّم.ما',
+            APP_VERSION: '2.0.0',
+            CACHE_VERSION: '2024.03',
+            DEFAULT_AVATARS: ['👨‍🏫', '👩‍🏫', '📚', '🔬', '📐', '⚡', '📝', '🌍', '🧪', '🎓'],
+            ANIMATION_ENABLED: true,
+            TOAST_DURATION: 3000
+        };
+
         // ========== التطبيق المتكامل ==========
         const App = {
-            // ========== البيانات ==========
+            // ========== البيانات الأساسية ==========
             teachers: [],
             students: [],
             lessons: [],
             posts: [],
             currentUser: null,
             viewingChannel: null,
-            
-            // ========== تهيئة ==========
-            init() {
-                this.loadData();
-                this.initSampleData();
-                this.render();
+            selectedUserType: 'student',
+            filters: {
+                search: '',
+                level: '',
+                subject: '',
+                teacherName: ''
+            },
+            searchResults: {
+                teachers: [],
+                lessons: []
             },
             
+            // ========== دوال التخزين ==========
             loadData() {
                 this.teachers = JSON.parse(localStorage.getItem('teachers')) || [];
                 this.students = JSON.parse(localStorage.getItem('students')) || [];
@@ -583,8 +1871,8 @@
                 }
             },
             
+            // ========== بيانات تجريبية ==========
             initSampleData() {
-                // أساتذة تجريبيون
                 if (this.teachers.length === 0) {
                     this.teachers.push(
                         {
@@ -593,12 +1881,16 @@
                             email: 'ahmed@teacher.com',
                             password: '123456',
                             specialty: 'الرياضيات',
-                            bio: 'أستاذ الرياضيات - خبرة 15 سنة',
+                            bio: 'أستاذ الرياضيات للبكالوريا - خبرة 15 سنة في تدريس المعادلات والدوال',
                             avatar: '📐',
                             rating: 4.8,
                             followers: [],
-                            subjects: ['math'],
-                            levels: ['bac1', 'bac2']
+                            subjects: ['math', 'physique'],
+                            levels: ['bac1', 'bac2'],
+                            social: {
+                                youtube: 'https://youtube.com/@ahmed_teacher',
+                                facebook: 'https://facebook.com/ahmed.teacher'
+                            }
                         },
                         {
                             id: 2,
@@ -606,12 +1898,15 @@
                             email: 'fatima@teacher.com',
                             password: '123456',
                             specialty: 'الفيزياء',
-                            bio: 'دكتورة في الفيزياء',
+                            bio: 'دكتورة في الفيزياء النووية - متخصصة في تبسيط العلوم للتلاميذ',
                             avatar: '⚡',
                             rating: 4.9,
                             followers: [],
-                            subjects: ['physique'],
-                            levels: ['bac1', 'bac2']
+                            subjects: ['physique', 'chimie'],
+                            levels: ['bac1', 'bac2'],
+                            social: {
+                                youtube: 'https://youtube.com/@fatima_physics'
+                            }
                         },
                         {
                             id: 3,
@@ -619,7 +1914,7 @@
                             email: 'mohamed@teacher.com',
                             password: '123456',
                             specialty: 'العربية',
-                            bio: 'أستاذ اللغة العربية',
+                            bio: 'أستاذ اللغة العربية - خبير في تدريس النحو والصرف والبلاغة',
                             avatar: '📝',
                             rating: 4.7,
                             followers: [],
@@ -629,7 +1924,6 @@
                     );
                 }
                 
-                // تلاميذ تجريبيون
                 if (this.students.length === 0) {
                     this.students.push(
                         {
@@ -657,30 +1951,59 @@
                     );
                 }
                 
-                // دروس تجريبية
                 if (this.lessons.length === 0) {
                     this.lessons.push(
                         {
                             id: 101,
                             title: 'المعادلات من الدرجة الأولى',
-                            description: 'شرح مبسط مع تمارين',
+                            description: 'شرح مبسط مع تمارين تطبيقية وحلول مفصلة',
                             teacherId: 1,
                             teacherName: 'أحمد الفاسي',
                             level: 'bac1',
                             subject: 'math',
                             date: '2024-02-20',
-                            views: 120
+                            views: 120,
+                            downloads: 45
                         },
                         {
                             id: 102,
-                            title: 'قوانين نيوتن',
-                            description: 'شرح قوانين الحركة',
+                            title: 'قوانين نيوتن في الحركة',
+                            description: 'شرح قوانين نيوتن الثلاثة مع أمثلة من الحياة اليومية',
                             teacherId: 2,
                             teacherName: 'فاطمة المراكشي',
                             level: 'bac2',
                             subject: 'physique',
                             date: '2024-02-21',
-                            views: 89
+                            views: 89,
+                            downloads: 32
+                        }
+                    );
+                }
+                
+                if (this.posts.length === 0) {
+                    this.posts.push(
+                        {
+                            id: 1001,
+                            teacherId: 1,
+                            teacherName: 'أحمد الفاسي',
+                            type: 'video',
+                            title: 'حل تمارين المعادلات - الجزء الأول',
+                            description: 'شرح مفصل لحل تمارين المعادلات مع تطبيقات عملية',
+                            videoId: 'dQw4w9WgXcQ',
+                            date: '2024-03-01',
+                            views: 234,
+                            likes: 45
+                        },
+                        {
+                            id: 1002,
+                            teacherId: 1,
+                            teacherName: 'أحمد الفاسي',
+                            type: 'text',
+                            title: 'ملخص قوانين الدوال',
+                            description: 'ملخص شامل لجميع قوانين الدوال مع أمثلة',
+                            date: '2024-02-28',
+                            views: 156,
+                            likes: 23
                         }
                     );
                 }
@@ -691,11 +2014,24 @@
             // ========== دوال مساعدة ==========
             toast(message, type = 'success') {
                 const toast = document.createElement('div');
-                toast.className = 'toast';
-                toast.style.borderRightColor = type === 'success' ? '#28a745' : '#dc3545';
-                toast.textContent = message;
+                toast.className = `toast ${type}`;
+                
+                const icons = {
+                    success: 'fa-check-circle',
+                    error: 'fa-exclamation-circle',
+                    warning: 'fa-exclamation-triangle',
+                    info: 'fa-info-circle'
+                };
+                
+                const icon = icons[type] || 'fa-info-circle';
+                
+                toast.innerHTML = `<i class="fas ${icon}"></i> <span>${message}</span>`;
                 document.getElementById('toastContainer').appendChild(toast);
-                setTimeout(() => toast.remove(), 3000);
+                
+                setTimeout(() => {
+                    toast.style.animation = 'slideOutRight 0.3s ease';
+                    setTimeout(() => toast.remove(), 300);
+                }, CONFIG.TOAST_DURATION);
             },
             
             showModal(content) {
@@ -719,9 +2055,22 @@
                 return levels[level] || level;
             },
             
+            getSubjectName(subject) {
+                const subjects = {
+                    'math': 'الرياضيات',
+                    'physique': 'الفيزياء',
+                    'chimie': 'الكيمياء',
+                    'svt': 'علوم الحياة',
+                    'philosophy': 'الفلسفة',
+                    'arabic': 'العربية',
+                    'french': 'الفرنسية',
+                    'english': 'الإنجليزية'
+                };
+                return subjects[subject] || subject;
+            },
+            
             getRandomAvatar() {
-                const avatars = ['👨‍🏫', '👩‍🏫', '📚', '🔬', '📐', '⚡', '📝'];
-                return avatars[Math.floor(Math.random() * avatars.length)];
+                return CONFIG.DEFAULT_AVATARS[Math.floor(Math.random() * CONFIG.DEFAULT_AVATARS.length)];
             },
             
             // ========== واجهة المستخدم ==========
@@ -746,72 +2095,92 @@
                 const navMenu = document.getElementById('navMenu');
                 
                 if (this.currentUser) {
+                    const userType = this.currentUser.type === 'teacher' ? 'أستاذ' : 'تلميذ';
                     navMenu.innerHTML = `
                         <div class="user-badge">
                             <i class="fas ${this.currentUser.type === 'teacher' ? 'fa-chalkboard-teacher' : 'fa-user-graduate'}"></i>
                             <span>${this.currentUser.name}</span>
                         </div>
-                        <button class="nav-btn" onclick="App.goHome()">الرئيسية</button>
-                        <button class="nav-btn" onclick="App.logout()">خروج</button>
+                        <button class="nav-btn" onclick="App.goHome()"><i class="fas fa-home"></i> الرئيسية</button>
+                        <button class="nav-btn" onclick="App.logout()"><i class="fas fa-sign-out-alt"></i> خروج</button>
                     `;
                 } else {
                     navMenu.innerHTML = `
-                        <button class="nav-btn" onclick="App.showAuthModal()">دخول</button>
+                        <button class="nav-btn" onclick="App.showAuthModal()"><i class="fas fa-sign-in-alt"></i> دخول</button>
                     `;
                 }
             },
             
-            // ========== منطقة التلاميذ (الكاملة) ==========
+            // ========== منطقة التلاميذ المتكاملة ==========
             renderStudentDashboard() {
                 const student = this.students.find(s => s.id === this.currentUser.id);
                 if (!student) return;
                 
                 const followingCount = student.following?.length || 0;
                 const savedCount = student.savedLessons?.length || 0;
-                const allLessons = this.lessons.length;
                 
                 const dashboard = document.getElementById('dashboard');
                 dashboard.innerHTML = `
-                    <!-- بطاقة الترحيب -->
-                    <div class="welcome-card">
+                    <!-- بطاقة الترحيب المتطورة -->
+                    <div class="welcome-card" data-aos="fade-up">
                         <h1 class="welcome-title">مرحباً بك ${student.name} 👋</h1>
                         <div class="welcome-stats">
                             <div class="welcome-stat">
-                                <i class="fas fa-fire" style="color: #ffd700;"></i>
+                                <i class="fas fa-fire" style="color: var(--secondary);"></i>
                                 <span>${student.streak} يوم متتالي</span>
                             </div>
                             <div class="welcome-stat">
-                                <i class="fas fa-star" style="color: #ffd700;"></i>
+                                <i class="fas fa-star" style="color: var(--secondary);"></i>
                                 <span>${student.points} نقطة</span>
                             </div>
                             <div class="welcome-stat">
-                                <i class="fas fa-graduation-cap" style="color: #ffd700;"></i>
+                                <i class="fas fa-graduation-cap" style="color: var(--secondary);"></i>
                                 <span>${this.getLevelName(student.level)}</span>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- إحصائيات سريعة -->
+                    <!-- إحصائيات متقدمة -->
                     <div class="stats-grid">
-                        <div class="stat-card">
+                        <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
                             <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                            <div class="stat-number">${this.teachers.length}</div>
-                            <div>أستاذ</div>
+                            <div class="stat-content">
+                                <div class="stat-value">${this.teachers.length}</div>
+                                <div class="stat-label">أستاذ</div>
+                                <div class="stat-trend trend-up">
+                                    <i class="fas fa-arrow-up"></i> +${this.teachers.length - 3} هذا الأسبوع
+                                </div>
+                            </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
                             <div class="stat-icon"><i class="fas fa-heart"></i></div>
-                            <div class="stat-number">${followingCount}</div>
-                            <div>متابعة</div>
+                            <div class="stat-content">
+                                <div class="stat-value">${followingCount}</div>
+                                <div class="stat-label">متابعة</div>
+                                <div class="stat-trend trend-up">
+                                    <i class="fas fa-arrow-up"></i> +2 هذا الأسبوع
+                                </div>
+                            </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
                             <div class="stat-icon"><i class="fas fa-book"></i></div>
-                            <div class="stat-number">${allLessons}</div>
-                            <div>درس متاح</div>
+                            <div class="stat-content">
+                                <div class="stat-value">${this.lessons.length}</div>
+                                <div class="stat-label">درس متاح</div>
+                                <div class="stat-trend trend-up">
+                                    <i class="fas fa-arrow-up"></i> +5 هذا الأسبوع
+                                </div>
+                            </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
                             <div class="stat-icon"><i class="fas fa-bookmark"></i></div>
-                            <div class="stat-number">${savedCount}</div>
-                            <div>درس محفوظ</div>
+                            <div class="stat-content">
+                                <div class="stat-value">${savedCount}</div>
+                                <div class="stat-label">درس محفوظ</div>
+                                <div class="stat-trend trend-up">
+                                    <i class="fas fa-arrow-up"></i> +3 هذا الأسبوع
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
@@ -824,7 +2193,7 @@
                             <i class="fas fa-heart"></i> أساتذتي (${followingCount})
                         </button>
                         <button class="tab-btn" onclick="App.showStudentTab('lessons')">
-                            <i class="fas fa-book"></i> كل الدروس (${allLessons})
+                            <i class="fas fa-book"></i> كل الدروس (${this.lessons.length})
                         </button>
                         <button class="tab-btn" onclick="App.showStudentTab('saved')">
                             <i class="fas fa-bookmark"></i> محفوظاتي (${savedCount})
@@ -847,14 +2216,15 @@
                             const teacherLessons = this.lessons.filter(l => l.teacherId === teacher.id).length;
                             
                             return `
-                                <div class="teacher-card" onclick="App.viewTeacherChannel(${teacher.id})">
+                                <div class="teacher-card" onclick="App.viewTeacherChannel(${teacher.id})" data-aos="fade-up">
                                     <div class="teacher-header"></div>
                                     <div class="teacher-avatar">${teacher.avatar}</div>
                                     <div class="teacher-info">
                                         <h3 class="teacher-name">${teacher.name}</h3>
                                         <p class="teacher-specialty">${teacher.specialty}</p>
+                                        <p class="teacher-bio">${teacher.bio.substring(0, 80)}...</p>
                                         <div class="teacher-stats">
-                                            <span class="stat-badge"><i class="fas fa-star" style="color: #ffd700;"></i> ${teacher.rating}</span>
+                                            <span class="stat-badge"><i class="fas fa-star" style="color: var(--secondary);"></i> ${teacher.rating}</span>
                                             <span class="stat-badge"><i class="fas fa-book"></i> ${teacherLessons}</span>
                                         </div>
                                         <button class="follow-btn ${isFollowing ? 'following' : ''}" 
@@ -875,7 +2245,13 @@
                 const followingTeachers = this.teachers.filter(t => student.following?.includes(t.id));
                 
                 if (followingTeachers.length === 0) {
-                    return `<p style="text-align: center; color: white;">لم تتابع أي أستاذ بعد</p>`;
+                    return `
+                        <div class="no-data">
+                            <i class="fas fa-heart"></i>
+                            <h3>لم تتابع أي أستاذ بعد</h3>
+                            <p>تابع الأساتذة لمشاهدة دروسهم أولاً بأول</p>
+                        </div>
+                    `;
                 }
                 
                 return `
@@ -913,22 +2289,22 @@
                             const isSaved = student.savedLessons?.includes(lesson.id);
                             
                             return `
-                                <div class="lesson-card">
+                                <div class="lesson-card" data-aos="fade-up">
                                     <div class="lesson-header">📄</div>
                                     <div class="lesson-content">
                                         <h3 class="lesson-title">${lesson.title}</h3>
-                                        <p>${lesson.teacherName}</p>
+                                        <p class="lesson-teacher">${lesson.teacherName}</p>
                                         <div class="lesson-meta">
-                                            <span>${this.getLevelName(lesson.level)}</span>
-                                            <span>👁️ ${lesson.views}</span>
+                                            <span><i class="fas fa-layer-group"></i> ${this.getLevelName(lesson.level)}</span>
+                                            <span><i class="fas fa-eye"></i> ${lesson.views}</span>
                                         </div>
                                         <div class="lesson-actions">
                                             <button class="lesson-btn view-btn" onclick="App.viewLesson(${lesson.id})">
                                                 <i class="fas fa-eye"></i> عرض
                                             </button>
                                             <button class="lesson-btn save-btn ${isSaved ? 'saved' : ''}" 
-                                                onclick="App.toggleSaveLesson(${lesson.id})">
-                                                <i class="fas ${isSaved ? 'fa-bookmark' : 'fa-bookmark'}"></i>
+                                                onclick="event.stopPropagation(); App.toggleSaveLesson(${lesson.id})">
+                                                <i class="fas ${isSaved ? 'fa-check' : 'fa-bookmark'}"></i>
                                                 ${isSaved ? 'محفوظ' : 'حفظ'}
                                             </button>
                                         </div>
@@ -945,7 +2321,13 @@
                 const savedLessons = this.lessons.filter(l => student.savedLessons?.includes(l.id));
                 
                 if (savedLessons.length === 0) {
-                    return `<p style="text-align: center; color: white;">لا توجد دروس محفوظة</p>`;
+                    return `
+                        <div class="no-data">
+                            <i class="fas fa-bookmark"></i>
+                            <h3>لا توجد دروس محفوظة</h3>
+                            <p>احفظ الدروس التي تهمك للعودة إليها لاحقاً</p>
+                        </div>
+                    `;
                 }
                 
                 return `
@@ -955,7 +2337,7 @@
                                 <div class="lesson-header">📄</div>
                                 <div class="lesson-content">
                                     <h3 class="lesson-title">${lesson.title}</h3>
-                                    <p>${lesson.teacherName}</p>
+                                    <p class="lesson-teacher">${lesson.teacherName}</p>
                                     <div class="lesson-meta">
                                         <span>${this.getLevelName(lesson.level)}</span>
                                         <span>👁️ ${lesson.views}</span>
@@ -986,6 +2368,191 @@
                 }
                 
                 document.getElementById('studentContent').innerHTML = content;
+            },
+            
+            // ========== صفحة قناة الأستاذ ==========
+            viewTeacherChannel(teacherId) {
+                this.viewingChannel = teacherId;
+                const teacher = this.teachers.find(t => t.id === teacherId);
+                
+                const student = this.students.find(s => s.id === this.currentUser?.id);
+                const isFollowing = student?.following?.includes(teacherId) || false;
+                const teacherLessons = this.lessons.filter(l => l.teacherId === teacherId);
+                const teacherPosts = this.posts.filter(p => p.teacherId === teacherId);
+                
+                const dashboard = document.getElementById('dashboard');
+                dashboard.innerHTML = `
+                    <div class="channel-page">
+                        <div class="channel-cover">
+                            <div class="channel-avatar-large">${teacher.avatar}</div>
+                            <div class="channel-cover-content">
+                                <h1>${teacher.name}</h1>
+                                <p>${teacher.specialty}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="channel-info">
+                            <h1 class="channel-name">${teacher.name}</h1>
+                            <p class="channel-specialty">${teacher.specialty}</p>
+                            <p class="channel-bio">${teacher.bio}</p>
+                            
+                            <div class="channel-meta">
+                                <div class="channel-meta-item">
+                                    <div class="channel-meta-value">${teacher.followers?.length || 0}</div>
+                                    <div class="channel-meta-label">متابع</div>
+                                </div>
+                                <div class="channel-meta-item">
+                                    <div class="channel-meta-value">${teacherPosts.length}</div>
+                                    <div class="channel-meta-label">منشور</div>
+                                </div>
+                                <div class="channel-meta-item">
+                                    <div class="channel-meta-value">${teacherLessons.length}</div>
+                                    <div class="channel-meta-label">درس</div>
+                                </div>
+                            </div>
+                            
+                            ${teacher.social ? `
+                                <div class="social-links">
+                                    ${teacher.social.youtube ? `
+                                        <a href="${teacher.social.youtube}" target="_blank" class="social-link">
+                                            <i class="fab fa-youtube"></i>
+                                        </a>
+                                    ` : ''}
+                                    ${teacher.social.facebook ? `
+                                        <a href="${teacher.social.facebook}" target="_blank" class="social-link">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                    ` : ''}
+                                </div>
+                            ` : ''}
+                            
+                            <div class="channel-actions">
+                                ${this.currentUser?.type === 'student' ? `
+                                    <button class="channel-btn channel-btn-primary" onclick="App.toggleFollow(${teacher.id})">
+                                        <i class="fas ${isFollowing ? 'fa-check' : 'fa-plus'}"></i>
+                                        ${isFollowing ? 'متابعة' : 'متابعة'}
+                                    </button>
+                                ` : this.currentUser?.id === teacher.id ? `
+                                    <button class="channel-btn channel-btn-primary" onclick="App.showAddPostForm()">
+                                        <i class="fas fa-plus"></i> إضافة منشور
+                                    </button>
+                                    <button class="channel-btn channel-btn-secondary" onclick="App.showAddLessonForm()">
+                                        <i class="fas fa-book"></i> إضافة درس
+                                    </button>
+                                ` : ''}
+                                <button class="channel-btn channel-btn-secondary" onclick="App.goHome()">
+                                    <i class="fas fa-arrow-right"></i> رجوع
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="channel-tabs">
+                            <button class="channel-tab active" onclick="App.showChannelTab('posts')">
+                                <i class="fas fa-newspaper"></i> المنشورات
+                            </button>
+                            <button class="channel-tab" onclick="App.showChannelTab('lessons')">
+                                <i class="fas fa-book"></i> الدروس
+                            </button>
+                            <button class="channel-tab" onclick="App.showChannelTab('about')">
+                                <i class="fas fa-info-circle"></i> حول
+                            </button>
+                        </div>
+                        
+                        <div class="channel-content" id="channelContent">
+                            ${this.renderChannelPosts(teacherPosts)}
+                        </div>
+                    </div>
+                `;
+            },
+            
+            renderChannelPosts(posts) {
+                if (posts.length === 0) {
+                    return `<p style="text-align: center; color: var(--gray);">لا توجد منشورات بعد</p>`;
+                }
+                
+                return `
+                    <div class="posts-grid">
+                        ${posts.map(post => `
+                            <div class="post-card">
+                                <h3 class="post-title">${post.title}</h3>
+                                <div class="post-meta">📅 ${post.date}</div>
+                                <div class="post-content">${post.description}</div>
+                                <div class="post-stats">
+                                    <span><i class="fas fa-eye"></i> ${post.views || 0}</span>
+                                    <span><i class="fas fa-heart"></i> ${post.likes || 0}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            },
+            
+            renderChannelLessons(lessons) {
+                if (lessons.length === 0) {
+                    return `<p style="text-align: center; color: var(--gray);">لا توجد دروس بعد</p>`;
+                }
+                
+                return `
+                    <div class="lessons-grid">
+                        ${lessons.map(lesson => `
+                            <div class="lesson-card">
+                                <div class="lesson-header">📄</div>
+                                <div class="lesson-content">
+                                    <h3 class="lesson-title">${lesson.title}</h3>
+                                    <p>${lesson.description}</p>
+                                    <button class="lesson-btn view-btn" onclick="App.viewLesson(${lesson.id})">
+                                        عرض
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            },
+            
+            renderChannelAbout(teacher) {
+                return `
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">عن الأستاذ</h3>
+                    <p style="margin-bottom: 1.5rem;">${teacher.bio}</p>
+                    
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">المواد</h3>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                        ${teacher.subjects?.map(s => `
+                            <span class="stat-badge" style="background: var(--primary); color: white;">
+                                ${this.getSubjectName(s)}
+                            </span>
+                        `).join('')}
+                    </div>
+                    
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">المستويات</h3>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        ${teacher.levels?.map(l => `
+                            <span class="stat-badge" style="background: var(--secondary); color: var(--primary);">
+                                ${this.getLevelName(l)}
+                            </span>
+                        `).join('')}
+                    </div>
+                `;
+            },
+            
+            showChannelTab(tab) {
+                const teacher = this.teachers.find(t => t.id === this.viewingChannel);
+                const teacherPosts = this.posts.filter(p => p.teacherId === teacher.id);
+                const teacherLessons = this.lessons.filter(l => l.teacherId === teacher.id);
+                
+                document.querySelectorAll('.channel-tab').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                let content = '';
+                if (tab === 'posts') {
+                    content = this.renderChannelPosts(teacherPosts);
+                } else if (tab === 'lessons') {
+                    content = this.renderChannelLessons(teacherLessons);
+                } else if (tab === 'about') {
+                    content = this.renderChannelAbout(teacher);
+                }
+                
+                document.getElementById('channelContent').innerHTML = content;
             },
             
             // ========== تفاعلات التلميذ ==========
@@ -1040,87 +2607,182 @@
                 this.saveAll();
                 
                 this.showModal(`
-                    <h2 style="color: #1e3c72;">${lesson.title}</h2>
+                    <h2 style="color: var(--primary);">${lesson.title}</h2>
                     <p style="margin: 1rem 0;">${lesson.description}</p>
-                    <p><strong>الأستاذ:</strong> ${lesson.teacherName}</p>
-                    <p><strong>المستوى:</strong> ${this.getLevelName(lesson.level)}</p>
-                    <p><strong>المشاهدات:</strong> ${lesson.views}</p>
+                    <div style="background: var(--light); padding: 1rem; border-radius: var(--radius-md);">
+                        <p><strong>الأستاذ:</strong> ${lesson.teacherName}</p>
+                        <p><strong>المستوى:</strong> ${this.getLevelName(lesson.level)}</p>
+                        <p><strong>المشاهدات:</strong> ${lesson.views}</p>
+                    </div>
                 `);
             },
             
-            // ========== صفحة قناة الأستاذ ==========
-            viewTeacherChannel(teacherId) {
-                this.viewingChannel = teacherId;
-                const teacher = this.teachers.find(t => t.id === teacherId);
-                
-                const student = this.students.find(s => s.id === this.currentUser?.id);
-                const isFollowing = student?.following?.includes(teacherId) || false;
-                const teacherLessons = this.lessons.filter(l => l.teacherId === teacherId);
-                const teacherPosts = this.posts.filter(p => p.teacherId === teacherId);
-                
-                const dashboard = document.getElementById('dashboard');
-                dashboard.innerHTML = `
-                    <div class="channel-page">
-                        <div class="channel-cover">
-                            <div class="channel-avatar-large">${teacher.avatar}</div>
-                        </div>
-                        
-                        <div class="channel-info">
-                            <h1 class="channel-name">${teacher.name}</h1>
-                            <p class="channel-specialty">${teacher.specialty}</p>
-                            <p class="channel-bio">${teacher.bio}</p>
-                            
-                            <div class="channel-meta">
-                                <div><strong>${teacher.followers?.length || 0}</strong> متابع</div>
-                                <div><strong>${teacherLessons.length}</strong> درس</div>
-                                <div><strong>${teacherPosts.length}</strong> منشور</div>
-                            </div>
-                            
-                            <div class="channel-actions">
-                                ${this.currentUser?.type === 'student' ? `
-                                    <button class="channel-btn channel-btn-primary" onclick="App.toggleFollow(${teacher.id})">
-                                        <i class="fas ${isFollowing ? 'fa-check' : 'fa-plus'}"></i>
-                                        ${isFollowing ? 'متابعة' : 'متابعة'}
-                                    </button>
-                                ` : ''}
-                                <button class="channel-btn channel-btn-secondary" onclick="App.goHome()">
-                                    <i class="fas fa-arrow-right"></i> رجوع
-                                </button>
-                            </div>
-                        </div>
+            // ========== نماذج الإضافة ==========
+            showAddPostForm() {
+                this.showModal(`
+                    <h2 style="color: var(--primary); margin-bottom: 1.5rem;">إضافة منشور جديد</h2>
+                    <div class="form-group">
+                        <label>عنوان المنشور</label>
+                        <input type="text" id="postTitle" placeholder="أدخل عنوان المنشور">
                     </div>
-                `;
+                    <div class="form-group">
+                        <label>محتوى المنشور</label>
+                        <textarea id="postDesc" rows="5" placeholder="أدخل محتوى المنشور"></textarea>
+                    </div>
+                    <button class="submit-btn" onclick="App.addNewPost()">نشر</button>
+                `);
+            },
+            
+            addNewPost() {
+                const title = document.getElementById('postTitle').value;
+                const desc = document.getElementById('postDesc').value;
+                
+                if (!title || !desc) {
+                    this.toast('الرجاء ملء جميع الحقول', 'error');
+                    return;
+                }
+                
+                const teacher = this.teachers.find(t => t.id === this.currentUser.id);
+                
+                const newPost = {
+                    id: Date.now(),
+                    teacherId: teacher.id,
+                    teacherName: teacher.name,
+                    type: 'text',
+                    title: title,
+                    description: desc,
+                    date: new Date().toISOString().split('T')[0],
+                    views: 0,
+                    likes: 0
+                };
+                
+                this.posts.push(newPost);
+                this.saveAll();
+                this.closeModal();
+                this.viewTeacherChannel(teacher.id);
+                this.toast('✅ تم نشر المنشور');
+            },
+            
+            showAddLessonForm() {
+                this.showModal(`
+                    <h2 style="color: var(--primary); margin-bottom: 1.5rem;">إضافة درس جديد</h2>
+                    <div class="form-group">
+                        <label>عنوان الدرس</label>
+                        <input type="text" id="lessonTitle" placeholder="أدخل عنوان الدرس">
+                    </div>
+                    <div class="form-group">
+                        <label>وصف الدرس</label>
+                        <textarea id="lessonDesc" rows="5" placeholder="أدخل وصف الدرس"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>المستوى</label>
+                        <select id="lessonLevel">
+                            <option value="bac1">الأولى باكالوريا</option>
+                            <option value="bac2">الثانية باكالوريا</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>المادة</label>
+                        <select id="lessonSubject">
+                            <option value="math">الرياضيات</option>
+                            <option value="physique">الفيزياء</option>
+                        </select>
+                    </div>
+                    <button class="submit-btn" onclick="App.addNewLesson()">نشر</button>
+                `);
+            },
+            
+            addNewLesson() {
+                const title = document.getElementById('lessonTitle').value;
+                const desc = document.getElementById('lessonDesc').value;
+                const level = document.getElementById('lessonLevel').value;
+                const subject = document.getElementById('lessonSubject').value;
+                
+                if (!title || !desc) {
+                    this.toast('الرجاء ملء جميع الحقول', 'error');
+                    return;
+                }
+                
+                const teacher = this.teachers.find(t => t.id === this.currentUser.id);
+                
+                const newLesson = {
+                    id: Date.now(),
+                    title: title,
+                    description: desc,
+                    level: level,
+                    subject: subject,
+                    teacherId: teacher.id,
+                    teacherName: teacher.name,
+                    date: new Date().toISOString().split('T')[0],
+                    views: 0,
+                    downloads: 0
+                };
+                
+                this.lessons.push(newLesson);
+                this.saveAll();
+                this.closeModal();
+                this.viewTeacherChannel(teacher.id);
+                this.toast('✅ تم نشر الدرس');
             },
             
             // ========== لوحة تحكم الأستاذ ==========
             renderTeacherDashboard() {
                 const teacher = this.teachers.find(t => t.id === this.currentUser.id);
                 
+                const teacherLessons = this.lessons.filter(l => l.teacherId === teacher.id);
+                const teacherPosts = this.posts.filter(p => p.teacherId === teacher.id);
+                
                 const dashboard = document.getElementById('dashboard');
                 dashboard.innerHTML = `
                     <div class="welcome-card">
-                        <h1>مرحباً بك أ. ${teacher.name} 👨‍🏫</h1>
+                        <h1 class="welcome-title">مرحباً بك أ. ${teacher.name} 👨‍🏫</h1>
                         <p>${teacher.bio}</p>
                     </div>
                     
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-icon"><i class="fas fa-users"></i></div>
-                            <div class="stat-number">${teacher.followers?.length || 0}</div>
-                            <div>متابع</div>
+                            <div class="stat-content">
+                                <div class="stat-value">${teacher.followers?.length || 0}</div>
+                                <div class="stat-label">متابع</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-newspaper"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-value">${teacherPosts.length}</div>
+                                <div class="stat-label">منشور</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-book"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-value">${teacherLessons.length}</div>
+                                <div class="stat-label">درس</div>
+                            </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon"><i class="fas fa-star"></i></div>
-                            <div class="stat-number">${teacher.rating}</div>
-                            <div>تقييم</div>
+                            <div class="stat-content">
+                                <div class="stat-value">${teacher.rating}</div>
+                                <div class="stat-label">تقييم</div>
+                            </div>
                         </div>
                     </div>
                     
-                    <div style="background: white; padding: 2rem; border-radius: 15px;">
-                        <h2 style="color: #1e3c72; margin-bottom: 1rem;">إجراءات سريعة</h2>
-                        <button class="nav-btn" style="background: #1e3c72; color: white;" onclick="App.viewTeacherChannel(${teacher.id})">
-                            عرض قناتي
-                        </button>
+                    <div style="background: rgba(255,255,255,0.95); padding: 2rem; border-radius: var(--radius-xl);">
+                        <h2 style="color: var(--primary); margin-bottom: 1rem;">إجراءات سريعة</h2>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <button class="nav-btn" style="background: var(--primary); color: white;" onclick="App.viewTeacherChannel(${teacher.id})">
+                                <i class="fas fa-eye"></i> عرض قناتي
+                            </button>
+                            <button class="nav-btn" style="background: var(--secondary); color: var(--primary);" onclick="App.showAddPostForm()">
+                                <i class="fas fa-plus"></i> إضافة منشور
+                            </button>
+                            <button class="nav-btn" style="background: var(--secondary); color: var(--primary);" onclick="App.showAddLessonForm()">
+                                <i class="fas fa-book"></i> إضافة درس
+                            </button>
+                        </div>
                     </div>
                 `;
             },
@@ -1128,17 +2790,26 @@
             // ========== المصادقة ==========
             showAuthModal() {
                 this.showModal(`
-                    <h2 style="color: #1e3c72; text-align: center;">مرحباً بك</h2>
-                    <div style="display: flex; gap: 1rem; margin: 1rem 0;">
-                        <button class="nav-btn" style="flex:1;" onclick="App.selectUserType('student')">تلميذ</button>
-                        <button class="nav-btn" style="flex:1;" onclick="App.selectUserType('teacher')">أستاذ</button>
+                    <h2 style="color: var(--primary); text-align: center; margin-bottom: 1.5rem;">مرحباً بك في تعلّم.ما</h2>
+                    
+                    <div class="user-type-selector">
+                        <button class="user-type-btn ${this.selectedUserType === 'student' ? 'active' : ''}" 
+                            onclick="App.selectUserType('student')">
+                            <i class="fas fa-user-graduate"></i> تلميذ
+                        </button>
+                        <button class="user-type-btn ${this.selectedUserType === 'teacher' ? 'active' : ''}" 
+                            onclick="App.selectUserType('teacher')">
+                            <i class="fas fa-chalkboard-teacher"></i> أستاذ
+                        </button>
                     </div>
+                    
                     <div class="form-group">
                         <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
                     </div>
                     <div class="form-group">
                         <input type="password" id="loginPassword" placeholder="كلمة السر">
                     </div>
+                    
                     <button class="submit-btn" onclick="App.handleLogin()">دخول</button>
                     <button class="nav-btn" style="width:100%; margin-top:1rem;" onclick="App.showRegisterForm()">تسجيل جديد</button>
                 `);
@@ -1146,7 +2817,8 @@
             
             showRegisterForm() {
                 this.showModal(`
-                    <h2 style="color: #1e3c72; text-align: center;">تسجيل جديد</h2>
+                    <h2 style="color: var(--primary); text-align: center; margin-bottom: 1.5rem;">تسجيل جديد</h2>
+                    
                     <div class="form-group">
                         <input type="text" id="regName" placeholder="الاسم الكامل">
                     </div>
@@ -1156,6 +2828,7 @@
                     <div class="form-group">
                         <input type="password" id="regPassword" placeholder="كلمة السر">
                     </div>
+                    
                     ${this.selectedUserType === 'teacher' ? `
                         <div class="form-group">
                             <input type="text" id="regSpecialty" placeholder="الاختصاص">
@@ -1164,14 +2837,15 @@
                             <textarea id="regBio" rows="3" placeholder="نبذة عنك"></textarea>
                         </div>
                     ` : ''}
+                    
                     <button class="submit-btn" onclick="App.handleRegister()">تسجيل</button>
                 `);
             },
             
-            selectedUserType: 'student',
-            
             selectUserType(type) {
                 this.selectedUserType = type;
+                document.querySelectorAll('.user-type-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
             },
             
             handleLogin() {
@@ -1196,7 +2870,7 @@
                     this.render();
                     this.toast('مرحباً بك');
                 } else {
-                    this.toast('خطأ في الدخول', 'error');
+                    this.toast('البريد الإلكتروني أو كلمة السر غير صحيحة', 'error');
                 }
             },
             
@@ -1212,7 +2886,7 @@
                 
                 if (this.selectedUserType === 'teacher') {
                     if (this.teachers.find(t => t.email === email)) {
-                        this.toast('البريد موجود مسبقاً', 'error');
+                        this.toast('البريد الإلكتروني موجود مسبقاً', 'error');
                         return;
                     }
                     
@@ -1238,7 +2912,7 @@
                     
                 } else {
                     if (this.students.find(s => s.email === email)) {
-                        this.toast('البريد موجود مسبقاً', 'error');
+                        this.toast('البريد الإلكتروني موجود مسبقاً', 'error');
                         return;
                     }
                     
@@ -1275,6 +2949,34 @@
             goHome() {
                 this.viewingChannel = null;
                 this.render();
+            },
+            
+            // ========== تهيئة التطبيق ==========
+            init() {
+                this.loadData();
+                this.initSampleData();
+                this.render();
+                
+                // تهيئة الخلفية المتحركة
+                this.initAnimatedBg();
+                
+                window.onclick = (event) => {
+                    const modal = document.getElementById('modal');
+                    if (event.target === modal) this.closeModal();
+                };
+            },
+            
+            initAnimatedBg() {
+                const bg = document.getElementById('animatedBg');
+                for (let i = 0; i < 20; i++) {
+                    const span = document.createElement('span');
+                    span.style.left = Math.random() * 100 + '%';
+                    span.style.width = Math.random() * 20 + 5 + 'px';
+                    span.style.height = span.style.width;
+                    span.style.animationDuration = Math.random() * 20 + 10 + 's';
+                    span.style.animationDelay = Math.random() * 10 + 's';
+                    bg.appendChild(span);
+                }
             }
         };
 
