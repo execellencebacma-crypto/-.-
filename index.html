@@ -969,111 +969,45 @@
         // ========== الحد الأقصى لحجم الملف ==========
         const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
-        // ========== نظام البيانات المشتركة - مع تحميل من localStorage ==========
-        const Database = {
-            // دالة للحصول على الأساتذة من localStorage
-            getTeachers() {
-                const teachers = localStorage.getItem('teachers');
-                return teachers ? JSON.parse(teachers) : [];
-            },
-            
-            // دالة لحفظ الأساتذة في localStorage
-            saveTeachers(teachers) {
-                localStorage.setItem('teachers', JSON.stringify(teachers));
-            },
-            
-            // دالة للحصول على التلاميذ
-            getStudents() {
-                const students = localStorage.getItem('students');
-                return students ? JSON.parse(students) : [];
-            },
-            
-            // دالة لحفظ التلاميذ
-            saveStudents(students) {
-                localStorage.setItem('students', JSON.stringify(students));
-            },
-            
-            // دالة للحصول على الدروس
-            getLessons() {
-                const lessons = localStorage.getItem('lessons');
-                return lessons ? JSON.parse(lessons) : [];
-            },
-            
-            // دالة لحفظ الدروس
-            saveLessons(lessons) {
-                localStorage.setItem('lessons', JSON.stringify(lessons));
-            },
-            
-            // إضافة أستاذ جديد
-            addTeacher(teacher) {
-                const teachers = this.getTeachers();
-                teachers.push(teacher);
-                this.saveTeachers(teachers);
-                return teacher;
-            },
-            
-            // إضافة تلميذ جديد
-            addStudent(student) {
-                const students = this.getStudents();
-                students.push(student);
-                this.saveStudents(students);
-                return student;
-            },
-            
-            // إضافة درس جديد
-            addLesson(lesson) {
-                const lessons = this.getLessons();
-                lessons.push(lesson);
-                this.saveLessons(lessons);
-                return lesson;
-            },
-            
-            // تحديث أستاذ
-            updateTeacher(teacherId, updates) {
-                const teachers = this.getTeachers();
-                const index = teachers.findIndex(t => t.id === teacherId);
-                if (index !== -1) {
-                    teachers[index] = { ...teachers[index], ...updates };
-                    this.saveTeachers(teachers);
-                    return teachers[index];
-                }
-                return null;
-            },
-            
-            // تحديث تلميذ
-            updateStudent(studentId, updates) {
-                const students = this.getStudents();
-                const index = students.findIndex(s => s.id === studentId);
-                if (index !== -1) {
-                    students[index] = { ...students[index], ...updates };
-                    this.saveStudents(students);
-                    return students[index];
-                }
-                return null;
-            },
-            
-            // تحديث درس
-            updateLesson(lessonId, updates) {
-                const lessons = this.getLessons();
-                const index = lessons.findIndex(l => l.id === lessonId);
-                if (index !== -1) {
-                    lessons[index] = { ...lessons[index], ...updates };
-                    this.saveLessons(lessons);
-                    return lessons[index];
-                }
-                return null;
-            },
-            
-            // تهيئة البيانات التجريبية
-            initSampleData() {
-                const teachers = this.getTeachers();
-                const students = this.getStudents();
-                const lessons = this.getLessons();
-                
-                // إضافة أساتذة تجريبيين إذا لم يكن هناك أي أستاذ
-                if (teachers.length === 0) {
-                    console.log('إضافة بيانات تجريبية للأساتذة');
-                    this.addTeacher({
+        // ========== نظام إدارة البيانات - مبسط للغاية ==========
+        // نستخدم localStorage مباشرة بدون تعقيد
+        
+        // دوال مساعدة للوصول إلى البيانات
+        function getTeachers() {
+            const teachers = localStorage.getItem('teachers');
+            return teachers ? JSON.parse(teachers) : [];
+        }
+        
+        function saveTeachers(teachers) {
+            localStorage.setItem('teachers', JSON.stringify(teachers));
+        }
+        
+        function getStudents() {
+            const students = localStorage.getItem('students');
+            return students ? JSON.parse(students) : [];
+        }
+        
+        function saveStudents(students) {
+            localStorage.setItem('students', JSON.stringify(students));
+        }
+        
+        function getLessons() {
+            const lessons = localStorage.getItem('lessons');
+            return lessons ? JSON.parse(lessons) : [];
+        }
+        
+        function saveLessons(lessons) {
+            localStorage.setItem('lessons', JSON.stringify(lessons));
+        }
+
+        // ========== تهيئة البيانات التجريبية ==========
+        function initSampleData() {
+            // التحقق من وجود أساتذة
+            let teachers = getTeachers();
+            if (teachers.length === 0) {
+                console.log('إضافة بيانات تجريبية للأساتذة');
+                teachers = [
+                    {
                         id: 1,
                         name: 'أحمد الفاسي',
                         email: 'ahmed@teacher.com',
@@ -1084,11 +1018,9 @@
                         rating: 4.8,
                         followers: [],
                         subjects: ['math', 'physique'],
-                        levels: ['bac1', 'bac2'],
-                        lessons: []
-                    });
-                    
-                    this.addTeacher({
+                        levels: ['bac1', 'bac2']
+                    },
+                    {
                         id: 2,
                         name: 'فاطمة المراكشي',
                         email: 'fatima@teacher.com',
@@ -1099,11 +1031,9 @@
                         rating: 4.9,
                         followers: [],
                         subjects: ['physique', 'chimie'],
-                        levels: ['bac1', 'bac2'],
-                        lessons: []
-                    });
-                    
-                    this.addTeacher({
+                        levels: ['bac1', 'bac2']
+                    },
+                    {
                         id: 3,
                         name: 'محمد البيضاوي',
                         email: 'mohamed@teacher.com',
@@ -1114,11 +1044,9 @@
                         rating: 4.7,
                         followers: [],
                         subjects: ['arabic'],
-                        levels: ['tronc', 'bac1'],
-                        lessons: []
-                    });
-                    
-                    this.addTeacher({
+                        levels: ['tronc', 'bac1']
+                    },
+                    {
                         id: 4,
                         name: 'سعاد المغربية',
                         email: 'souad@teacher.com',
@@ -1129,14 +1057,18 @@
                         rating: 4.6,
                         followers: [],
                         subjects: ['philosophy'],
-                        levels: ['bac1', 'bac2'],
-                        lessons: []
-                    });
-                }
+                        levels: ['bac1', 'bac2']
+                    }
+                ];
+                saveTeachers(teachers);
+            }
 
-                // إضافة تلاميذ تجريبيين
-                if (students.length === 0) {
-                    this.addStudent({
+            // التحقق من وجود تلاميذ
+            let students = getStudents();
+            if (students.length === 0) {
+                console.log('إضافة بيانات تجريبية للتلاميذ');
+                students = [
+                    {
                         id: 1,
                         name: 'يوسف الطالبي',
                         email: 'youssef@student.com',
@@ -1146,9 +1078,8 @@
                         savedLessons: [],
                         points: 150,
                         streak: 5
-                    });
-                    
-                    this.addStudent({
+                    },
+                    {
                         id: 2,
                         name: 'سارة العلمي',
                         email: 'sara@student.com',
@@ -1158,12 +1089,17 @@
                         savedLessons: [],
                         points: 80,
                         streak: 3
-                    });
-                }
+                    }
+                ];
+                saveStudents(students);
+            }
 
-                // إضافة دروس تجريبية
-                if (lessons.length === 0) {
-                    this.addLesson({
+            // التحقق من وجود دروس
+            let lessons = getLessons();
+            if (lessons.length === 0) {
+                console.log('إضافة بيانات تجريبية للدروس');
+                lessons = [
+                    {
                         id: 101,
                         title: 'المعادلات من الدرجة الأولى',
                         description: 'شرح مبسط مع تمارين تطبيقية',
@@ -1175,9 +1111,8 @@
                         date: '2024-02-20',
                         downloads: 45,
                         views: 120
-                    });
-                    
-                    this.addLesson({
+                    },
+                    {
                         id: 102,
                         title: 'قوانين نيوتن في الحركة',
                         description: 'شرح قوانين نيوتن الثلاثة مع أمثلة',
@@ -1189,10 +1124,11 @@
                         date: '2024-02-21',
                         downloads: 32,
                         views: 89
-                    });
-                }
+                    }
+                ];
+                saveLessons(lessons);
             }
-        };
+        }
 
         // ========== نظام إدارة الحالة ==========
         const AppState = {
@@ -1217,7 +1153,7 @@
         };
 
         // ========== تهيئة البيانات التجريبية ==========
-        Database.initSampleData();
+        initSampleData();
 
         // ========== حفظ المستخدم الحالي ==========
         function saveCurrentUser() {
@@ -1291,8 +1227,8 @@
             AppState.filters.teacherName = document.getElementById('teacherFilter')?.value.toLowerCase() || '';
 
             // الحصول على أحدث البيانات
-            const teachers = Database.getTeachers();
-            const lessons = Database.getLessons();
+            const teachers = getTeachers();
+            const lessons = getLessons();
 
             // فلترة الأساتذة
             AppState.searchResults.teachers = teachers.filter(teacher => {
@@ -1422,14 +1358,14 @@
         // ========== عرض لوحة تحكم التلميذ ==========
         function renderStudentDashboard() {
             const dashboard = document.getElementById('dashboard');
-            const students = Database.getStudents();
+            const students = getStudents();
             const student = students.find(s => s.id === AppState.currentUser?.id);
 
             if (!student) return;
 
             // الحصول على أحدث البيانات
-            const teachers = Database.getTeachers();
-            const lessons = Database.getLessons();
+            const teachers = getTeachers();
+            const lessons = getLessons();
 
             const followingCount = student.following?.length || 0;
             const savedCount = student.savedLessons?.length || 0;
@@ -1437,6 +1373,9 @@
             // حساب إجمالي عدد الأساتذة والدروس
             const totalTeachers = teachers.length;
             const totalLessons = lessons.length;
+
+            console.log('عدد الأساتذة:', totalTeachers); // للتأكد
+            console.log('الأساتذة:', teachers); // للتأكد
 
             dashboard.innerHTML = `
                 <!-- بطاقة الترحيب -->
@@ -1552,10 +1491,10 @@
 
         function renderCurrentTab() {
             const content = document.getElementById('studentContent');
-            const students = Database.getStudents();
+            const students = getStudents();
             const student = students.find(s => s.id === AppState.currentUser.id);
-            const teachers = Database.getTeachers();
-            const lessons = Database.getLessons();
+            const teachers = getTeachers();
+            const lessons = getLessons();
 
             if (!content || !student) return;
 
@@ -1585,11 +1524,13 @@
                 return;
             }
 
+            console.log('عرض الأساتذة:', teachers); // للتأكد
+
             content.innerHTML = `
                 <div class="teachers-grid">
                     ${teachers.map(teacher => {
                         const isFollowing = student.following?.includes(teacher.id);
-                        const teacherLessons = Database.getLessons().filter(l => l.teacherId === teacher.id).length;
+                        const teacherLessons = getLessons().filter(l => l.teacherId === teacher.id).length;
                         
                         return `
                             <div class="teacher-card" onclick="viewTeacherLessons(${teacher.id})">
@@ -1633,7 +1574,7 @@
             content.innerHTML = `
                 <div class="lessons-grid">
                     ${lessons.map(lesson => {
-                        const teacher = Database.getTeachers().find(t => t.id === lesson.teacherId);
+                        const teacher = getTeachers().find(t => t.id === lesson.teacherId);
                         const isSaved = student.savedLessons?.includes(lesson.id);
                         
                         // تحديد ما إذا كان الدرس يحتوي على ملف مرفوع
@@ -1671,10 +1612,13 @@
 
         // ========== دوال التفاعل ==========
         function toggleFollow(teacherId) {
-            const students = Database.getStudents();
-            const student = students.find(s => s.id === AppState.currentUser.id);
-            const teachers = Database.getTeachers();
-            const teacher = teachers.find(t => t.id === teacherId);
+            const students = getStudents();
+            const studentIndex = students.findIndex(s => s.id === AppState.currentUser.id);
+            const student = students[studentIndex];
+            
+            const teachers = getTeachers();
+            const teacherIndex = teachers.findIndex(t => t.id === teacherId);
+            const teacher = teachers[teacherIndex];
 
             if (!student.following) student.following = [];
 
@@ -1693,15 +1637,19 @@
             }
 
             // حفظ التغييرات
-            Database.updateStudent(student.id, student);
-            Database.updateTeacher(teacher.id, teacher);
+            students[studentIndex] = student;
+            saveStudents(students);
+            
+            teachers[teacherIndex] = teacher;
+            saveTeachers(teachers);
             
             renderCurrentTab();
         }
 
         function toggleSaveLesson(lessonId) {
-            const students = Database.getStudents();
-            const student = students.find(s => s.id === AppState.currentUser.id);
+            const students = getStudents();
+            const studentIndex = students.findIndex(s => s.id === AppState.currentUser.id);
+            const student = students[studentIndex];
             
             if (!student.savedLessons) student.savedLessons = [];
 
@@ -1714,20 +1662,25 @@
                 showToast('تم حفظ الدرس +5 نقاط', 'success');
             }
 
-            Database.updateStudent(student.id, student);
+            students[studentIndex] = student;
+            saveStudents(students);
+            
             renderCurrentTab();
         }
 
         // ========== عرض الدرس مع الملف المرفوع ==========
         function viewLesson(lessonId) {
-            const lessons = Database.getLessons();
-            const lesson = lessons.find(l => l.id === lessonId);
-            const teachers = Database.getTeachers();
+            const lessons = getLessons();
+            const lessonIndex = lessons.findIndex(l => l.id === lessonId);
+            const lesson = lessons[lessonIndex];
+            
+            const teachers = getTeachers();
             const teacher = teachers.find(t => t.id === lesson.teacherId);
             
             // زيادة عدد المشاهدات
             lesson.views = (lesson.views || 0) + 1;
-            Database.updateLesson(lessonId, lesson);
+            lessons[lessonIndex] = lesson;
+            saveLessons(lessons);
 
             // التحقق من وجود ملف مرفوع
             const hasFile = lesson.fileData && lesson.fileName;
@@ -1804,8 +1757,9 @@
 
         // ========== تحميل PDF ==========
         function downloadPdf(lessonId) {
-            const lessons = Database.getLessons();
-            const lesson = lessons.find(l => l.id === lessonId);
+            const lessons = getLessons();
+            const lessonIndex = lessons.findIndex(l => l.id === lessonId);
+            const lesson = lessons[lessonIndex];
             
             if (!lesson.fileData) {
                 showToast('لا يوجد ملف للتحميل', 'error');
@@ -1814,7 +1768,8 @@
             
             // زيادة عدد التحميلات
             lesson.downloads = (lesson.downloads || 0) + 1;
-            Database.updateLesson(lessonId, lesson);
+            lessons[lessonIndex] = lesson;
+            saveLessons(lessons);
 
             // إنشاء رابط تحميل
             const link = document.createElement('a');
@@ -1886,9 +1841,9 @@
         }
 
         function viewTeacherLessons(teacherId) {
-            const teachers = Database.getTeachers();
+            const teachers = getTeachers();
             const teacher = teachers.find(t => t.id === teacherId);
-            const lessons = Database.getLessons().filter(l => l.teacherId === teacherId);
+            const lessons = getLessons().filter(l => l.teacherId === teacherId);
 
             if (lessons.length === 0) {
                 showToast('لا توجد دروس بعد', 'info');
@@ -1921,9 +1876,9 @@
         // ========== عرض لوحة تحكم الأستاذ ==========
         function renderTeacherDashboard() {
             const dashboard = document.getElementById('dashboard');
-            const teachers = Database.getTeachers();
+            const teachers = getTeachers();
             const teacher = teachers.find(t => t.id === AppState.currentUser.id);
-            const lessons = Database.getLessons();
+            const lessons = getLessons();
             const teacherLessons = lessons.filter(l => l.teacherId === teacher.id);
 
             const totalDownloads = teacherLessons.reduce((sum, l) => sum + (l.downloads || 0), 0);
@@ -1995,9 +1950,9 @@
         }
 
         function switchTeacherTab(tab) {
-            const teachers = Database.getTeachers();
+            const teachers = getTeachers();
             const teacher = teachers.find(t => t.id === AppState.currentUser.id);
-            const lessons = Database.getLessons();
+            const lessons = getLessons();
             const teacherLessons = lessons.filter(l => l.teacherId === teacher.id);
             
             document.querySelectorAll('.teacher-menu li').forEach(li => li.classList.remove('active'));
@@ -2146,7 +2101,7 @@
                     `;
 
                 case 'followers':
-                    const students = Database.getStudents();
+                    const students = getStudents();
                     const followers = students.filter(s => teacher.followers?.includes(s.id));
                     
                     return `
@@ -2203,9 +2158,10 @@
                 return;
             }
 
-            const teachers = Database.getTeachers();
+            const teachers = getTeachers();
             const teacher = teachers.find(t => t.id === AppState.currentUser.id);
             
+            const lessons = getLessons();
             const newLesson = {
                 id: Date.now(),
                 title: title,
@@ -2223,7 +2179,8 @@
                 fileData: AppState.currentFile.data
             };
 
-            Database.addLesson(newLesson);
+            lessons.push(newLesson);
+            saveLessons(lessons);
             
             // مسح الملف المحدد
             AppState.currentFile = null;
@@ -2237,8 +2194,8 @@
         function deleteLesson(lessonId) {
             if (!confirm('هل أنت متأكد من حذف هذا الدرس؟')) return;
 
-            const lessons = Database.getLessons().filter(l => l.id !== lessonId);
-            localStorage.setItem('lessons', JSON.stringify(lessons));
+            const lessons = getLessons().filter(l => l.id !== lessonId);
+            saveLessons(lessons);
             
             showToast('✅ تم حذف الدرس', 'info');
             renderTeacherDashboard();
@@ -2349,10 +2306,10 @@
 
             let user;
             if (AppState.selectedUserType === 'teacher') {
-                const teachers = Database.getTeachers();
+                const teachers = getTeachers();
                 user = teachers.find(t => t.email === email && t.password === password);
             } else {
-                const students = Database.getStudents();
+                const students = getStudents();
                 user = students.find(s => s.email === email && s.password === password);
             }
 
@@ -2383,7 +2340,7 @@
             }
 
             if (AppState.selectedUserType === 'teacher') {
-                const teachers = Database.getTeachers();
+                const teachers = getTeachers();
                 if (teachers.find(t => t.email === email)) {
                     showToast('البريد الإلكتروني موجود مسبقاً', 'error');
                     return;
@@ -2406,11 +2363,13 @@
                     levels: []
                 };
 
-                Database.addTeacher(newTeacher);
+                teachers.push(newTeacher);
+                saveTeachers(teachers);
+                
                 AppState.currentUser = { id: newTeacher.id, name: name, email: email, type: 'teacher' };
                 
             } else {
-                const students = Database.getStudents();
+                const students = getStudents();
                 if (students.find(s => s.email === email)) {
                     showToast('البريد الإلكتروني موجود مسبقاً', 'error');
                     return;
@@ -2430,7 +2389,9 @@
                     streak: 0
                 };
 
-                Database.addStudent(newStudent);
+                students.push(newStudent);
+                saveStudents(students);
+                
                 AppState.currentUser = { id: newStudent.id, name: name, email: email, type: 'student' };
             }
 
@@ -2523,8 +2484,8 @@
         function init() {
             initAnimatedBg();
             
-            // التأكد من وجود بيانات تجريبية
-            Database.initSampleData();
+            // تهيئة البيانات التجريبية
+            initSampleData();
             
             // عرض الواجهة
             renderUI();
